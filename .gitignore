@@ -34,15 +34,16 @@ hs_err_pid*
 /bin/
 /out/
 /log/
-.log
+*.log
 
 # User save file
-.save
+*.save
 
 
 
 # Tex file
-.aux
-.log
-.gz
-.toc
+**/documentation/*.aux
+**/documentation/*.log
+**/documentation/*.gz
+**/documentation/*.toc
+**/documentation/*.synctex
