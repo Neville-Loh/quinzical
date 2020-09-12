@@ -21,3 +21,28 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+# Intellij
+.idea/
+*.iml
+
+# classpath and project path #
+*.classpath
+*.project
+*.save
+/bin/
+/out/
+/log/
+.log
+
+# User save file
+.save
+
+
+
+# Tex file
+.aux
+.log
+.gz
+.toc
