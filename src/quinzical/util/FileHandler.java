@@ -1,4 +1,4 @@
-package qunizical.util;
+package quinzical.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,9 +9,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import qunizical.db.ObjectDB;
-import qunizical.model.Category;
-import qunizical.model.Question;
+import quinzical.db.ObjectDB;
+import quinzical.model.Category;
+import quinzical.model.Question;
 
 /**
  * Utility class which handle all the loading and saving, writing logs file in

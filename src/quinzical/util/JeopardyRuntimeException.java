@@ -1,4 +1,4 @@
-package qunizical.util;	/**
+package quinzical.util;	/**
  * 
  */
 

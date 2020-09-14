@@ -1,4 +1,4 @@
-package qunizical.db;
+package quinzical.db;
 
 import java.io.Serializable;
 import java.util.HashMap;

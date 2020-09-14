@@ -1,4 +1,4 @@
-package qunizical.controller;
+package quinzical.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import quinzical.Main;
-import qunizical.model.QuizModel;
+import quinzical.model.QuizModel;
 
 /**
  * Controller class for current winning view at CurrentWinningView.fxml.

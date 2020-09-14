@@ -1,4 +1,4 @@
-package qunizical.controller;
+package quinzical.controller;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
@@ -7,8 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import quinzical.Main;
-import qunizical.model.Question;
-import qunizical.model.QuizModel;
+import quinzical.model.Question;
+import quinzical.model.QuizModel;
 
 /**
  * Controller class for answer view after a question

@@ -1,4 +1,4 @@
-package qunizical.controller;
+package quinzical.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Region;
 import quinzical.Main;
-import qunizical.model.QuizModel;
+import quinzical.model.QuizModel;
 
 /**
  * Controller class for question view at QuestionView.fxml.

@@ -1,12 +1,12 @@
-package qunizical.model;
+package quinzical.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import qunizical.db.ObjectDB;
-import qunizical.util.FileHandler;
-import qunizical.util.Helper;
+import quinzical.db.ObjectDB;
+import quinzical.util.FileHandler;
+import quinzical.util.Helper;
 
 /**
  * THe Quiz model of the application. This class contain all the necessary

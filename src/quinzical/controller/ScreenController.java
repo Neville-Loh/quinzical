@@ -1,4 +1,4 @@
-package qunizical.controller;
+package quinzical.controller;
 
 import java.io.IOException;
 
@@ -22,7 +22,7 @@ public class ScreenController {
 	 */
 	public static void goMainMenu(Class<?> controllerClass, ActionEvent event) {
 		try {
-			Parent parent = FXMLLoader.load(controllerClass.getResource("/qunizical/view/MainView.fxml"));
+			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/MainView.fxml"));
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			window.setScene(new Scene(parent));
 		} catch (IOException e) {
@@ -37,7 +37,7 @@ public class ScreenController {
 	 */
 	public static void goQuestionSelect(Class<?> controllerClass, ActionEvent event) {
 		try {
-			Parent parent = FXMLLoader.load(controllerClass.getResource("/qunizical/view/QuestionSelectView.fxml"));
+			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/QuestionSelectView.fxml"));
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			window.setScene(new Scene(parent));
 		} catch (IOException e) {
@@ -52,7 +52,7 @@ public class ScreenController {
 	 */
 	public static void goQuestion(Class<?> controllerClass, ActionEvent event) {
 		try {
-			Parent parent = FXMLLoader.load(controllerClass.getResource("/qunizical/view/QuestionView.fxml"));
+			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/QuestionView.fxml"));
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			window.setScene(new Scene(parent));
 		} catch (IOException e) {
@@ -67,7 +67,7 @@ public class ScreenController {
 	 */
 	public static void goCurrentWinning(Class<?> controllerClass, ActionEvent event) {
 		try {
-			Parent parent = FXMLLoader.load(controllerClass.getResource("/qunizical/view/CurrentWinningView.fxml"));
+			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/CurrentWinningView.fxml"));
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			window.setScene(new Scene(parent));
 			
@@ -83,7 +83,7 @@ public class ScreenController {
 	 */
 	public static void goGameOver(Class<?> controllerClass, ActionEvent event){
 		try {
-			Parent parent = FXMLLoader.load(controllerClass.getResource("/qunizical/view/GameOverView.fxml"));
+			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/GameOverView.fxml"));
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			window.setScene(new Scene(parent));
 		} catch (IOException e) {

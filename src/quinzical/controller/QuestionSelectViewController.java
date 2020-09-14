@@ -1,4 +1,4 @@
-package qunizical.controller;
+package quinzical.controller;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,9 +18,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import quinzical.Main;
-import qunizical.model.Category;
-import qunizical.model.Question;
-import qunizical.model.QuizModel;
+import quinzical.model.Category;
+import quinzical.model.Question;
+import quinzical.model.QuizModel;
 
 /**
  * Controller class for Question select screen, display all category

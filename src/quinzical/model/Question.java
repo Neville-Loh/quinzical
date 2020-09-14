@@ -1,4 +1,4 @@
-package qunizical.model;
+package quinzical.model;
 /**
  * Class for implementation of the question data structure, the class stores the
  * question prompt, the answer and score of the question.

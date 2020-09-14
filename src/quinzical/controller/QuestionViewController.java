@@ -1,4 +1,4 @@
-package qunizical.controller;
+package quinzical.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import quinzical.Main;
-import qunizical.model.Question;
-import qunizical.model.QuizModel;
+import quinzical.model.Question;
+import quinzical.model.QuizModel;
 /**
  * Controller class for question view at QuestionView.fxml.
  * Display are question and text field
@@ -85,7 +85,7 @@ public class QuestionViewController implements Initializable {
 
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/qunizical/view/AnswerResultView.fxml"));
+			loader.setLocation(getClass().getResource("/quinzical/view/AnswerResultView.fxml"));
 			Parent parent = loader.load();
 			Scene scene = new Scene(parent);
 			AnswerResultViewController controller = loader.getController();
