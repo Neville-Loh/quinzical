@@ -1,4 +1,4 @@
-package jeopardy.model;
+package qunizical.model;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package jeopardy.controller;
+package qunizical.controller;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
@@ -6,9 +6,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import jeopardy.Main;
-import jeopardy.model.Question;
-import jeopardy.model.QuizModel;
+import quinzical.Main;
+import qunizical.model.Question;
+import qunizical.model.QuizModel;
 
 /**
  * Controller class for answer view after a question

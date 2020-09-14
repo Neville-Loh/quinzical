@@ -1,12 +1,12 @@
-package jeopardy;
+package quinzical;
 
 import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import jeopardy.model.QuizModel;
-import jeopardy.util.Helper;
+import qunizical.model.QuizModel;
+import qunizical.util.Helper;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -31,9 +31,9 @@ public class Main extends Application {
 			model = new QuizModel();
 		}
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Jepardy");
+		this.primaryStage.setTitle("Qunizical");
 		
-		Parent root = FXMLLoader.load(getClass().getResource("view/MainView.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/qunizical/view/MainView.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();

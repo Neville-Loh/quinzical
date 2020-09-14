@@ -1,4 +1,4 @@
-package jeopardy.util;
+package qunizical.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -15,8 +15,8 @@ import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import jeopardy.Main;
-import jeopardy.model.QuizModel;
+import quinzical.Main;
+import qunizical.model.QuizModel;
 
 /**
  * Helper class for application Jeopardy, contain all helper function 

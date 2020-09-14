@@ -1,4 +1,4 @@
-package jeopardy.db;
+package qunizical.db;
 
 import java.io.Serializable;
 import java.util.HashMap;

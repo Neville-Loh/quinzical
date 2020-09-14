@@ -1,4 +1,4 @@
-package jeopardy.util;
+package qunizical.util;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package jeopardy.util;
+package qunizical.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,9 +9,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import jeopardy.db.ObjectDB;
-import jeopardy.model.Category;
-import jeopardy.model.Question;
+import qunizical.db.ObjectDB;
+import qunizical.model.Category;
+import qunizical.model.Question;
 
 /**
  * Utility class which handle all the loading and saving, writing logs file in

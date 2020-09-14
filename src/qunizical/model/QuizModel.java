@@ -1,12 +1,12 @@
-package jeopardy.model;
+package qunizical.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import jeopardy.db.ObjectDB;
-import jeopardy.util.FileHandler;
-import jeopardy.util.Helper;
+import qunizical.db.ObjectDB;
+import qunizical.util.FileHandler;
+import qunizical.util.Helper;
 
 /**
  * THe Quiz model of the application. This class contain all the necessary

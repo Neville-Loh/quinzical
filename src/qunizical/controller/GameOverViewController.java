@@ -1,4 +1,5 @@
-package jeopardy.controller;
+package qunizical.controller;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -7,47 +8,42 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import jeopardy.Main;
-import jeopardy.model.QuizModel;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Region;
+import quinzical.Main;
+import qunizical.model.QuizModel;
+
 /**
- * Controller class for main menu view at MainView.fxml.
- * class control each button in the main menu
+ * Controller class for question view at QuestionView.fxml.
+ * Display are question and text field
  * @author Neville
- * 
  */
-public class MainController implements Initializable{
+public class GameOverViewController implements Initializable {
+
 	private QuizModel model;
+
+	@FXML private Label winningLabel;
 	
 	/**
-	 * Navigate to question select screen
+	 * Navigate to main menu
 	 * @param event
 	 */
 	@FXML
-	private void showQuestionSelectView(ActionEvent event){
-		ScreenController.goQuestionSelect(getClass(), event);
+	private void goMainMenu(ActionEvent event) throws IOException {
+		ScreenController.goMainMenu(getClass(), event);
 	}
 	
 	/**
-	 * Navigate to current winning screen
+	 * Raise alert for rest option, if user proceed if yes, reset the model
+	 * to its initial state.
 	 * @param event
 	 */
 	@FXML
-	private void showCurrentWinningView(ActionEvent event) throws IOException{
-		ScreenController.goCurrentWinning(getClass(), event);
-	}
-	
-	/**
-	 * Send out reset Alert, if user confirm, reset the game
-	 * @param event
-	 */
-	@FXML
-	private void resetButtonClick(ActionEvent event) throws IOException{
+	private void resetButtonClick(ActionEvent event) {
 		Alert alert = new Alert(AlertType.CONFIRMATION,
 				"Are you sure you want to reset the game? Your save will be reset to its initial status. This can not be undone.",
 				ButtonType.YES, ButtonType.NO
@@ -65,24 +61,18 @@ public class MainController implements Initializable{
 	}
 	
 	/**
-	 * Save and exit the application
-	 * @param event
-	 */
-	@FXML
-	private void quitButtonClick(ActionEvent event) throws IOException{
-		model.save();
-		Platform.exit();
-	}
-
-	/**
-	 * Populate the quiz model
+	 * Initialize the current scene
+	 * populate label of current winning.
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		try {
 		model = Main.getQuizModel();
-		
+		String scoreStr = model.getWinningStr();
+		winningLabel.setText(scoreStr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
-
 
 }

@@ -1,4 +1,4 @@
-package jeopardy.controller;
+package qunizical.controller;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -17,10 +17,10 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import jeopardy.Main;
-import jeopardy.model.Category;
-import jeopardy.model.Question;
-import jeopardy.model.QuizModel;
+import quinzical.Main;
+import qunizical.model.Category;
+import qunizical.model.Question;
+import qunizical.model.QuizModel;
 
 /**
  * Controller class for Question select screen, display all category
