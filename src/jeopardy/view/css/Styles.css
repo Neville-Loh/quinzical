@@ -1,0 +1,23 @@
+.button {
+	-fx-font-weight: bold;
+	-fx-background-color: #2196f3;
+	-fx-front-size: 16;
+	-fx-text-fill: white;
+}
+
+.button:hover{
+	-fx-font-weight: bold;
+	-fx-background-color: #2196f3;
+	-fx-front-size: 16;
+	-fx-text-fill: white;
+	-fx-border-color: #2196f3;
+	-fx-border-radius: 20;
+	-fx-border-width: 3;
+}
+.popup {
+    -fx-padding: 10;
+    -fx-border-width: 5;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+}
+

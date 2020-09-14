@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeopardy.controller.AnswerResultViewController">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: #262d37;" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Your answer is " textFill="#fff9f9">
+               <font>
+                  <Font name="KacstArt" size="19.0" />
+               </font></Label>
+            <Label fx:id="isCorrectLabel" text="UNKNOWERROR!" textFill="#fff9f9">
+               <font>
+                  <Font name="KacstArt" size="19.0" />
+               </font></Label>
+            <Label fx:id="correctAnsLabel" textFill="#fff9f9">
+               <font>
+                  <Font name="KacstArt" size="19.0" />
+               </font></Label>
+            <Label text="Your Current Winning is" textFill="#fff9f9">
+               <font>
+                  <Font name="KacstArt" size="19.0" />
+               </font></Label>
+            <Label fx:id="winningLabel" text="UNKNOWERROR!" textFill="#fff9f9">
+               <font>
+                  <Font name="KacstArt" size="19.0" />
+               </font></Label>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox fx:id="bottomHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="200.0" style="-fx-background-color: #262d37;" stylesheets="@css/Styles.css" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#goMainMenu" text="Main Menu" />
+            <Button mnemonicParsing="false" onAction="#goQuestionSelect" text="Select Question" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

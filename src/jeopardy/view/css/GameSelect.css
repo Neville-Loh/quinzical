@@ -1,0 +1,21 @@
+.label {
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+
+.button {
+	-fx-font-weight: bold;
+	-fx-background-color: #595ebf;
+	-fx-front-size: 16;
+	-fx-text-fill: white;
+}
+
+.button:hover{
+	-fx-font-weight: bold;
+	-fx-background-color: #2196f3;
+	-fx-front-size: 16;
+	-fx-text-fill: white;
+	-fx-border-color: #2196f3;
+	-fx-border-radius: 20;
+	-fx-border-width: 3;
+}
