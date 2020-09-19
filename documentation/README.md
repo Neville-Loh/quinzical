@@ -32,6 +32,8 @@
 - Requriemnet analysis  
 - ~~Core gameplay loop design~~  
 - ~~GUI design rough sketch~~  
-- Set up template projects
+- ~~Set up template projects~~
 - Set up initial game model/practice mode
 
+## Week 2 (20 Sep - 26 Sep)
+### TODO:
