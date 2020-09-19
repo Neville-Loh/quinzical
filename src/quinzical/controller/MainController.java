@@ -53,7 +53,7 @@ public class MainController implements Initializable{
 				ButtonType.YES, ButtonType.NO
 			);
 		alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-		alert.setTitle("Rest Confirmation");
+		alert.setTitle("Reset Confirmation");
 		alert.setHeaderText(null);
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.YES) {
