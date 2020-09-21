@@ -20,6 +20,8 @@ public class QuizModel {
 	private int _remainingQuestion;
 	private ArrayList<Category> _cats;
 	private Question _activeQuestion;
+	
+	
 
 	/**
 	 * Constructor. The class initiate by loading all category. If there is also a
@@ -39,6 +41,15 @@ public class QuizModel {
 			System.out.println("Loading failed. Maybe trying removing user.save in the working directory");
 			e.printStackTrace();
 		}
+	}
+	
+	
+	/**
+	 * #TODO !!!!!!!!!!!!
+	 * Save the current session to database
+	 */
+	public void saveSession() {
+		
 	}
 
 	/**
