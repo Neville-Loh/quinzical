@@ -33,6 +33,7 @@ public class ObjectDB implements Serializable {
     public int getWinning() {
         return _winning;
     }
+    
     /**
      * Get Method
      * @return attempted question as a boolean map
@@ -40,6 +41,7 @@ public class ObjectDB implements Serializable {
     public Map<String, Boolean> getIsAttemptedMap() {
         return _isAttempted;
     }
+    
     /**
      * Set Method
      * Set current sores of the user
@@ -47,6 +49,7 @@ public class ObjectDB implements Serializable {
     public void setWinning(int winning) {
     	_winning = winning;
     }
+    
     /**
      * Set Method
      * Set question attempted boolean map

@@ -65,6 +65,7 @@ public class Session {
 		
 	}
 	
+	
 	/**
 	 * Rest the current session to its initial state, 
 	 */

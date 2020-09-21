@@ -14,11 +14,11 @@ import javafx.scene.control.Alert.AlertType;
  */
 
 
-public class JeopardyRuntimeException extends RuntimeException{
+public class QuinzicalRuntimeException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;
 
-	public JeopardyRuntimeException(String msg) {
+	public QuinzicalRuntimeException(String msg) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Warning");
 		alert.setHeaderText("A runtime exception occured");
