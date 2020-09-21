@@ -57,7 +57,7 @@ public class QuizModel {
 			_winning += question.getScore();
 			return true;
 		} else {
-			_winning -= question.getScore();
+			//_winning -= question.getScore();
 			return false;
 		}
 

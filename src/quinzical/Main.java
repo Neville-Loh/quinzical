@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import quinzical.model.QuizModel;
+import quinzical.model.PracticeModel;
 import quinzical.util.Helper;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ import javafx.scene.Scene;
 public class Main extends Application {
 	private Stage primaryStage;
 	private static  QuizModel model;
+	private static PracticeModel practiceModel;
    
 	/**
 	 * Start the current application by showing primary stage
@@ -29,9 +31,10 @@ public class Main extends Application {
 		// to ensure singleton assignment
 		if (model == null) {
 			model = new QuizModel();
+			practiceModel = new PracticeModel();
 		}
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Qunizical");
+		this.primaryStage.setTitle("Quinzical");
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/quinzical/view/MainView.fxml"));
 		Scene scene = new Scene(root);
@@ -48,6 +51,9 @@ public class Main extends Application {
 	 */
 	public static QuizModel getQuizModel() {
 		return model;
+	}
+	public static PracticeModel getPracticeModel() {
+		return practiceModel;
 	}
 	public static void main(String[] args) {
 		launch(args);

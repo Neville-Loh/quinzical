@@ -17,17 +17,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import quinzical.Main;
 import quinzical.model.Question;
-import quinzical.model.QuizModel;
-/**
- * Controller class for question view at QuestionView.fxml.
- * Display are question and text field
- * @author Neville
- *
- */
-public class QuestionViewController implements Initializable {
+import quinzical.model.PracticeModel;
 
-	private QuizModel model;
+public class PracticeViewController implements Initializable {
+
+	private PracticeModel model;
 	private Question question;
+	private int attemptNumber = 1;
 	
 	@FXML private Label questionLabel;
 	@FXML private TextField textfield;
@@ -66,10 +62,10 @@ public class QuestionViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		model = Main.getQuizModel();
+		model = Main.getPracticeModel();
 		question = model.getActiveQuestion();
 		model.textToSpeech(question.toString());
-		//questionLabel.setText(question.toString());
+		questionLabel.setText(question.toString());
 
 	}
 	
@@ -93,17 +89,33 @@ public class QuestionViewController implements Initializable {
 			// Initialize different page according to the user answer
 			if (isCorrect) {
 				controller.validAnswerInit(question);
+				nextQuestion();
+			} else if (attemptNumber == 1) {
+				questionLabel.setText(questionLabel.getText() + "\nTry again");
+				attemptNumber++;
+			} else if (attemptNumber == 2) {
+				questionLabel.setText(questionLabel.getText() + "\nTry again" + "\nThe correct answer begins with " + question.getAnswer().substring(0,1));
+				attemptNumber++;
 			} else {
 				controller.invalidAnswerInit(question);
+				attemptNumber = 1;
+				nextQuestion();
 			}
 			
 			// switch to next screen
-			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window.setScene(scene);
+			//Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			//window.setScene(scene);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void nextQuestion() {
+		model.nextQuestion();
+		Question newQuestion = model.getActiveQuestion();
+		question = newQuestion;
+		questionLabel.setText(newQuestion.toString());
 	}
 
 }
