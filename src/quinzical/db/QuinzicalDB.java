@@ -19,7 +19,7 @@ public interface QuinzicalDB {
 	
 	public void addCategory(String categoryName);
 	
-	public void addQuestion(Question quesiton);
+	public void addQuestion(Question quesiton, int categoryId);
 	
 	public void addUser(User user);
 	

@@ -11,6 +11,12 @@ public class SQLiteSchema {
 	private static final int CATEGORYNAME_CHAR_LIMIT = 50;
 	private static final int QUESTION_CHAR_LIMIT = 200;
 	
+	/**
+	 * Create User Table
+	 * 
+	 * @param conn
+	 * @throws SQLException
+	 */
 	public static void createUserTable(Connection conn) throws SQLException {
 		Statement state = conn.createStatement();
 		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='user'");		
@@ -25,21 +31,32 @@ public class SQLiteSchema {
 		
 	}
 	
+	/**
+	 * Create Category Table
+	 * 
+	 * @param conn
+	 * @throws SQLException
+	 */
 	public static  void createCategoryTable(Connection conn) throws SQLException {
 		Statement state = conn.createStatement();
 		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='category'");		
-		if ( !res.next() ) {
+		if (!res.next() ) {
 			System.out.println("Building the category table");
 			Statement state2 = conn.createStatement();
 			state2.execute("Create TABLE category("
 					+ "category_id integer,"
-					+ "category_name varchar("+ CATEGORYNAME_CHAR_LIMIT +")," 
+					+ "category_name varchar("+ CATEGORYNAME_CHAR_LIMIT +") UNIQUE," 
 					+ "primary key(category_id));"
 					);
 		}
 		
 	}
 	
+	/**
+	 * Create Quesiton Table
+	 * @param conn
+	 * @throws SQLException
+	 */
 	public static void createQuestionTable(Connection conn) throws SQLException {
 		Statement state = conn.createStatement();
 		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='question'");		
@@ -58,6 +75,11 @@ public class SQLiteSchema {
 		
 	}
 	
+	/**
+	 * Create Session Table
+	 * @param conn
+	 * @throws SQLException
+	 */
 	public static void createSessionTable(Connection conn) throws SQLException {
 		Statement state = conn.createStatement();
 		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='session'");		
@@ -75,17 +97,24 @@ public class SQLiteSchema {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param conn
+	 * @throws SQLException
+	 */
 	public static void createSessionQuestionsTable(Connection conn) throws SQLException {
 		Statement state = conn.createStatement();
 		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='session_questions'");		
 		if ( !res.next() ) {
 			System.out.println("Building the session_questions table");
 			Statement state2 = conn.createStatement();
-			state2.execute("Create TABLE user("
-					+ "id integer,"
-					+ "username varchar(60)," 
-					+ "primary key(id));");
+			state2.execute("Create TABLE session_questions("
+					+ "session_id INT,"
+					+ "category_id INT,"
+					+ "primary key(session_id, category_id),"
+					+ "FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE,"
+					+ "FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE);"
+					);
 		}
 		
 	}
