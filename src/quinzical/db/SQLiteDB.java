@@ -14,92 +14,55 @@ import quinzical.model.Question;
 import quinzical.model.Session;
 import quinzical.model.User;
 
+/**
+ * 
+ * @author Neville
+ *
+ */
 public class SQLiteDB implements QuinzicalDB{
 	
-	private  static Connection con;
-	private  static boolean hasData = false;
+	private static Connection conn;
+	private static boolean hasData = false;
+	
+	private static int USERNAME_CHAR_LIMIT = 20;
+	private static int CATEGORYNAME_CHAR_LIMIT = 50;
+	private static int QUESTION_CHAR_LIMIT = 200;
 	
 	
 	public ResultSet displayUsers() throws ClassNotFoundException, SQLException {
-		if(con == null) {
+		if(conn == null) {
 			getConnection();
 		}
 		
-		Statement state = con.createStatement();
-		ResultSet res = state.executeQuery("SELECT username From user");
+		Statement state = conn.createStatement();
+		ResultSet res = state.executeQuery("SELECT user_name From user");
 		return res;
 	}
 
 	private void getConnection() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		Class.forName("org.sqlite.JDBC");
-		con = DriverManager.getConnection("jdbc:sqlite:SQLiteQuinzical.db");
+		conn = DriverManager.getConnection("jdbc:sqlite:SQLiteQuinzical.db");
 		initialise();
 	}
 
 	private void initialise() throws SQLException {
-		// TODO Auto-generated method stub
+		// 
+		Statement state = conn.createStatement();
+		state.executeQuery("PRAGMA foreign_keys = ON");		
 		if( !hasData ) {
 			hasData = true;
 			
-			createUserTable();
-			//createQuestionTable();
-			//createSessionTable();
-			//createCategoryTable();
+			SQLiteSchema.createUserTable(conn);
+			//SQLiteSchema.createQuestionTable();
+			//SQLiteSchema.createSessionTable();
+			//SQLiteSchema.createCategoryTable();
 
 		}
 	}
 	
 	
-	private void createUserTable() throws SQLException {
-		Statement state = con.createStatement();
-		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='user'");		
-		if ( !res.next() ) {
-			System.out.println("Building the User table with prepopulated values.");
-			
-			// building the  User table table
-			Statement state2 = con.createStatement();
-			state2.execute("Create TABLE user(id integer,"
-					+ "username varchar(20)," + "primary key(id));");
-		}
-		
-	}
 	
-	private void createQuestionTable() throws SQLException {
-		Statement state = con.createStatement();
-		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='user'");		
-		if ( !res.next() ) {
-			System.out.println("Building the User table with prepopulated values.");
-			Statement state2 = con.createStatement();
-			state2.execute("Create TABLE user(id integer,"
-					+ "username varchar(60)," + "primary key(id));");
-		}
-		
-	}
-	
-	private void createSessionTable() throws SQLException {
-		Statement state = con.createStatement();
-		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='user'");		
-		if ( !res.next() ) {
-			System.out.println("Building the User table with prepopulated values.");
-			Statement state2 = con.createStatement();
-			state2.execute("Create TABLE user(id integer,"
-					+ "username varchar(60)," + "primary key(id));");
-		}
-		
-	}
-	
-	public void createCategoryTable() throws SQLException {
-		Statement state = con.createStatement();
-		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='user'");		
-		if ( !res.next() ) {
-			System.out.println("Building the User table with prepopulated values.");
-			Statement state2 = con.createStatement();
-			state2.execute("Create TABLE user(id integer,"
-					+ "username varchar(60)," + "primary key(id));");
-		}
-		
-	}
 	
 	
 	@Override
@@ -129,10 +92,10 @@ public class SQLiteDB implements QuinzicalDB{
 	@Override
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
-		if(con == null) {
+		if(conn == null) {
 			try {
 				getConnection();
-				PreparedStatement prep = con.prepareStatement("INSERT INTO user(username) values(?);");
+				PreparedStatement prep = conn.prepareStatement("INSERT INTO user(username) values(?);");
 				prep.setString(1, user.getname());
 				prep.execute();
 				
@@ -154,6 +117,23 @@ public class SQLiteDB implements QuinzicalDB{
 	@Override
 	public void deleteUser(int userId) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addCategory(String categoryName) {
+		if(conn == null) {
+			try {
+				getConnection();
+				PreparedStatement prep = conn.prepareStatement("INSERT INTO user(username) values(?);");
+				prep.setString(1, categoryName);
+				prep.execute();
+				
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	
 		
 	}
 

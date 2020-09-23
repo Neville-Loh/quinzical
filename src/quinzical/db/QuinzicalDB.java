@@ -17,6 +17,8 @@ public interface QuinzicalDB {
 	
 	public Session getUserSession(int UserId);
 	
+	public void addCategory(String categoryName);
+	
 	public void addQuestion(Question quesiton);
 	
 	public void addUser(User user);
