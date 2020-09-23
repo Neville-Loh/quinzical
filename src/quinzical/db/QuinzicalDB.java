@@ -21,5 +21,7 @@ public interface QuinzicalDB {
 	
 	public void addUser(User user);
 	
+	public void deleteUser(int userId);
+	
 	public void create();
 }

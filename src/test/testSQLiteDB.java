@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import quinzical.db.SQLiteDB;
+import quinzical.model.User;
 
 public class testSQLiteDB {
 	
@@ -12,6 +13,9 @@ public class testSQLiteDB {
 		
 		SQLiteDB db = new SQLiteDB();
 		ResultSet res;
+		db.addUser(new User());
+		
+		
 		
 		try {
 			res = db.displayUsers();

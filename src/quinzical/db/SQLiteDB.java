@@ -33,7 +33,7 @@ public class SQLiteDB implements QuinzicalDB{
 	private void getConnection() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		Class.forName("org.sqlite.JDBC");
-		con = DriverManager.getConnection("jdbc:sqlite:SQLiteTest1.db");
+		con = DriverManager.getConnection("jdbc:sqlite:SQLiteQuinzical.db");
 		initialise();
 	}
 
@@ -41,28 +41,67 @@ public class SQLiteDB implements QuinzicalDB{
 		// TODO Auto-generated method stub
 		if( !hasData ) {
 			hasData = true;
-			Statement state = con.createStatement();
-			ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='user'");
-			if ( !res.next() ) {
-				System.out.println("Building the User table with prepopulated values.");
-				// building the table
-				Statement state2 = con.createStatement();
-				state2.execute("Create TABLE user(id integer,"
-						+ "username varchar(60)," + "primary key(id));");
-				
-				// inserting some sample data
-				PreparedStatement prep = con.prepareStatement("INSERT INTO user(username) values(?);");
-				prep.setString(1, "john wick");
-				prep.execute();
-				
-				PreparedStatement prep2 = con.prepareStatement("INSERT INTO user(username) values(?);");
-				prep2.setString(1, "whatever");
-				prep2.execute();
-				
-			}
+			
+			createUserTable();
+			//createQuestionTable();
+			//createSessionTable();
+			//createCategoryTable();
+
 		}
 	}
-
+	
+	
+	private void createUserTable() throws SQLException {
+		Statement state = con.createStatement();
+		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='user'");		
+		if ( !res.next() ) {
+			System.out.println("Building the User table with prepopulated values.");
+			
+			// building the  User table table
+			Statement state2 = con.createStatement();
+			state2.execute("Create TABLE user(id integer,"
+					+ "username varchar(20)," + "primary key(id));");
+		}
+		
+	}
+	
+	private void createQuestionTable() throws SQLException {
+		Statement state = con.createStatement();
+		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='user'");		
+		if ( !res.next() ) {
+			System.out.println("Building the User table with prepopulated values.");
+			Statement state2 = con.createStatement();
+			state2.execute("Create TABLE user(id integer,"
+					+ "username varchar(60)," + "primary key(id));");
+		}
+		
+	}
+	
+	private void createSessionTable() throws SQLException {
+		Statement state = con.createStatement();
+		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='user'");		
+		if ( !res.next() ) {
+			System.out.println("Building the User table with prepopulated values.");
+			Statement state2 = con.createStatement();
+			state2.execute("Create TABLE user(id integer,"
+					+ "username varchar(60)," + "primary key(id));");
+		}
+		
+	}
+	
+	public void createCategoryTable() throws SQLException {
+		Statement state = con.createStatement();
+		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='user'");		
+		if ( !res.next() ) {
+			System.out.println("Building the User table with prepopulated values.");
+			Statement state2 = con.createStatement();
+			state2.execute("Create TABLE user(id integer,"
+					+ "username varchar(60)," + "primary key(id));");
+		}
+		
+	}
+	
+	
 	@Override
 	public List<ArrayList<Category>> getAllCategory() {
 		// TODO Auto-generated method stub
@@ -93,8 +132,8 @@ public class SQLiteDB implements QuinzicalDB{
 		if(con == null) {
 			try {
 				getConnection();
-				PreparedStatement prep = con.prepareStatement("INSERT INTO user values)");
-				prep.setString(2,  user.getname());
+				PreparedStatement prep = con.prepareStatement("INSERT INTO user(username) values(?);");
+				prep.setString(1, user.getname());
 				prep.execute();
 				
 			} catch (ClassNotFoundException | SQLException e) {
@@ -108,6 +147,12 @@ public class SQLiteDB implements QuinzicalDB{
 
 	@Override
 	public void create() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteUser(int userId) {
 		// TODO Auto-generated method stub
 		
 	}

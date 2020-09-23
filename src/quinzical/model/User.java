@@ -33,7 +33,7 @@ public class User {
 	 */
 	public String getname() {
 		// TODO Auto-generated method stub
-		return null;
+		return "ass";
 	}
 	
 	/**
