@@ -13,7 +13,6 @@ public interface QuinzicalDB {
 	
 	public List<ArrayList<Category>> getAllCategory();
 	
-	
 	public User getUser(int id);
 	
 	public Session getUserSession(int UserId);
@@ -22,5 +21,5 @@ public interface QuinzicalDB {
 	
 	public void addUser(User user);
 	
-	
+	public void create();
 }

@@ -56,6 +56,8 @@ public class Main extends Application {
 		return practiceModel;
 	}
 	public static void main(String[] args) {
-		launch(args);
+		//launch(args);
+		//test a = new test();
+		new test.testSQLiteDB();
 	}
 }
