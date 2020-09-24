@@ -3,22 +3,23 @@ package test;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
 import quinzical.model.Question;
 import quinzical.model.User;
 
 public class testSQLiteDB {
+
 	
 	public testSQLiteDB() {
 		//
 		
 		SQLiteDB db = new SQLiteDB();
+
 		try {
 			db.getConnection();
-			populateCategory(db);
-			//populateQuetsion(db);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+			db.deleteCategory(3);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 //		ResultSet res;
@@ -40,14 +41,30 @@ public class testSQLiteDB {
 		
 		
 	}
+	public void testOnDelectCascade() {
+		
+	}
+	public void populateUser(QuinzicalDB db) {
+
+	}
 	
-	public void populateCategory(SQLiteDB db) {
+	
+	
+	public void populateSession() {
+		
+	}
+	
+	private void populateSessionsQuestion() {
+		
+	}
+	
+	private void populateCategory(SQLiteDB db) {
 		db.addCategory("Animal");
 		db.addCategory("Sport");
 		db.addCategory("Country");
 	}
 	
-	public void populateQuetsion(SQLiteDB db) {
+	private void populateQuetsion(SQLiteDB db) {
 		Question question1 = new Question("What is somthing that is white?", "cloud", 0);
 		db.addQuestion(question1, 1);
 		Question question2 = new Question("What is somthing that is blue?", "sky", 0);
