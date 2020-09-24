@@ -1,9 +1,11 @@
 package quinzical.model;
 
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 /**
  * Class to store the current session related to the user 
  * @author Neville
@@ -12,6 +14,7 @@ import java.util.List;
 
 public class Session {
 	
+
 	private int _ID;
 	private Timestamp _startTime;
 	private Timestamp _endTime;
@@ -29,11 +32,12 @@ public class Session {
 		_startTime = new Timestamp(System.currentTimeMillis());
 		_user = user;
 	}
-	
+
 	/**
 	 * Get Method, get creationTime of Session
 	 * @return Time 
 	 */
+
 	public Timestamp getCreationTime() {
 		return _startTime;
 	}
@@ -51,6 +55,7 @@ public class Session {
 	 * the current session.
 	 * @return winning 
 	 */
+
 	public int getWinnings() {
 		return _winnings;
 	}
@@ -81,15 +86,17 @@ public class Session {
 	 * 
 	 * @return
 	 */
+
 	public long getAttemptedMap() {
 		// #TODO 
 		return -1;
 	}
 	
+
 	public boolean isFinished() {
 		return _isFinished;
 	}
-	
+
 	/**
 	 * when the sessions's game over method is called, the session is terminated 
 	 * and all statistic that is associated with the player such as score is recorded 

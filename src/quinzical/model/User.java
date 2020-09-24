@@ -8,10 +8,11 @@ package quinzical.model;
  */
 public class User {
 	
+
 	private final int _ID;
 	private String _name;
 	private Session _currentSession;
-	
+
 	
 	/**
 	 * Constructor of the user, the user data such as Name is saved to database
@@ -75,4 +76,5 @@ public class User {
 	public void setSession(Session session) {
 		_currentSession = session;
 	}
+
 }

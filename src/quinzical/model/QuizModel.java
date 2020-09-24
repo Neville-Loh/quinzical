@@ -22,6 +22,7 @@ public class QuizModel {
 	private Question _activeQuestion;
 	private User _currentUser;
 	private Session _currentSession;
+
 	
 	
 

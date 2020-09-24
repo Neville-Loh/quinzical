@@ -5,7 +5,9 @@ public interface TextToSpeech {
 	/**
 	 * Starts the text to speech process which run in background
 	 */
+
 	public void start(String text);
+
 	
 	/**
 	 * Stop the text to speech by force
@@ -16,9 +18,11 @@ public interface TextToSpeech {
 	 * Set the volume of the current text to speech
 	 */
 	public void setVolume(int volume);
+
 	
 	/**
 	 * Set the speed of the curren text to speech
 	 */
 	public void setSpeed(int speed);
+
 }

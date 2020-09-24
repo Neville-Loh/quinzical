@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import quinzical.model.User;
+
 /**
  * Object implementation of a database. Use to save user data to the local directory
  * @author Neville
@@ -23,7 +25,7 @@ public class ObjectDB implements Serializable {
     	_winning = 0;
     	_isAttempted = new HashMap<String, Boolean>();
     }
-    
+
     /**
      * Get Method
      * @return score of user
@@ -31,6 +33,7 @@ public class ObjectDB implements Serializable {
     public int getWinning() {
         return _winning;
     }
+    
     /**
      * Get Method
      * @return attempted question as a boolean map
@@ -38,6 +41,7 @@ public class ObjectDB implements Serializable {
     public Map<String, Boolean> getIsAttemptedMap() {
         return _isAttempted;
     }
+    
     /**
      * Set Method
      * Set current sores of the user
@@ -45,6 +49,7 @@ public class ObjectDB implements Serializable {
     public void setWinning(int winning) {
     	_winning = winning;
     }
+    
     /**
      * Set Method
      * Set question attempted boolean map
