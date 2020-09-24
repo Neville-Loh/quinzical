@@ -62,7 +62,8 @@ public class SQLiteDB implements QuinzicalDB{
 	@Override
 	public User getUser(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		User result = new User("temp");
+		return result;
 	}
 
 	@Override
@@ -87,8 +88,7 @@ public class SQLiteDB implements QuinzicalDB{
 
 	@Override
 	public void deleteUser(int userId) {
-		// TODO Auto-generated method stub
-		
+		DbUtils.deleteEntryInTable(conn, userId, "user");
 	}
 	
 	/**
@@ -143,7 +143,7 @@ public class SQLiteDB implements QuinzicalDB{
 
 	@Override
 	public void deleteSession(int sessionId) {
-		// TODO Auto-generated method stub
+		DbUtils.deleteEntryInTable(conn, sessionId, "session");
 		
 	}
 	
@@ -244,7 +244,7 @@ public class SQLiteDB implements QuinzicalDB{
 
 	@Override
 	public void deleteQuestion(int questionId) {
-		// TODO Auto-generated method stub
+		DbUtils.deleteEntryInTable(conn, questionId, "question");
 		
 	}
 	
