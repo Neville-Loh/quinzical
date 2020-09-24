@@ -6,15 +6,17 @@ package quinzical.model;
  * @author Neville
  */
 public class Question {
+	private int _id;
 	private String _question;
 	private String _answer;
 	private int _score;
 	private boolean _isAttempted = false;
 
-	public Question(String question, String ans, int score) {
+	public Question(String question, String ans, int score, int id) {
 		_answer = ans;
 		_question = question;
 		_score = score;
+		_id = id;
 	}
 	
 
@@ -53,5 +55,9 @@ public class Question {
 	 */
 	public int getScore() {
 		return _score;
+	}
+	
+	public int getID() {
+		return _id;
 	}
 }

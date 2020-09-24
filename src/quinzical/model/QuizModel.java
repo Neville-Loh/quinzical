@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import quinzical.db.ObjectDB;
+//import quinzical.db.QuinzicalDB;
 import quinzical.util.FileHandler;
 import quinzical.util.Helper;
 
@@ -16,10 +17,12 @@ import quinzical.util.Helper;
  * @author Neville
  */
 public class QuizModel {
-	private int _winning;
 	private int _remainingQuestion;
 	private ArrayList<Category> _cats;
 	private Question _activeQuestion;
+	private User _currentUser;
+	private Session _currentSession;
+
 	
 	
 
@@ -29,7 +32,6 @@ public class QuizModel {
 	 * exist, all value will be set to its initial status
 	 */
 	public QuizModel() {
-		_winning = 0;
 		_cats = FileHandler.loadCategory();
 		updateRemainingQuestion();
 		try {
@@ -63,9 +65,10 @@ public class QuizModel {
 	 */
 	public boolean answerQuestion(Question question, String input) {
 		question.setAttempted(true);
+		_currentSession.addAttempted(question);
 		_remainingQuestion -= 1;
 		if (question.getAnswer().equalsIgnoreCase(input)) {
-			_winning += question.getScore();
+			_currentSession.addWinnings(question.getScore());
 			return true;
 		} else {
 			//_winning -= question.getScore();
@@ -95,7 +98,7 @@ public class QuizModel {
 	 */
 	public void save() {
 		ObjectDB db = new ObjectDB();
-		db.setWinning(_winning);
+		db.setWinning(_currentSession.getWinnings());
 		HashMap<String, Boolean> isAttemptedMap = new HashMap<String, Boolean>();
 		for (Category cat : _cats) {
 			for (Question question : cat.getQuestions()) {
@@ -112,7 +115,7 @@ public class QuizModel {
 	 */
 	public void load() {
 		ObjectDB db = FileHandler.loadDB();
-		_winning = db.getWinning();
+		_currentSession.setWinnings(db.getWinning());
 		Map<String, Boolean> isAttemptedMap = db.getIsAttemptedMap();
 
 		// TODO handle exception
@@ -132,7 +135,7 @@ public class QuizModel {
 	 * question will be set to its non attempted status
 	 */
 	public void reset() {
-		_winning = 0;
+		_currentSession.reset();
 		_remainingQuestion = 0;
 		for (Category cat : _cats) {
 			for (Question question : cat.getQuestions()) {
@@ -183,14 +186,14 @@ public class QuizModel {
 	 * @return score of the player
 	 */
 	public int getWinning() {
-		return _winning;
+		return _currentSession.getWinnings();
 	}
 	/**
 	 * Get Method
 	 * @return Score as a string with dollar sign 
 	 */
 	public String getWinningStr() {
-		return "$" + Integer.toString(_winning);
+		return "$" + Integer.toString(_currentSession.getWinnings());
 	}
 
 	/**

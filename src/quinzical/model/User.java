@@ -8,12 +8,23 @@ package quinzical.model;
  */
 public class User {
 	
+
+	private final int _ID;
+	private String _name;
+	private Session _currentSession;
+
 	
 	/**
 	 * Constructor of the user, the user data such as Name is saved to database
 	 * upon initialization.
 	 */
-	public User() {
+	public User(String name, int ID) throws IllegalArgumentException {
+		if (name.length() > 20) {
+			throw new IllegalArgumentException();
+		}
+		_ID = ID;
+		_name = name;
+		_currentSession = new Session(this);
 		// TODO Auto-generated method stub
 	}
 	
@@ -23,27 +34,24 @@ public class User {
 	 * @return The userID
 	 */
 	public int getUserID() {
-		// TODO Auto-generated method stub
-		return -1;
+		return _ID;
 	}
 
 	/**
 	 * Get Method, get the user name of the player
 	 * @return name of the user
 	 */
-	public String getname() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getName() {
+		return _name;
 	}
 	
 	/**
-	 * Return the the latest session the user are in, one user can only be 
-	 * associate to one session at the time.
+	 * Return the the latest session the user is in, a user can only be 
+	 * associated with one session at the time.
 	 * @return previous session of user
 	 */
 	public Session getSession() {
-		// TODO Auto-generated method stub
-		return null;
+		return _currentSession;
 		
 	}
 	
@@ -64,4 +72,9 @@ public class User {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void setSession(Session session) {
+		_currentSession = session;
+	}
+
 }
