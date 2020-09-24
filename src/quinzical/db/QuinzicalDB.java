@@ -43,9 +43,9 @@ public interface QuinzicalDB {
 	
 	public Category getCategory(int categoryId);
 	
-	public List<List<Category>> getAllCategory();
+	public List<Category> getAllCategory();
 	
-	public void addCategory(String categoryName);
+	public void addCategory(Category category);
 	
 	public void deleteCategory(int categoryId);
 	

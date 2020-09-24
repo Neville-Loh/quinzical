@@ -30,14 +30,12 @@ public class SQLiteDB implements QuinzicalDB{
 		if(conn == null) {
 			getConnection();
 		}
-		
 		Statement state = conn.createStatement();
 		ResultSet res = state.executeQuery("SELECT user_name From user");
 		return res;
 	}
 
 	public void getConnection() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 		Class.forName("org.sqlite.JDBC");
 		SQLiteConfig config = new SQLiteConfig();  
         config.enforceForeignKeys(true);  
@@ -46,16 +44,13 @@ public class SQLiteDB implements QuinzicalDB{
 	}
 
 	private void initialise() throws SQLException {
-		// 
 		if( !hasData ) {
 			hasData = true;
 			
-			//SQLiteSchema.createUserTable(conn);
+			SQLiteSchema.createUserTable(conn);
 			SQLiteSchema.createCategoryTable(conn);
 			SQLiteSchema.createQuestionTable(conn);
-			//SQLiteSchema.createSessionTable();
-			
-
+			SQLiteSchema.createSessionTable(conn);
 		}
 	}
 	
@@ -79,18 +74,15 @@ public class SQLiteDB implements QuinzicalDB{
 	@Override
 	public void addUser(User user) {
 		PreparedStatement prep = null;
-		if(conn == null) {
 			try {
-				getConnection();
 				prep = conn.prepareStatement("INSERT INTO user(user_name) values(?);");
 				prep.setString(1, user.getName());
 				prep.execute();
 				
-			} catch (ClassNotFoundException | SQLException e) {
+			} catch (SQLException e) {
 				e.printStackTrace();
 				
 			} 
-		}
 	}
 
 	@Override
@@ -112,7 +104,40 @@ public class SQLiteDB implements QuinzicalDB{
 
 	@Override
 	public void addSession(User user, Session session) {
-		// TODO Auto-generated method stub
+		PreparedStatement prep = null;
+		try {
+			prep = conn.prepareStatement("INSERT INTO session(user_id, score, isFinished, finished_time) values(?,?,?,?);");
+			prep.setInt(1, user.getUserID());
+			prep.setInt(2, session.getWinnings());
+			prep.setBoolean(3, session.isFinished());
+			prep.setTimestamp(4, session.getCreationTime());
+			prep.execute();
+			try (ResultSet generatedKeys = prep.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	            	int sessionId = generatedKeys.getInt(1);
+	                //user.setUserId(generatedKeys.getInt(1));
+	                System.out.println("The user " + user.getName() + " have id " + sessionId);
+	                
+		            // saving each question in 
+		            List<Category> cats = session.getCategoryList();
+		            for (Category cat : cats) {
+		            	for (Question question : cat.getQuestions()) {
+		            		prep = conn.prepareStatement("REPLACE INTO session_questions("
+		            				+ "session_id, question_id, isAtempted) values(?,?,?);");
+		            		prep.setInt(1, sessionId);
+		            		prep.setInt(1, question.getID());
+		            		prep.setBoolean(3, question.isAttempted());
+		            	}
+		            }
+	            } else {
+	                throw new SQLException("Creating user failed, no ID obtained.");
+	            }
+	            
+	            
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
 		
 	}
 
@@ -135,17 +160,46 @@ public class SQLiteDB implements QuinzicalDB{
 	}
 
 	@Override
-	public List<List<Category>> getAllCategory() {
+	public List<Category> getAllCategory() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<Category> getRandomQuestionSet(List<String> categoryNames) {
+		List<Category> result = new ArrayList<Category>();
+		
+		for (String categoryName : categoryNames) {
+			Category cat = new Category(categoryName);
+			
+			// Adding new question 
+			PreparedStatement prep = null;
+			try {
+				prep = conn.prepareStatement("SELECT question_id, prompt, answer FROM question "
+						+ "WHERE category_id = "
+						+ cat.getCategoryId()
+						+ " ORDER by RANDOM() LIMIT 5;");
+				ResultSet res = prep.executeQuery();
+				
+				while( res.next() ) {
+					System.out.println(res);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+			
+			result.add(cat);
+		}
+		return result;
+		
+	}
 
 	@Override
-	public void addCategory(String categoryName) {
+	public void addCategory(Category category) {
 		PreparedStatement prep = null;
 			try {
 				prep = conn.prepareStatement("INSERT INTO category(category_name) values(?);");
-				prep.setString(1, categoryName);
+				prep.setString(1, category.getTitle());
 				prep.execute();
 				
 			} catch (SQLException e) {

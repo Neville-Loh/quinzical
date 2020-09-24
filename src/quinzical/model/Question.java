@@ -17,7 +17,10 @@ public class Question {
 		_question = question;
 		_score = score;
 	}
-	
+	public Question(String question, String ans) {
+		_answer = ans;
+		_question = question;
+	}
 
 	/**
 	 * set attribute isAttempted to a boolean
