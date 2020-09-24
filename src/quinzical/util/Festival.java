@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 public class Festival implements TextToSpeech {
 	
 	private int _volume;
-	private int _speed;
 	private Process _currentProcess;
 	
 	public Festival() {
@@ -18,7 +17,7 @@ public class Festival implements TextToSpeech {
 			@Override
 			public void run() {
 				String command = "echo \"" + text + "\" | festival --tts";
-				runBash(command);
+				runTerminal(command, true);
 			}
 
 		}).start();
@@ -32,17 +31,34 @@ public class Festival implements TextToSpeech {
 		_volume = volume;
 	}
 	
+	/**
+	 * This method changes the speed of the speech synthesis of festival.
+	 * @param speed is the requested speed expressed as a percentage of the default speed.
+	 * For example to set the speed as the default speed the input would be 100 
+	 * corresponding to 100%
+	 * 
+	 */
 	public void setSpeed(int speed) {
-		_speed = speed;
+		double duration = 1 / ( (double) speed / 100);
+		runTerminal("festival", false);
+		String command = "(Parameter.set 'Duration_Stretch " + Double.toString(duration) + ")";
+		runTerminal(command, false);
+		runTerminal("(quit)", false);
 	}
+	
 	
 	/**
 	 * Run a bash command using process builder
 	 * @param command
 	 */
-	private void runBash(String command) {
+	private void runTerminal(String command, boolean bash) {
 		try {
-			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+			ProcessBuilder pb;
+			if (bash) {
+				pb = new ProcessBuilder("bash", "-c", command);
+			} else {
+				pb = new ProcessBuilder(command);
+			}
 			Process process = pb.start();
 			_currentProcess = process;
 			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
