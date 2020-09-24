@@ -45,17 +45,26 @@ public class testSQLiteDB {
 		
 	}
 	public void populateUser(QuinzicalDB db) {
-
-	}
-	
-	
-	
-	public void populateSession() {
+		User user;
+		
+		user = new User("Tom");
+		db.addUser(user);
+		
+		user = new User("Amy");
+		db.addUser(user);
+		
+		user = new User("Neville");
+		db.addUser(user);
 		
 	}
 	
-	private void populateSessionsQuestion() {
+	
+	
+	public void populateSession(QuinzicalDB db) {
 		
+	}
+	
+	private void populateSessionsQuestion(QuinzicalDB db) {
 	}
 	
 	private void populateCategory(SQLiteDB db) {

@@ -83,7 +83,7 @@ public class SQLiteDB implements QuinzicalDB{
 			try {
 				getConnection();
 				prep = conn.prepareStatement("INSERT INTO user(user_name) values(?);");
-				prep.setString(1, user.getname());
+				prep.setString(1, user.getName());
 				prep.execute();
 				
 			} catch (ClassNotFoundException | SQLException e) {

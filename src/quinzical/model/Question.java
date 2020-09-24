@@ -12,11 +12,10 @@ public class Question {
 	private int _score;
 	private boolean _isAttempted = false;
 
-	public Question(String question, String ans, int score, int id) {
+	public Question(String question, String ans, int score) {
 		_answer = ans;
 		_question = question;
 		_score = score;
-		_id = id;
 	}
 	
 

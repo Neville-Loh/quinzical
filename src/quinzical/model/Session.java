@@ -78,7 +78,7 @@ public class Session {
 	}
 	
 	public void addAttempted(Question question) {
-		_isAttempted.add(question.getID());
+		//_isAttempted.add(question.getID());
 	}
 	
 	
