@@ -9,7 +9,7 @@ package quinzical.model;
 public class User {
 	
 
-	private final int _ID;
+	private int _ID = -1;
 	private String _name;
 	private Session _currentSession;
 
@@ -18,11 +18,10 @@ public class User {
 	 * Constructor of the user, the user data such as Name is saved to database
 	 * upon initialization.
 	 */
-	public User(String name, int ID) throws IllegalArgumentException {
+	public User(String name) throws IllegalArgumentException {
 		if (name.length() > 20) {
 			throw new IllegalArgumentException();
 		}
-		_ID = ID;
 		_name = name;
 		_currentSession = new Session(this);
 		// TODO Auto-generated method stub
@@ -35,6 +34,14 @@ public class User {
 	 */
 	public int getUserID() {
 		return _ID;
+	}
+	
+	public void setUserId(int id) {
+		if (_ID == -1) {
+			_ID = id;
+		} else {
+			throw new IllegalArgumentException();
+		}
 	}
 
 	/**

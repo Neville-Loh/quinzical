@@ -13,20 +13,24 @@ public class Question {
 	private int _score;
 	private boolean _isAttempted = false;
 
-	public Question(String question, String ans, int score, int id) {
+	public Question(String question, String ans, int score) {
 		_answer = ans;
 		_question = question;
 		_score = score;
-		_id = id;
 	}
+
 	
-	public Question(String question, String ans, String prefix, int id) {
+	public Question(String question, String ans, String prefix) {
 		_answer = ans;
 		_question = question;
 		_prefix = prefix;
-		_id = id;
 	}
 	
+
+	public Question(String question, String ans) {
+		_answer = ans;
+		_question = question;
+
 
 	/**
 	 * set attribute isAttempted to a boolean

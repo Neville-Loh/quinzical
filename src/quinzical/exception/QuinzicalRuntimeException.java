@@ -1,4 +1,4 @@
-package quinzical.util;	/**
+package quinzical.exception;	/**
  * 
  */
 
@@ -8,7 +8,7 @@ import javafx.scene.control.Alert.AlertType;
 
 /**
  * Runtime Exception class for the application, created in order to distinguish
- * exception from other classe
+ * exception from other classes
  * @author Neville Loh
  * 
  */

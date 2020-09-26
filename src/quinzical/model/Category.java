@@ -11,13 +11,7 @@ import java.util.ArrayList;
 public class Category {
 	private ArrayList<Question> _questions;
 	private String _title;
-	private int catID;
-	
-	public Category(String title, int id) {
-		_title = title;
-		_questions = new ArrayList<Question>();
-		catID = id;
-	}
+	private int catID = -1;
 	
 	public Category(String title) {
 		_title = title;
@@ -62,5 +56,20 @@ public class Category {
 	 */
 	public int getQuestionCount() {
 		return _questions.size();
+	}
+	
+	public void getCategorySet(int id) {
+		catID = id;
+	}
+	public int getCategoryId() {
+		return catID;
+	}
+	
+	public void setUserId(int id) {
+		if (catID == -1) {
+			catID = id;
+		} else {
+			throw new IllegalArgumentException("The category already have an id.");
+		}
 	}
 }
