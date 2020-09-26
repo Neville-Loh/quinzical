@@ -11,6 +11,13 @@ import java.util.ArrayList;
 public class Category {
 	private ArrayList<Question> _questions;
 	private String _title;
+	private int catID;
+	
+	public Category(String title, int id) {
+		_title = title;
+		_questions = new ArrayList<Question>();
+		catID = id;
+	}
 	
 	public Category(String title) {
 		_title = title;
