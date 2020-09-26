@@ -16,13 +16,13 @@ public class Session {
 	
 
 	private int _ID;
+	private User _user;
+	private int _winnings;
+	private ArrayList<Category> _cats;
+	
 	private Timestamp _startTime;
 	private Timestamp _endTime;
-	private int _winnings;
-	private User _user;
-	private List<Question> _questions = new ArrayList<Question>();
 	private boolean _isFinished = false;
-	private ArrayList<Integer> _isAttempted;
 	
 	/**
 	 * Session constructor.
@@ -82,16 +82,6 @@ public class Session {
 	}
 	
 	
-	/**
-	 * 
-	 * @return
-	 */
-
-	public long getAttemptedMap() {
-		// #TODO 
-		return -1;
-	}
-	
 
 	public boolean isFinished() {
 		return _isFinished;
@@ -115,12 +105,20 @@ public class Session {
 		_startTime = new Timestamp(System.currentTimeMillis());
 		_endTime = null;
 		_winnings = 0;
-		for (Question question : _questions) {
-			question.setAttempted(false);
+		for (Category cat : _cats) {
+			for (Question question : cat.getQuestions()) {
+				question.setAttempted(false);
+			}
 		}
 	}
 	
 	public long getPlayTime() {
 		return _endTime.getTime() - _startTime.getTime();
 	}
+	
+	public ArrayList<Category> getCategoryList(){
+		return _cats;
+	}
+	
+
 }

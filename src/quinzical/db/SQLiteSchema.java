@@ -26,7 +26,7 @@ public class SQLiteSchema {
 			state2.execute("Create TABLE user("
 					+ "user_id integer,"
 					+ "user_name varchar("+ USERNAME_CHAR_LIMIT + ")," 
-					+ "primary key(id));");
+					+ "primary key(user_id));");
 		}
 		
 	}
@@ -91,7 +91,7 @@ public class SQLiteSchema {
 					+ "user_id integer,"
 					+ "score integer,"
 					+ "isFinished boolean,"
-					+ "finished_time varchar(200),"
+					+ "finished_time TIMESTAMP,"
 					+ "primary key(session_id));");
 		}
 		
@@ -110,10 +110,11 @@ public class SQLiteSchema {
 			Statement state2 = conn.createStatement();
 			state2.execute("Create TABLE session_questions("
 					+ "session_id INT,"
-					+ "category_id INT,"
+					+ "question_id INT,"
+					+ "isAtempted boolean"
 					+ "primary key(session_id, category_id),"
-					+ "FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE,"
-					+ "FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE);"
+					+ "FOREIGN KEY (session_id) REFERENCES session(session_id) ON DELETE CASCADE,"
+					+ "FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE);"
 					);
 		}
 		
