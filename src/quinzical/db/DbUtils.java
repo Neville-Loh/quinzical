@@ -7,8 +7,19 @@ import java.sql.SQLException;
 
 import quinzical.exception.QunizicalEntryNotFoundException;
 import quinzical.model.Question;
-
+/**
+ * Class for database helper function.s
+ * @author Neville
+ */
 public class DbUtils {
+	
+	/**
+	 * Delete an entry from the give tableName, irreversible action.
+	 * All entry related to the entry will be deleted in a cascade faction.
+	 * @param conn connection of the database
+	 * @param entryId the id asigned to the entry
+	 * @param tableName the table Name
+	 */
 	public static void deleteEntryInTable(Connection conn, int entryId, String tableName) {
 		PreparedStatement prep = null;
 		try {
@@ -23,7 +34,18 @@ public class DbUtils {
 	}
 	
 	
-	
+	/**
+	 * get an entry ID given the table name, column  name, where the column value to match it
+	 * Will only return the first entry if there are multiple matches
+	 * catch exception if no matches
+	 * 
+	 * @param conn connection of the database
+	 * @param tableName the Name of the table
+	 * @param colName name of the column
+	 * @param colValue name of the column
+	 * @return the ID of the entry
+	 * @throws QunizicalEntryNotFoundException
+	 */
 	public static int getEntryIDInTable(Connection conn, String tableName, String colName , 
 			String colValue) throws QunizicalEntryNotFoundException {
 		PreparedStatement prep = null;

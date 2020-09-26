@@ -62,7 +62,7 @@ public class PracticeViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		model = Main.getPracticeModel();
+		//odel = Main.getPracticeModel();
 		question = model.getActiveQuestion();
 		model.textToSpeech(question.toString());
 		questionLabel.setText(question.toString());
