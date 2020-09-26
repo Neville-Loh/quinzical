@@ -11,23 +11,10 @@
 - Score dashboard
 
 
-# package
-```
-.src
-..model
-
-..resource
-...view
-...css
-
-..controller
-..db
-..init 
-```
 
 ## Week 2 (20 Sep - 26 Sep)
 ### TODO:
-- set up sql lite
+- ~~set up sql lite~~
 - finsih backend
 - write some docs (if possible)
 
@@ -37,6 +24,6 @@
 - ~~Core gameplay loop design~~  
 - ~~GUI design rough sketch~~  
 - ~~Set up template projects~~
-- Set up initial game model/practice mode
+- ~~Set up initial game model/practice mode~~
 
 
