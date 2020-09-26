@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Class to store the current session related to the user 
- * @author Neville
+ * @author Neville, danielcutfield
  *
  */
 

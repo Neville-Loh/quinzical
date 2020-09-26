@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import quinzical.exception.QunizicalEntryNotFoundException;
+import quinzical.model.Question;
 
 public class DbUtils {
 	public static void deleteEntryInTable(Connection conn, int entryId, String tableName) {
@@ -27,9 +28,12 @@ public class DbUtils {
 			String colValue) throws QunizicalEntryNotFoundException {
 		PreparedStatement prep = null;
 		try {
-			prep = conn.prepareStatement("SELECT "+ tableName + "_id FROM "
+			String statement = "SELECT "+ tableName + "_id FROM "
 					+ tableName
-					+ " WHERE " + colName + " = '" + colValue + "';");
+					+ " WHERE " + colName + " = '" + colValue + "';";
+			
+			System.out.println(statement);
+			prep = conn.prepareStatement(statement);
 			ResultSet r = prep.executeQuery();
 			
 			
@@ -42,4 +46,13 @@ public class DbUtils {
 		
 		throw new QunizicalEntryNotFoundException("Operation not sucessful");
 	}
+	
+//	public static Question resultSetToQuestion(ResultSet res) throws SQLException {
+//		while( res.next() ) {
+//			System.out.println("" + res.getInt(1) + " "+  res.getString(2) + " "+ res.getString(3));
+//			Question q = new Question(res.getString(2), res.getString(3));
+//			q.setID(res.getInt(1));
+//		}
+//		return q;
+//	}
 }

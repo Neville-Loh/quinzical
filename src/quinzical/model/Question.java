@@ -3,10 +3,10 @@ package quinzical.model;
  * Class for implementation of the question data structure, the class stores the
  * question prompt, the answer and score of the question.
  * 
- * @author Neville
+ * @author Neville, danielcutfield
  */
 public class Question {
-	private int _id;
+	private int _id = -1;
 	private String _question;
 	private String _answer;
 	private String _prefix;
@@ -73,7 +73,52 @@ public class Question {
 		return _score;
 	}
 	
+	/**
+	 * Get Method, get the question ID
+	 * @return question id
+	 */
 	public int getID() {
 		return _id;
 	}
+	
+	/**
+	 * Set method for ID,
+	 * CAUTIOUS!, this method only meant to be called by database implementation and
+	 * not Anywhere of the application, throw illegalArgumentException if id already exist.
+	 * @param id
+	 */
+	public void setID(int id) {
+		if (_id == -1) {
+			_id = id;
+		} else {
+			throw new IllegalArgumentException("Id already exist for question: " + _question);
+		}
+		
+	}
+	
+	/**
+	 * Get Method, get the question prompt
+	 * @return question prompt
+	 */
+	public String getPrompt() {
+		return _question;
+	}
+	
+	/**
+	 * Get Method, get the prefix of the answer
+	 * @return prefix
+	 */
+	public String getAnswerPrefix() {
+		return _prefix;
+	}
+	
+	/**
+	 * Set Method, set the prefix the answer of this question
+	 * @param answerPrefix
+	 */
+	public void setAnswerPrefix(String answerPrefix) {
+		_prefix = answerPrefix;
+	}
+	
+
 }

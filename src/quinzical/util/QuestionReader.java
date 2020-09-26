@@ -19,28 +19,41 @@ import quinzical.model.Question;
 
 public class QuestionReader {
 	
-	public QuestionReader() {
-		
+	private final String FILENAME;
+	
+	
+	public QuestionReader(String location) {
+		FILENAME = location;
 	}
 	
 	public void populateCategoriesAndQuestions(SQLiteDB db) {
 		try {
-			File file = new File("Quinzical.txt");
+			File file = new File(FILENAME);
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
 			String line;
-			int catid = 1;
-			int qid = 1;
+
 			Category cat = null;
 			while ((line = br.readLine()) != null) {
 				if (!line.equals("") && line.length() < 20) {
 					cat = new Category(line);
-					catid++;
+					///
+					System.out.println("adding category: " + cat.getTitle());
+					db.addCategory(cat);
+					////
+
 					//db.addCategory(cat);
 				} else if (!line.equals("")) {
-					Question question = createQuestion(line, qid);
+					Question question = createQuestion(line);
+					
+					///
+					
+					System.out.printf("Propmt: %s %nPrefix: %s, Answer: %s %n", question.getPrompt(), question.getAnswerPrefix(),
+							question.getAnswer());
+					db.addQuestion(question, cat.getCategoryID());
+					
+					////
 					cat.add(question);
-					qid++;
 					//db.addQuestion(question, catid - 1);
 				}
 			}
@@ -51,7 +64,7 @@ public class QuestionReader {
 		}
 	}
 	
-	private Question createQuestion(String line, int qid) {
+	private Question createQuestion(String line) {
 		int bracket = line.indexOf(")");
 		String question = line.substring(0, line.indexOf(","));
 		String prefix = line.substring(line.indexOf("(") + 1, bracket);

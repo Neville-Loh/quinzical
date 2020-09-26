@@ -18,6 +18,7 @@ import quinzical.model.Category;
 import quinzical.model.Question;
 import quinzical.model.Session;
 import quinzical.model.User;
+import quinzical.util.QuestionReader;
 
 public class testSQLiteDB {
 
@@ -34,6 +35,14 @@ public class testSQLiteDB {
 		try {
 			
 			db.getConnection();
+			
+//			QuestionReader rq = new QuestionReader("Quinzical.txt");
+//			rq.populateCategoriesAndQuestions(db);
+			
+			
+			
+			
+			
 //			populateUser(db);
 //			populateCategory(db);
 //			populateQuetsion(db);
@@ -46,6 +55,8 @@ public class testSQLiteDB {
 			
 			testgetRandomQuestionSet();
 			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -53,8 +64,7 @@ public class testSQLiteDB {
 //		db.addUser(new User());
 //		
 		
-		USER a = USER.ID;	
-//		
+
 //		try {
 //			res = db.displayUsers();
 //			while(res.next()) {
@@ -95,13 +105,13 @@ public class testSQLiteDB {
 		names.add("Country");
 		
 		
-		List<Category> cats = db.getRandomQuestionSet(names);
+		List<Category> cats = db.getRandomQuestionSet(5);
 		printCategorySet(cats);
 		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
+
 		
 	}
 	
@@ -143,7 +153,9 @@ public class testSQLiteDB {
 		
 	}
 	
-	private void printCategorySet(List<Category> cats) {
+	public static void printCategorySet(List<Category> cats) {
+		System.out.printf("Category length : %d%n", cats.size());
+		
 		for (Category cat : cats) {
 			System.out.println(cat.getTitle());
 			for (Question question : cat.getQuestions()) {

@@ -58,18 +58,25 @@ public class Category {
 		return _questions.size();
 	}
 	
-	public void getCategorySet(int id) {
-		catID = id;
-	}
-	public int getCategoryId() {
+	/**
+	 * Get Method 
+	 * @return the id of the current category
+	 */
+	public int getCategoryID() {
 		return catID;
 	}
 	
-	public void setUserId(int id) {
+	/**
+	 * Set method for ID,
+	 * CAUTIOUS!, this method only meant to be called by database implementation and
+	 * not Anywhere of the application, throw illegalArgumentException if id already exist.
+	 * @param id
+	 */
+	public void setID(int id) {
 		if (catID == -1) {
 			catID = id;
 		} else {
-			throw new IllegalArgumentException("The category already have an id.");
+			throw new IllegalArgumentException("Id already exist for question: " + _title);
 		}
 	}
 }

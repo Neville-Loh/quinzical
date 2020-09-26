@@ -29,17 +29,6 @@ public class SQLiteDB implements QuinzicalDB{
 	
 	
 	
-	
-	
-
-	public ResultSet displayUsers() throws ClassNotFoundException, SQLException {
-		if(conn == null) {
-			getConnection();
-		}
-		Statement state = conn.createStatement();
-		ResultSet res = state.executeQuery("SELECT user_name From user");
-		return res;
-	}
 
 	public void getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName("org.sqlite.JDBC");
@@ -61,6 +50,7 @@ public class SQLiteDB implements QuinzicalDB{
 	}
 	
 	/**
+	 * =====================================================================================================
 	 * User
 	 * Implementation of all end point method of the related
 	 * to the class User
@@ -98,6 +88,7 @@ public class SQLiteDB implements QuinzicalDB{
 	}
 	
 	/**
+	 * =====================================================================================================
 	 * Session
 	 * Implementation of all end point method of the related
 	 * to the class Session 
@@ -154,6 +145,7 @@ public class SQLiteDB implements QuinzicalDB{
 	}
 	
 	/**
+	 * =====================================================================================================
 	 * Category
 	 * Implementation of all end point method of the related
 	 * to the class Category
@@ -171,9 +163,10 @@ public class SQLiteDB implements QuinzicalDB{
 		return null;
 	}
 	
-	public List<Category> getRandomQuestionSet(List<String> categoryName) {
+	public List<Category> getRandomQuestionSet(int num) {
 		List<Category> result = new ArrayList<Category>();
 		
+		List<String> categoryName = getRandomCategoryName(num);
 		for (String catName: categoryName) {
 			Category cat = new Category(catName);
 			
@@ -187,12 +180,16 @@ public class SQLiteDB implements QuinzicalDB{
 						+ " ORDER by RANDOM() LIMIT 5;";
 				
 				System.out.println(statement);
+				
 				prep = conn.prepareStatement(statement);
 				ResultSet res = prep.executeQuery();
 				
 				while( res.next() ) {
 					System.out.println("" + res.getInt(1) + " "+  res.getString(2) + " "+ res.getString(3));
 					Question q = new Question(res.getString(2), res.getString(3));
+					q.setID(res.getInt(1));
+					
+					cat.add(q);
 				}
 				
 			} catch (SQLException e) {
@@ -206,6 +203,26 @@ public class SQLiteDB implements QuinzicalDB{
 		return result;
 		
 	}
+	
+	public List<String> getRandomCategoryName(int numberofQuestion){
+		List<String> result = new ArrayList<String>();
+		String statement = "SELECT * FROM category ORDER by RANDOM() LIMIT " + numberofQuestion + ";";
+		PreparedStatement prep = null;
+		try {			
+			//System.out.println(statement);
+			prep = conn.prepareStatement(statement);
+			ResultSet res = prep.executeQuery();
+			
+			while( res.next() ) {
+				System.out.println(res.getString(2));
+				result.add(res.getString(2));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return result;
+	}
 
 	@Override
 	public void addCategory(Category category) {
@@ -214,7 +231,9 @@ public class SQLiteDB implements QuinzicalDB{
 				prep = conn.prepareStatement("INSERT INTO category(category_name) values(?);");
 				prep.setString(1, category.getTitle());
 				prep.execute();
-				
+				try (ResultSet generatedKeys = prep.getGeneratedKeys()) {
+					category.setID(generatedKeys.getInt(1));
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} 
@@ -234,6 +253,7 @@ public class SQLiteDB implements QuinzicalDB{
 	}
 	
 	/**
+	 * =====================================================================================================
 	 * Question
 	 * Implementation of all end point method of the related
 	 * to the class Question
@@ -246,14 +266,19 @@ public class SQLiteDB implements QuinzicalDB{
 	}
 
 	@Override
-	public void addQuestion(Question quesiton, int categoryId) {
+	public void addQuestion(Question question, int categoryId) {
 		PreparedStatement prep = null;
 		try {
-			prep = conn.prepareStatement("INSERT INTO question(prompt,answer, category_id) VALUES(?,?,?);");
-			prep.setString(1, quesiton.toString());
-			prep.setString(2, quesiton.getAnswer());
-			prep.setInt(3, categoryId);
+			prep = conn.prepareStatement("INSERT INTO question(prompt,answer, answer_prefix, category_id) VALUES(?,?,?,?);");
+			prep.setString(1, question.toString());
+			prep.setString(2, question.getAnswer());
+			prep.setString(3, question.getAnswerPrefix());
+			prep.setInt(4, categoryId);
 			prep.execute();
+			
+			try (ResultSet generatedKeys = prep.getGeneratedKeys()) {
+				question.setID(generatedKeys.getInt(1));
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

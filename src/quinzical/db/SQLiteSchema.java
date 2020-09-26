@@ -53,7 +53,7 @@ public class SQLiteSchema {
 	}
 	
 	/**
-	 * Create Quesiton Table
+	 * Create Question Table
 	 * @param conn
 	 * @throws SQLException
 	 */
@@ -67,6 +67,7 @@ public class SQLiteSchema {
 					+ "question_id integer,"
 					+ "prompt varchar("+ QUESTION_CHAR_LIMIT +")," 
 					+ "answer varchar("+ QUESTION_CHAR_LIMIT +"),"
+					+ "answer_prefix varchar("+ QUESTION_CHAR_LIMIT +"),"
 					+ "category_id integer,"
 					+ "primary key(question_id),"
 					+ "FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE);"
