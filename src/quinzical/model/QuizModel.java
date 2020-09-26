@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import quinzical.db.ObjectDB;
+import quinzical.db.QuinzicalDB;
+import quinzical.db.SQLiteDB;
 //import quinzical.db.QuinzicalDB;
 import quinzical.util.FileHandler;
 import quinzical.util.Helper;
@@ -17,11 +19,9 @@ import quinzical.util.Helper;
  * @author Neville
  */
 public class QuizModel {
-	private int _remainingQuestion;
-	private ArrayList<Category> _cats;
-	private Question _activeQuestion;
 	private User _currentUser;
 	private Session _currentSession;
+	private QuinzicalDB db;
 
 	
 	
@@ -32,25 +32,35 @@ public class QuizModel {
 	 * exist, all value will be set to its initial status
 	 */
 	public QuizModel() {
-		_cats = FileHandler.loadCategory();
-		updateRemainingQuestion();
-		try {
-			if (FileHandler.saveFileExist()) {
-				load();
-				System.out.println("load file suscessfuly load");
-			}
-		} catch (Exception e) {
-			System.out.println("Loading failed. Maybe trying removing user.save in the working directory");
-			e.printStackTrace();
-		}
+		
+		db = new SQLiteDB();
+		
+		
+		db.getUserSession(1);
+		
+//		_cats = FileHandler.loadCategory();
+//		updateRemainingQuestion();
+//		try {
+//			if (FileHandler.saveFileExist()) {
+//				load();
+//				System.out.println("load file suscessfuly load");
+//			}
+//		} catch (Exception e) {
+//			System.out.println("Loading failed. Maybe trying removing user.save in the working directory");
+//			e.printStackTrace();
+//		}
 	}
 	
+	
+	public void loadUserSession() {
+		
+	}
 	
 	/**
 	 * #TODO !!!!!!!!!!!!
 	 * Save the current session to database
 	 */
-	public void saveSession() {
+	public void saveUserSession() {
 		
 	}
 
@@ -65,7 +75,6 @@ public class QuizModel {
 	 */
 	public boolean answerQuestion(Question question, String input) {
 		question.setAttempted(true);
-		_currentSession.addAttempted(question);
 		_remainingQuestion -= 1;
 		if (question.getAnswer().equalsIgnoreCase(input)) {
 			_currentSession.addWinnings(question.getScore());
@@ -100,7 +109,7 @@ public class QuizModel {
 		ObjectDB db = new ObjectDB();
 		db.setWinning(_currentSession.getWinnings());
 		HashMap<String, Boolean> isAttemptedMap = new HashMap<String, Boolean>();
-		for (Category cat : _cats) {
+		for (Category cat : _currentSession.getCategoryList()) {
 			for (Question question : cat.getQuestions()) {
 				isAttemptedMap.put(question.toString(), question.isAttempted());
 			}
@@ -119,7 +128,7 @@ public class QuizModel {
 		Map<String, Boolean> isAttemptedMap = db.getIsAttemptedMap();
 
 		// TODO handle exception
-		for (Category cat : _cats) {
+		for (Category cat : _currentSession.getCategoryList()) {
 			for (Question question : cat.getQuestions()) {
 				if (isAttemptedMap.get(question.toString()) == true) {
 					question.setAttempted(true);
@@ -137,7 +146,7 @@ public class QuizModel {
 	public void reset() {
 		_currentSession.reset();
 		_remainingQuestion = 0;
-		for (Category cat : _cats) {
+		for (Category cat : _currentSession.getCategoryList()) {
 			for (Question question : cat.getQuestions()) {
 				question.setAttempted(false);
 				_remainingQuestion += 1;
