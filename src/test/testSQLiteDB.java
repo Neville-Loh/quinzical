@@ -116,6 +116,12 @@ public class testSQLiteDB {
 	}
 	
 	
+	public void testSessionSaveAndLoad(QuinzicalDB db) {
+		User user = new User("Ton");
+		
+	}
+	
+	
 	
 	private void populateSession(QuinzicalDB db) {
 		User user = new User("Tom");

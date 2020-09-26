@@ -36,7 +36,7 @@ public class QuizModel {
 		db = new SQLiteDB();
 		
 		
-		db.getUserSession(1);
+		//db.getUserSession(1);
 		
 //		_cats = FileHandler.loadCategory();
 //		updateRemainingQuestion();
@@ -75,7 +75,7 @@ public class QuizModel {
 	 */
 	public boolean answerQuestion(Question question, String input) {
 		question.setAttempted(true);
-		_remainingQuestion -= 1;
+		_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() - 1);
 		if (question.getAnswer().equalsIgnoreCase(input)) {
 			_currentSession.addWinnings(question.getScore());
 			return true;
@@ -91,11 +91,11 @@ public class QuizModel {
 	 * questions in the category and count the attempted function.
 	 */
 	public void updateRemainingQuestion() {
-		_remainingQuestion = 0;
-		for (Category cat : _cats) {
+		_currentSession.setRemainingQuestoin(0);
+		for (Category cat : _currentSession.getCategoryList()) {
 			for (Question question : cat.getQuestions()) {
 				if (!question.isAttempted()) {
-					_remainingQuestion += 1;
+					_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() + 1);
 				}
 			}
 		}
@@ -145,11 +145,11 @@ public class QuizModel {
 	 */
 	public void reset() {
 		_currentSession.reset();
-		_remainingQuestion = 0;
+		_currentSession.setRemainingQuestoin(0);
 		for (Category cat : _currentSession.getCategoryList()) {
 			for (Question question : cat.getQuestions()) {
 				question.setAttempted(false);
-				_remainingQuestion += 1;
+				_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() + 1);
 			}
 		}
 	}
@@ -174,21 +174,22 @@ public class QuizModel {
 	 * @param question
 	 */
 	public void setActiveQuestion(Question question) {
-		_activeQuestion = question;
+		_currentSession.setActiveQuestion(question);
 	}
 	/**
 	 * Get Method
 	 * @return current selected question
 	 */
 	public Question getActiveQuestion() {
-		return _activeQuestion;
+		return _currentSession.getActiveQuestion();
+		
 	}
 	/**
 	 * Get Method
 	 * @return all Category
 	 */
 	public ArrayList<Category> getCategoryList() {
-		return _cats;
+		return _currentSession.getCategoryList();
 	}
 	/**
 	 * Get Method
@@ -210,7 +211,7 @@ public class QuizModel {
 	 * @return total question left
 	 */
 	public int getRemainingQuestionCount() {
-		return _remainingQuestion;
+		return _currentSession.getRemainingQuestion();
 	}
 
 }

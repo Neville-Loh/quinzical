@@ -21,7 +21,6 @@ import javafx.scene.Scene;
 public class Main extends Application {
 	private Stage primaryStage;
 	private static  QuizModel model;
-	private static PracticeModel practiceModel;
    
 	/**
 	 * Start the current application by showing primary stage
@@ -31,7 +30,6 @@ public class Main extends Application {
 		// to ensure singleton assignment
 		if (model == null) {
 			model = new QuizModel();
-			practiceModel = new PracticeModel();
 		}
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Quinzical");
@@ -52,9 +50,7 @@ public class Main extends Application {
 	public static QuizModel getQuizModel() {
 		return model;
 	}
-	public static PracticeModel getPracticeModel() {
-		return practiceModel;
-	}
+	
 	public static void main(String[] args) {
 		//launch(args);
 		//test a = new test();

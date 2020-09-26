@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class to store the current session related to the user 
@@ -19,6 +20,7 @@ public class Session {
 	private User _user;
 	private int _winnings;
 	private ArrayList<Category> _cats;
+	private Map<Integer,Question> questionDic;
 	private Question _activeQuestion;
 	private int _remainingQuestion;
 	
@@ -38,7 +40,9 @@ public class Session {
 		_winnings = 0;
 		_startTime = new Timestamp(System.currentTimeMillis());
 		_user = user;
+		questionDic = new HashMap<Integer, Question>();
 	}
+	
 	
 	
 	/**
@@ -62,6 +66,14 @@ public class Session {
 		for (Category cat : _cats) {
 			for (Question question : cat.getQuestions()) {
 				question.setAttempted(false);
+			}
+		}
+	}
+	
+	public void setQuestionSet(List<Category> category) {
+		for (Category cats: category) {
+			for (Question question : cats.getQuestions()) {
+				questionDic.put(question.getID(), question);
 			}
 		}
 	}
@@ -126,6 +138,11 @@ public class Session {
 	}
 	
 	
+	public Question getQuestoinById(int id) {
+		return questionDic.get(id);
+	}
+	
+	
 	/*
 	 *  ----------------------------------------------------------------------------
 	 *  USER STATISTIC
@@ -176,6 +193,18 @@ public class Session {
 
 	public int getWinnings() {
 		return _winnings;
+	}
+
+
+
+	public void setActiveQuestion(Question question) {
+		_activeQuestion = question;
+		
+	}
+
+
+	public Question getActiveQuestion() {
+		return _activeQuestion;
 	}
 	
 
