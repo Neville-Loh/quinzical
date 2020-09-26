@@ -31,7 +31,7 @@ public class Question {
 		_answer = ans;
 		_question = question;
 
-
+	}
 	/**
 	 * set attribute isAttempted to a boolean
 	 * @param bool

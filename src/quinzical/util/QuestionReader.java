@@ -1,10 +1,11 @@
-package quinzical.db;
+package quinzical.util;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import quinzical.db.SQLiteDB;
 import quinzical.model.Category;
 import quinzical.model.Question;
 
@@ -33,7 +34,7 @@ public class QuestionReader {
 			Category cat = null;
 			while ((line = br.readLine()) != null) {
 				if (!line.equals("") && line.length() < 20) {
-					cat = new Category(line, catid);
+					cat = new Category(line);
 					catid++;
 					//db.addCategory(cat);
 				} else if (!line.equals("")) {
@@ -58,7 +59,7 @@ public class QuestionReader {
 		question = removeSpaces(question);
 		prefix = removeSpaces(prefix);
 		answer = removeSpaces(answer);
-		Question q = new Question(question, answer, prefix, qid);
+		Question q = new Question(question, answer, prefix);
 		return q;
 	}
 	
