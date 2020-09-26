@@ -9,6 +9,7 @@ public class Question {
 	private int _id;
 	private String _question;
 	private String _answer;
+	private String _prefix;
 	private int _score;
 	private boolean _isAttempted = false;
 
@@ -16,6 +17,13 @@ public class Question {
 		_answer = ans;
 		_question = question;
 		_score = score;
+		_id = id;
+	}
+	
+	public Question(String question, String ans, String prefix, int id) {
+		_answer = ans;
+		_question = question;
+		_prefix = prefix;
 		_id = id;
 	}
 	
@@ -48,6 +56,10 @@ public class Question {
 	 */
 	public String getAnswer() {
 		return _answer;
+	}
+	
+	public void setScore(int score) {
+		_score = score;
 	}
 	/**
 	 * Get the score of the question
