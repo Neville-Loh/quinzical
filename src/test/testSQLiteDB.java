@@ -1,11 +1,19 @@
 package test;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.sqlite.core.DB;
+
+import quinzical.db.DbUtils;
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
+import quinzical.db.Table;
+import quinzical.db.Table.USER;
 import quinzical.model.Category;
 import quinzical.model.Question;
 import quinzical.model.Session;
@@ -13,32 +21,39 @@ import quinzical.model.User;
 
 public class testSQLiteDB {
 
+	private SQLiteDB db;
+	
 	
 	public testSQLiteDB() {
 		//
 		
 		System.out.println("DBtest start");
 		long startTime = System.currentTimeMillis();
-		SQLiteDB db = new SQLiteDB();
+		db = new SQLiteDB();
 
 		try {
-			db.getConnection();
-			populateUser(db);
-			populateCategory(db);
-			populateQuetsion(db);
-			//populateSession(db);
-			//db.deleteCategory(3);
 			
-			System.out.println("all is good");
-			long stopTime = System.currentTimeMillis();
-			System.out.println((stopTime - startTime)/1000.0);
+			db.getConnection();
+//			populateUser(db);
+//			populateCategory(db);
+//			populateQuetsion(db);
+//			populateSession(db);
+//			db.deleteCategory(3);
+//			
+//			System.out.println("all is good");
+//			long stopTime = System.currentTimeMillis();
+//			System.out.println((stopTime - startTime)/1000.0);
+			
+			testgetRandomQuestionSet();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 //		ResultSet res;
 //		db.addUser(new User());
 //		
-//		
+		
+		USER a = USER.ID;	
 //		
 //		try {
 //			res = db.displayUsers();
@@ -67,6 +82,26 @@ public class testSQLiteDB {
 		
 		user = new User("Neville");
 		db.addUser(user);
+		
+	}
+	
+	private void testgetRandomQuestionSet(){
+		
+	try {
+			
+		List<String> names = new ArrayList<String>();
+		names.add("Animal");
+		names.add("Sport");
+		names.add("Country");
+		
+		
+		List<Category> cats = db.getRandomQuestionSet(names);
+		printCategorySet(cats);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 		
 	}
 	
@@ -107,4 +142,16 @@ public class testSQLiteDB {
 		}
 		
 	}
+	
+	private void printCategorySet(List<Category> cats) {
+		for (Category cat : cats) {
+			System.out.println(cat.getTitle());
+			for (Question question : cat.getQuestions()) {
+				System.out.printf("prompt: %s , ans: %s id = %d \n", 
+						question.toString(), question.getAnswer(), question.getID());
+			}
+		}
+	}
+	
+	
 }

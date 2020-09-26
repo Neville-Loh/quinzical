@@ -49,6 +49,8 @@ public interface QuinzicalDB {
 	
 	public void deleteCategory(int categoryId);
 	
+	public int getCategoryId(String CategoryId);
+	
 	/**
 	 * 
 	 * @param questionId

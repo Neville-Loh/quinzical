@@ -1,4 +1,4 @@
-package quinzical.util;
+package quinzical.exception;
 
 import java.io.IOException;
 

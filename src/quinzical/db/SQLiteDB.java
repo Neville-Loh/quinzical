@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.sqlite.SQLiteConfig;
 
+import quinzical.exception.QunizicalEntryNotFoundException;
 import quinzical.model.Category;
 import quinzical.model.Question;
 import quinzical.model.Session;
@@ -23,9 +24,14 @@ import quinzical.model.User;
  */
 public class SQLiteDB implements QuinzicalDB{
 	
-	private static Connection conn = null;
+	public static Connection conn = null;
 	private static boolean hasData = false;
 	
+	
+	
+	
+	
+
 	public ResultSet displayUsers() throws ClassNotFoundException, SQLException {
 		if(conn == null) {
 			getConnection();
@@ -165,26 +171,33 @@ public class SQLiteDB implements QuinzicalDB{
 		return null;
 	}
 	
-	public List<Category> getRandomQuestionSet(List<String> categoryNames) {
+	public List<Category> getRandomQuestionSet(List<String> categoryName) {
 		List<Category> result = new ArrayList<Category>();
 		
-		for (String categoryName : categoryNames) {
-			Category cat = new Category(categoryName);
+		for (String catName: categoryName) {
+			Category cat = new Category(catName);
 			
 			// Adding new question 
 			PreparedStatement prep = null;
 			try {
-				prep = conn.prepareStatement("SELECT question_id, prompt, answer FROM question "
+				
+				String statement = "SELECT question_id, prompt, answer FROM question "
 						+ "WHERE category_id = "
-						+ cat.getCategoryId()
-						+ " ORDER by RANDOM() LIMIT 5;");
+						+ DbUtils.getEntryIDInTable(conn, "category" , "category_name" , catName)
+						+ " ORDER by RANDOM() LIMIT 5;";
+				
+				System.out.println(statement);
+				prep = conn.prepareStatement(statement);
 				ResultSet res = prep.executeQuery();
 				
 				while( res.next() ) {
-					System.out.println(res);
+					System.out.println("" + res.getInt(1) + " "+  res.getString(2) + " "+ res.getString(3));
+					Question q = new Question(res.getString(2), res.getString(3));
 				}
 				
 			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (QunizicalEntryNotFoundException e) {
 				e.printStackTrace();
 			} 
 			
@@ -212,6 +225,12 @@ public class SQLiteDB implements QuinzicalDB{
 	public void deleteCategory(int categoryId) {
 		DbUtils.deleteEntryInTable(conn, categoryId, "category");
 		
+	}
+	
+	@Override
+	public int getCategoryId(String CategoryId) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	/**
@@ -247,6 +266,6 @@ public class SQLiteDB implements QuinzicalDB{
 		DbUtils.deleteEntryInTable(conn, questionId, "question");
 		
 	}
-	
+
 
 }
