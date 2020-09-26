@@ -9,6 +9,7 @@ public class Question {
 	private int _id;
 	private String _question;
 	private String _answer;
+	private String _prefix;
 	private int _score;
 	private boolean _isAttempted = false;
 
@@ -17,10 +18,19 @@ public class Question {
 		_question = question;
 		_score = score;
 	}
+
+	
+	public Question(String question, String ans, String prefix) {
+		_answer = ans;
+		_question = question;
+		_prefix = prefix;
+	}
+	
+
 	public Question(String question, String ans) {
 		_answer = ans;
 		_question = question;
-	}
+
 
 	/**
 	 * set attribute isAttempted to a boolean
@@ -50,6 +60,10 @@ public class Question {
 	 */
 	public String getAnswer() {
 		return _answer;
+	}
+	
+	public void setScore(int score) {
+		_score = score;
 	}
 	/**
 	 * Get the score of the question
