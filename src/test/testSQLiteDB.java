@@ -12,8 +12,7 @@ import org.sqlite.core.DB;
 import quinzical.db.DbUtils;
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
-import quinzical.db.Table;
-import quinzical.db.Table.USER;
+
 import quinzical.model.Category;
 import quinzical.model.Question;
 import quinzical.model.Session;
@@ -36,49 +35,20 @@ public class testSQLiteDB {
 			
 			db.getConnection();
 			
-			QuestionReader rq = new QuestionReader("Quinzical.txt");
-			rq.populateCategoriesAndQuestions(db);
-			
-			
-			
-			
-			
-//			populateUser(db);
-//			populateCategory(db);
-//			populateQuetsion(db);
-//			populateSession(db);
-//			db.deleteCategory(3);
-//			
-//			System.out.println("all is good");
-//			long stopTime = System.currentTimeMillis();
-//			System.out.println((stopTime - startTime)/1000.0);
-			
-			//testgetRandomQuestionSet();
+		
 			testSessionSaving();
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		ResultSet res;
-//		db.addUser(new User());
-//		
-		
 
-//		try {
-//			res = db.displayUsers();
-//			while(res.next()) {
-//				System.out.println(res.getString("username"));
-//			}
-//			
-//		} catch (ClassNotFoundException | SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
-		
-		
+			
 	}
+	/**
+	 * Test the session saving and loading functionality
+	 * 
+	 */
 	private void testSessionSaving() {
 		User user = new User("Neville");
 		try {
@@ -93,27 +63,23 @@ public class testSQLiteDB {
 		session.setQuestionSet(cats);
 		printCategorySet(cats);
 		
-		db.addSession(user, session);
+//		Question q = session.getQuestionById(85);
+//		q.setAttempted(true);
+		//db.addSession(user, session);
+		
+		Question q = db.getQuestion(71);
+		
+		printQuestion(q);
 		
 	}
 	public void testOnDelectCascade() {
 		
 	}
-	private void populateUser(QuinzicalDB db) {
-		User user;
-		user = new User("Tom");
-		db.addUser(user);
-		
-		user = new User("Amy");
-		db.addUser(user);
-		
-		user = new User("Neville");
-		db.addUser(user);
-		
-	}
 	
-	private void testgetRandomQuestionSet(){
-		
+	/**
+	 * Test function of db to generate a random question set.
+	 */
+	public void testgetRandomQuestionSet(){
 	try {
 			
 		List<String> names = new ArrayList<String>();
@@ -133,30 +99,52 @@ public class testSQLiteDB {
 	}
 	
 	
-	public void testSessionSaveAndLoad(QuinzicalDB db) {
-		User user = new User("Ton");
-		
-	}
-	
-	
-	
-	private void populateSession(QuinzicalDB db) {
+	/**
+	 * populate data base with some random session data
+	 * use for testing purpose
+	 * @param db
+	 */
+	public void populateSession(QuinzicalDB db) {
 		User user = new User("Tom");
 		user.setUserId(1);
 		Session session = new Session(user);
 		db.addSession(user, session);
 	}
 	
-	private void populateSessionsQuestion(QuinzicalDB db) {
+
+	/**
+	 * populate data base with some random user
+	 * use for testing purpose
+	 * @param db
+	 */
+	public  void populateUser(QuinzicalDB db) {
+		User user;
+		user = new User("Tom");
+		db.addUser(user);
+		
+		user = new User("Amy");
+		db.addUser(user);
+		
+		user = new User("Neville");
+		db.addUser(user);
+		
 	}
 	
-	private void populateCategory(SQLiteDB db) {
+	/**
+	 * populate Category with some random value
+	 * @param db
+	 */
+	public void populateCategory(SQLiteDB db) {
 		db.addCategory(new Category("Animal"));
 		db.addCategory(new Category("Sport"));
 		db.addCategory(new Category("Country"));
 	}
 	
-	private void populateQuetsion(SQLiteDB db) {
+	/**
+	 * populate the question data with some testing quetsion
+	 * @param db
+	 */
+	public void populateQuetsion(SQLiteDB db) {
 		Question question1 = new Question("This is the capital of New Zealand", "cloud");
 		db.addQuestion(question1, 1);
 		Question question2 = new Question("What is somthing that is blue?", "sky");
@@ -176,16 +164,28 @@ public class testSQLiteDB {
 		
 	}
 	
+	/**
+	 * Utility function to print all question in a question set 
+	 * @param cats
+	 */
 	public static void printCategorySet(List<Category> cats) {
 		System.out.printf("Category length : %d%n", cats.size());
 		
 		for (Category cat : cats) {
 			System.out.println(cat.getTitle());
 			for (Question question : cat.getQuestions()) {
-				System.out.printf("prompt: %s , ans: %s id = %d \n", 
-						question.toString(), question.getAnswer(), question.getID());
+				printQuestion(question);
 			}
 		}
+	}
+	
+	/**
+	 * Utility function to print all question in a question set 
+	 * @param question
+	 */
+	public static void printQuestion(Question question) {
+		System.out.printf("Id: %d, attempted = %s, prompt: %s , ans: %s%n", 
+				question.getID(), ""+question.isAttempted(), question.toString(), question.getAnswer());
 	}
 	
 	

@@ -16,7 +16,7 @@ import java.util.Map;
 public class Session {
 	
 
-	private int _ID;
+	private int _ID = -1;
 	private User _user;
 	private int _winnings;
 	private List<Category> _cats;
@@ -107,8 +107,25 @@ public class Session {
 	}
 	
 	/**
+	 * Set method for ID,
+	 * CAUTIOUS!, this method only meant to be called by database implementation and
+	 * not Anywhere of the application, throw illegalArgumentException if id already exist.
+	 * @param id
+	 * @throw IllegalArgumentException
+	 */
+	public void setSessionID(int id) {
+		if (_ID == -1) {
+			_ID = id;
+		} else {
+			throw new IllegalArgumentException("Id " + _ID + "already exist for sesssion: " + _user.getName());
+		}
+
+	}
+	
+	
+	/**
 	 * Get the question set from the session 
-	 * @return
+	 * @return category containing all quetion
 	 */
 	public List<Category> getCategoryList(){
 		return _cats;
@@ -139,7 +156,7 @@ public class Session {
 	}
 	
 	
-	public Question getQuestoinById(int id) {
+	public Question getQuestionById(int id) {
 		return questionDic.get(id);
 	}
 	

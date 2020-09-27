@@ -23,6 +23,7 @@ public class QuizModel {
 	private User _currentUser;
 	private Session _currentSession;
 	private QuinzicalDB db;
+	private PracticeQuestion _practiceQuestion;
 
 	
 	
@@ -35,7 +36,6 @@ public class QuizModel {
 	public QuizModel() {
 		
 		db = new SQLiteDB();
-		
 		
 		//db.getUserSession(1);
 		
@@ -54,15 +54,14 @@ public class QuizModel {
 	
 	
 	public void loadUserSession() {
-		
+		_currentSession = db.getUserLastestSession(_currentUser); 
 	}
 	
 	/**
-	 * #TODO !!!!!!!!!!!!
 	 * Save the current session to database
 	 */
 	public void saveUserSession() {
-		
+		db.addSession(_currentUser, _currentSession);
 	}
 
 	/**
@@ -76,7 +75,7 @@ public class QuizModel {
 	 */
 	public boolean answerQuestion(int qid , String input) {
 		
-		Question question = _currentSession.getQuestoinById(qid);
+		Question question = _currentSession.getQuestionById(qid);
 		question.setAttempted(true);
 		_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() - 1);
 		if (question.getAnswer().equalsIgnoreCase(input)) {
@@ -217,6 +216,7 @@ public class QuizModel {
 		return _currentSession.getRemainingQuestion();
 	}
 
+	
 	// -------------------------- New implemented method -------------------------
 	public void selectRandomPracticeQuestion(int i) {
 		// TODO Auto-generated method stub
@@ -229,7 +229,8 @@ public class QuizModel {
 	}
 
 
-	public void answerPracticeQuestion(String string) {
+	public boolean answerPracticeQuestion(String string) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}
@@ -248,7 +249,7 @@ public class QuizModel {
 		_currentUser = user;
 		
 		// load current most recent user session;
-		Session session = db.getUserSession(userid);
+		Session session = db.getUserLastestSession(user);
 		_currentSession = session;
 		
 	}
@@ -264,6 +265,12 @@ public class QuizModel {
 	public void setActiveQuestion(int id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	public int getPracticeAttemptLeft() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 
