@@ -36,8 +36,8 @@ public class testSQLiteDB {
 			
 			db.getConnection();
 			
-//			QuestionReader rq = new QuestionReader("Quinzical.txt");
-//			rq.populateCategoriesAndQuestions(db);
+			QuestionReader rq = new QuestionReader("Quinzical.txt");
+			rq.populateCategoriesAndQuestions(db);
 			
 			
 			
@@ -53,8 +53,8 @@ public class testSQLiteDB {
 //			long stopTime = System.currentTimeMillis();
 //			System.out.println((stopTime - startTime)/1000.0);
 			
-			testgetRandomQuestionSet();
-			
+			//testgetRandomQuestionSet();
+			testSessionSaving();
 			
 			
 		} catch (Exception e) {
@@ -77,6 +77,23 @@ public class testSQLiteDB {
 //		}
 
 		
+		
+	}
+	private void testSessionSaving() {
+		User user = new User("Neville");
+		try {
+			db.addUser(user);
+		} catch (Exception e) {
+			
+		}
+		
+		Session session = new Session(user);
+		
+		List<Category> cats = db.getRandomQuestionSet(5, 5);
+		session.setQuestionSet(cats);
+		printCategorySet(cats);
+		
+		db.addSession(user, session);
 		
 	}
 	public void testOnDelectCascade() {
@@ -105,7 +122,7 @@ public class testSQLiteDB {
 		names.add("Country");
 		
 		
-		List<Category> cats = db.getRandomQuestionSet(5);
+		List<Category> cats = db.getRandomQuestionSet(5,5);
 		printCategorySet(cats);
 		
 		} catch (Exception e) {

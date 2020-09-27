@@ -112,8 +112,8 @@ public class SQLiteSchema {
 			state2.execute("Create TABLE session_questions("
 					+ "session_id INT,"
 					+ "question_id INT,"
-					+ "isAtempted boolean"
-					+ "primary key(session_id, category_id),"
+					+ "isAttempted boolean, "
+					+ "primary key(session_id, question_id),"
 					+ "FOREIGN KEY (session_id) REFERENCES session(session_id) ON DELETE CASCADE,"
 					+ "FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE);"
 					);

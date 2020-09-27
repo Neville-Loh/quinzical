@@ -19,7 +19,7 @@ public class Session {
 	private int _ID;
 	private User _user;
 	private int _winnings;
-	private ArrayList<Category> _cats;
+	private List<Category> _cats;
 	private Map<Integer,Question> questionDic;
 	private Question _activeQuestion;
 	private int _remainingQuestion;
@@ -71,8 +71,9 @@ public class Session {
 	}
 	
 	public void setQuestionSet(List<Category> category) {
-		for (Category cats: category) {
-			for (Question question : cats.getQuestions()) {
+		_cats = category;
+		for (Category cat: category) {
+			for (Question question : cat.getQuestions()) {
 				questionDic.put(question.getID(), question);
 			}
 		}
@@ -109,7 +110,7 @@ public class Session {
 	 * Get the question set from the session 
 	 * @return
 	 */
-	public ArrayList<Category> getCategoryList(){
+	public List<Category> getCategoryList(){
 		return _cats;
 	}
 	

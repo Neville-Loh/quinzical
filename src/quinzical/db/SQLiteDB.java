@@ -46,6 +46,7 @@ public class SQLiteDB implements QuinzicalDB{
 			SQLiteSchema.createCategoryTable(conn);
 			SQLiteSchema.createQuestionTable(conn);
 			SQLiteSchema.createSessionTable(conn);
+			SQLiteSchema.createSessionQuestionsTable(conn);
 		}
 	}
 	
@@ -54,6 +55,8 @@ public class SQLiteDB implements QuinzicalDB{
 	 * User
 	 * Implementation of all end point method of the related
 	 * to the class User
+	 * 
+	 * =====================================================================================================
 	 */
 	@Override
 	public User getUser(int id) {
@@ -76,6 +79,11 @@ public class SQLiteDB implements QuinzicalDB{
 				prep.setString(1, user.getName());
 				prep.execute();
 				
+				// Try see if result set return a generatedKeys, set the input object key to id
+				try (ResultSet generatedKeys = prep.getGeneratedKeys()) {
+					user.setUserId(generatedKeys.getInt(1));
+				}
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 				
@@ -92,6 +100,8 @@ public class SQLiteDB implements QuinzicalDB{
 	 * Session
 	 * Implementation of all end point method of the related
 	 * to the class Session 
+	 * 
+	 * =====================================================================================================
 	 */
 	@Override
 	public Session getUserSession(int userId) {
@@ -120,10 +130,11 @@ public class SQLiteDB implements QuinzicalDB{
 		            for (Category cat : cats) {
 		            	for (Question question : cat.getQuestions()) {
 		            		prep = conn.prepareStatement("REPLACE INTO session_questions("
-		            				+ "session_id, question_id, isAtempted) values(?,?,?);");
+		            				+ "session_id, question_id, isAttempted) values(?,?,?);");
 		            		prep.setInt(1, sessionId);
-		            		prep.setInt(1, question.getID());
+		            		prep.setInt(2, question.getID());
 		            		prep.setBoolean(3, question.isAttempted());
+		            		prep.execute();
 		            	}
 		            }
 	            } else {
@@ -144,11 +155,17 @@ public class SQLiteDB implements QuinzicalDB{
 		
 	}
 	
+	private int getLatestSessionIdOfUser() {
+		return 1;
+	}
+	
 	/**
 	 * =====================================================================================================
 	 * Category
 	 * Implementation of all end point method of the related
 	 * to the class Category
+	 * 
+	 * =====================================================================================================
 	 */
 
 	@Override
@@ -163,10 +180,11 @@ public class SQLiteDB implements QuinzicalDB{
 		return null;
 	}
 	
-	public List<Category> getRandomQuestionSet(int num) {
+	@Override
+	public List<Category> getRandomQuestionSet(int categoryCount, int questionCount) {
 		List<Category> result = new ArrayList<Category>();
 		
-		List<String> categoryName = getRandomCategoryName(num);
+		List<String> categoryName = getRandomCategoryName(categoryCount);
 		for (String catName: categoryName) {
 			Category cat = new Category(catName);
 			
@@ -177,7 +195,7 @@ public class SQLiteDB implements QuinzicalDB{
 				String statement = "SELECT question_id, prompt, answer FROM question "
 						+ "WHERE category_id = "
 						+ DbUtils.getEntryIDInTable(conn, "category" , "category_name" , catName)
-						+ " ORDER by RANDOM() LIMIT 5;";
+						+ " ORDER by RANDOM() LIMIT "+ questionCount +";";
 				
 				System.out.println(statement);
 				
@@ -204,9 +222,9 @@ public class SQLiteDB implements QuinzicalDB{
 		
 	}
 	
-	public List<String> getRandomCategoryName(int numberofQuestion){
+	public List<String> getRandomCategoryName(int numberofCategory){
 		List<String> result = new ArrayList<String>();
-		String statement = "SELECT * FROM category ORDER by RANDOM() LIMIT " + numberofQuestion + ";";
+		String statement = "SELECT * FROM category ORDER by RANDOM() LIMIT " + numberofCategory + ";";
 		PreparedStatement prep = null;
 		try {			
 			//System.out.println(statement);
@@ -257,6 +275,8 @@ public class SQLiteDB implements QuinzicalDB{
 	 * Question
 	 * Implementation of all end point method of the related
 	 * to the class Question
+	 * 
+	 * =====================================================================================================
 	 */
 	
 	@Override

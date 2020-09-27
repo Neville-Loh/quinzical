@@ -2,6 +2,7 @@ package quinzical.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import quinzical.db.ObjectDB;
@@ -73,7 +74,9 @@ public class QuizModel {
 	 * @param User input
 	 * @return true if the answer is correct, else false
 	 */
-	public boolean answerQuestion(Question question, String input) {
+	public boolean answerQuestion(int qid , String input) {
+		
+		Question question = _currentSession.getQuestoinById(qid);
 		question.setAttempted(true);
 		_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() - 1);
 		if (question.getAnswer().equalsIgnoreCase(input)) {
@@ -188,7 +191,7 @@ public class QuizModel {
 	 * Get Method
 	 * @return all Category
 	 */
-	public ArrayList<Category> getCategoryList() {
+	public List<Category> getCategoryList() {
 		return _currentSession.getCategoryList();
 	}
 	/**
@@ -213,5 +216,56 @@ public class QuizModel {
 	public int getRemainingQuestionCount() {
 		return _currentSession.getRemainingQuestion();
 	}
+
+	// -------------------------- New implemented method -------------------------
+	public void selectRandomPracticeQuestion(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public PracticeQuestion getCurrentPracticeQuestion() {
+		return null;
+	}
+
+
+	public void answerPracticeQuestion(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public int createNewUser(String string) {
+		User user = new User(string);
+		db.addUser(user);
+		return user.getUserID();
+	}
+
+
+	public void setUser(int userid) {
+		// change user to user id;
+		User user = db.getUser(userid);
+		_currentUser = user;
+		
+		// load current most recent user session;
+		Session session = db.getUserSession(userid);
+		_currentSession = session;
+		
+	}
+
+
+	public void createNewSession() {
+		// Creating new session which associate to current user.
+		Session session = new Session(_currentUser);
+		session.setQuestionSet(db.getRandomQuestionSet(5, 5));
+	}
+
+
+	public void setActiveQuestion(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }
