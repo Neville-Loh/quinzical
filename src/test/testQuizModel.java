@@ -46,7 +46,6 @@ public class testQuizModel {
 	private void testGameMode() {
 		
 		// set
-
 		int userid  = model.createNewUser("Default User");
 		model.setUser(userid);
 		model.loadUserSession();

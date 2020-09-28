@@ -7,6 +7,15 @@ public class PracticeQuestion extends Question{
 	
 	public PracticeQuestion(String question, String ans, String prefix) {
 		super(question, ans, prefix);
+		attemptLeft = 3;
+		showHint = false;
+	}
+	
+	public PracticeQuestion(Question question) {
+		super(question.getPrompt(), question.getAnswer(), question.getAnswerPrefix());
+		this.setID(question.getID());
+		attemptLeft = 3;
+		showHint = false;
 	}
 
 	public int getAttemptLeft() {
@@ -15,6 +24,11 @@ public class PracticeQuestion extends Question{
 
 	public void setAttemptLeft(int attemptLeft) {
 		this.attemptLeft = attemptLeft;
+		if (attemptLeft < 0){
+			attemptLeft = 0;
+		} else if (attemptLeft == 1) {
+			showHint = true;
+		}
 	}
 
 	public boolean isShowHint() {

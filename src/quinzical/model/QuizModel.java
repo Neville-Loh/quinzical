@@ -258,20 +258,24 @@ public class QuizModel {
 
 	
 	// -------------------------- New implemented method -------------------------
-	public void selectRandomPracticeQuestion(int i) {
-		// TODO Auto-generated method stub
-		
+	public void selectRandomPracticeQuestion(int categoryId) {
+		_practiceQuestion = new PracticeQuestion(db.getRandomQuestionFromCategory(categoryId));
 	}
 
 
 	public PracticeQuestion getCurrentPracticeQuestion() {
-		return null;
+		return _practiceQuestion;
 	}
 
 
-	public boolean answerPracticeQuestion(String string) {
-		return false;
-		// TODO Auto-generated method stub
+	public boolean answerPracticeQuestion(String input) {
+		if (validate(input, _practiceQuestion)) {
+			return true;
+		} else {
+			int attemptLeft = _practiceQuestion.getAttemptLeft() - 1;
+			_practiceQuestion.setAttemptLeft(attemptLeft);
+			return false;
+		}
 		
 	}
 
