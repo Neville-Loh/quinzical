@@ -85,6 +85,46 @@ public class QuizModel {
 		}
 
 	}
+	
+	/**
+	 * This function validates the answer input by the user. It also deals with any macrons
+	 * that may be present in the answer.
+	 * @param userInput
+	 * @param question
+	 * @return true if answer is correct, else false
+	 */
+	
+	public boolean validate(String userInput, Question question) {
+		String answer = question.getAnswer();
+		String prefix = question.getAnswerPrefix();
+		int i = 0;
+		while (true) {
+			if (userInput.equalsIgnoreCase(answer) || userInput.equalsIgnoreCase(prefix + " " + answer)) {
+				return true;
+			} else if (i == 0) {
+				answer = replaceMacrons(answer);
+				i = 1;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	/**
+	 * Replaces letters with macrons present in a string with their equivalent regular characters.
+	 * Helper function used in validate().
+	 * @param str
+	 * @return str
+	 */
+	
+	private String replaceMacrons(String str) {
+		str = str.replace("ā", "a");
+		str = str.replace("ē", "e");
+		str = str.replace("ī", "i");
+		str = str.replace("ō", "o");
+		str = str.replace("ū", "u");
+		return str;
+	}
 
 	/**
 	 * Count and update the question remaining, the function loop though all
