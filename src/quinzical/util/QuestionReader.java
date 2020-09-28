@@ -35,7 +35,7 @@ public class QuestionReader {
 
 			Category cat = null;
 			while ((line = br.readLine()) != null) {
-				if (!line.equals("") && line.length() < 20) {
+				if (line.length() > 2 && line.length() < 20) {
 					cat = new Category(line);
 					///
 					System.out.println("adding category: " + cat.getTitle());
@@ -43,12 +43,12 @@ public class QuestionReader {
 					////
 
 					//db.addCategory(cat);
-				} else if (!line.equals("")) {
+				} else if (line.length() > 2) {
 					Question question = createQuestion(line);
 					
 					///
 					
-					System.out.printf("Propmt: %s %nPrefix: %s, Answer: %s %n", question.getPrompt(), question.getAnswerPrefix(),
+					System.out.printf("Prompt: %s %nPrefix: %s, Answer: %s %n", question.getPrompt(), question.getAnswerPrefix(),
 							question.getAnswer());
 					db.addQuestion(question, cat.getCategoryID());
 					

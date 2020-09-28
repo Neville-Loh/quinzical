@@ -9,7 +9,7 @@ public class Festival implements TextToSpeech {
 	private Process _currentProcess;
 	
 	public Festival() {
-		
+		setVoice();
 	}
 	
 	public void start(String text) {
@@ -25,6 +25,12 @@ public class Festival implements TextToSpeech {
 	
 	public void stop() {
 		_currentProcess.destroy();
+	}
+	
+	private void setVoice() {
+		runTerminal("festival", false);
+		runTerminal("(voice_akl_nz_jdt_diphone)", false);
+		runTerminal("(quit)", false);
 	}
 	
 	public void setVolume(int volume) {
