@@ -76,7 +76,7 @@ public class QuizModel {
 	public boolean answerQuestion(Question question, String input) {
 		question.setAttempted(true);
 		_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() - 1);
-		if (question.getAnswer().equalsIgnoreCase(input)) {
+		if (validate(input, question)) {
 			_currentSession.addWinnings(question.getScore());
 			return true;
 		} else {
