@@ -35,16 +35,25 @@ public class testSQLiteDB {
 			
 			db.getConnection();
 			
-		
 			testSessionSaving();
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
+		long finishTime = System.currentTimeMillis();
+		System.out.println("Total Time cost: " + ((finishTime - startTime)/1000.0) + " second.");
 			
 	}
+	
+	/* ======================================================================================
+	 * Testing of the SQLiteDb implementation 
+	 * 
+	 * 
+	 * ======================================================================================
+	 */
+	
+	
 	/**
 	 * Test the session saving and loading functionality
 	 * 
@@ -58,18 +67,22 @@ public class testSQLiteDB {
 		}
 		
 		Session session = new Session(user);
-		
 		List<Category> cats = db.getRandomQuestionSet(5, 5);
+		
+		
 		session.setQuestionSet(cats);
+		printSession(session);
 		printCategorySet(cats);
 		
-//		Question q = session.getQuestionById(85);
-//		q.setAttempted(true);
-		//db.addSession(user, session);
+		Question q = session.getQuestionById(cats.get(0).getQuestions().get(0).getID());
+		q.setAttempted(true);
 		
-		Question q = db.getQuestion(71);
 		
-		printQuestion(q);
+		
+		db.addSession(user, session);
+		Session sessionReturn = db.getUserLastestSession(user);
+		printSession(sessionReturn);
+		printCategorySet(sessionReturn.getCategoryList());
 		
 	}
 	public void testOnDelectCascade() {
@@ -81,24 +94,32 @@ public class testSQLiteDB {
 	 */
 	public void testgetRandomQuestionSet(){
 	try {
-			
 		List<String> names = new ArrayList<String>();
 		names.add("Animal");
 		names.add("Sport");
 		names.add("Country");
-		
-		
 		List<Category> cats = db.getRandomQuestionSet(5,5);
 		printCategorySet(cats);
-		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+	}
+	
+	/**
+	 * Test the implementation of get Category id;
+	 */
+	public void testGetEmptyCategory() {
+		Category cat = db.getEmptyCategory(3);
+		System.out.println("fetched category = :" + cat.getTitle());
 		
 	}
 	
-	
+	/* ======================================================================================
+	 * Utility Method for testing
+	 * 
+	 * 
+	 * ======================================================================================
+	 */
 	/**
 	 * populate data base with some random session data
 	 * use for testing purpose
@@ -111,7 +132,6 @@ public class testSQLiteDB {
 		db.addSession(user, session);
 	}
 	
-
 	/**
 	 * populate data base with some random user
 	 * use for testing purpose
@@ -141,7 +161,7 @@ public class testSQLiteDB {
 	}
 	
 	/**
-	 * populate the question data with some testing quetsion
+	 * populate the question data with some testing question
 	 * @param db
 	 */
 	public void populateQuetsion(SQLiteDB db) {
@@ -188,5 +208,17 @@ public class testSQLiteDB {
 				question.getID(), ""+question.isAttempted(), question.toString(), question.getAnswer());
 	}
 	
+	/**
+	 * Utility function to print all session stats;
+	 * @param question
+	 */
+	public static void printSession(Session session) {
+		System.out.printf(
+				"session_id: %d, user_id: %d, score: %d, remaining_question: %d%n"
+				+ "start_time: %s, finished_time: %s %n", 
+				session.getSessionID(), session.getUser().getUserID(), session.getWinnings(), 
+				session.getRemainingQuestion(), session.getStartTime().toString(), 
+				String.valueOf(session.getFinishTime()).toString());
+	}
 	
 }

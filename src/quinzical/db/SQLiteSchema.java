@@ -57,7 +57,7 @@ public class SQLiteSchema {
 	 * @param conn
 	 * @throws SQLException
 	 */
-	public static void createQuestionTable(Connection conn) throws SQLException {
+	public static boolean createQuestionTable(Connection conn) throws SQLException {
 		Statement state = conn.createStatement();
 		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='question'");		
 		if ( !res.next() ) {
@@ -72,7 +72,11 @@ public class SQLiteSchema {
 					+ "primary key(question_id),"
 					+ "FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE);"
 					);
+			
+			return true;
 		}
+		
+		return false;
 		
 	}
 	
@@ -91,8 +95,10 @@ public class SQLiteSchema {
 					+ "session_id integer,"
 					+ "user_id integer,"
 					+ "score integer,"
+					+ "remaining_question integer,"
 					+ "isFinished boolean,"
-					+ "finished_time TIMESTAMP,"
+					+ "start_time TIMESTAMP,"
+					+ "finish_time TIMESTAMP,"
 					+ "primary key(session_id));");
 		}
 		

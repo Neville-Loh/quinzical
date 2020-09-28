@@ -72,9 +72,11 @@ public class Session {
 	
 	public void setQuestionSet(List<Category> category) {
 		_cats = category;
+		_remainingQuestion = 0;
 		for (Category cat: category) {
 			for (Question question : cat.getQuestions()) {
 				questionDic.put(question.getID(), question);
+				_remainingQuestion++;
 			}
 		}
 	}
@@ -175,9 +177,37 @@ public class Session {
 	 * @return Time 
 	 */
 
-	public Timestamp getCreationTime() {
+	public Timestamp getStartTime() {
 		return _startTime;
 	}
+	
+	/**
+	 * Set Method, set creationTime of Session
+	 * @param Time , time that session start
+	 */
+
+	public void setStartTime(Timestamp time) {
+		_startTime = time;
+	}
+	
+	/**
+	 * Get Method, get finish time of Session
+	 * @return Time 
+	 */
+
+	public Timestamp getFinishTime() {
+		return _endTime;
+	}
+	
+	/**
+	 * Set Method, set finish Time of Session
+	 * @param Time , time that session end
+	 */
+	public void setFinishTime(Timestamp time) {
+		_endTime = time;
+	}
+	
+	
 	
 	/**
 	 * Get the playTime for the session;
@@ -213,7 +243,10 @@ public class Session {
 		return _winnings;
 	}
 
-
+	
+	public void setIsFinished(boolean bool) {
+		_isFinished = bool;
+	}
 
 	public void setActiveQuestion(Question question) {
 		_activeQuestion = question;

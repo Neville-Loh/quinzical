@@ -103,7 +103,7 @@ public interface QuinzicalDB {
 	 * @param categoryId
 	 * @return
 	 */
-	public Category getCategory(int categoryId);
+	public Category getEmptyCategory(int categoryId);
 	
 	/**
 	 * 

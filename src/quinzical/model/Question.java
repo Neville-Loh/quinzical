@@ -19,7 +19,12 @@ public class Question {
 		_score = score;
 	}
 
-	
+	/**
+	 * Constructor of Object question, 
+	 * @param question
+	 * @param ans
+	 * @param prefix
+	 */
 	public Question(String question, String ans, String prefix) {
 		_answer = ans;
 		_question = question;

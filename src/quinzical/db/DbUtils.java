@@ -53,13 +53,8 @@ public class DbUtils {
 			String statement = "SELECT "+ tableName + "_id FROM "
 					+ tableName
 					+ " WHERE " + colName + " = '" + colValue + "';";
-			
-			System.out.println(statement);
 			prep = conn.prepareStatement(statement);
 			ResultSet r = prep.executeQuery();
-			
-			
-
 			return r.getInt(1);
 			
 		} catch (SQLException e) {
