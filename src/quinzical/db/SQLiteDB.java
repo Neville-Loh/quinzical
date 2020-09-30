@@ -281,8 +281,23 @@ public class SQLiteDB implements QuinzicalDB{
 
 	@Override
 	public List<Category> getAllCategory() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Category> result = new ArrayList<Category>();
+		String statement = "SELECT * FROM category;";
+		PreparedStatement prep = null;
+		try {			
+			prep = conn.prepareStatement(statement);
+			ResultSet res = prep.executeQuery();
+			
+			while( res.next() ) {
+				Category category = new Category(res.getString(2));
+				category.setID(res.getInt(1));
+				result.add(category);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return result;
 	}
 	
 	@Override

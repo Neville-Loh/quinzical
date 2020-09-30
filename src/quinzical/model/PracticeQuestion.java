@@ -7,6 +7,7 @@ public class PracticeQuestion extends Question{
 	
 	public PracticeQuestion(String question, String ans, String prefix) {
 		super(question, ans, prefix);
+		this.setisPractice(true);
 		attemptLeft = 3;
 		showHint = false;
 	}
@@ -14,6 +15,7 @@ public class PracticeQuestion extends Question{
 	public PracticeQuestion(Question question) {
 		super(question.getPrompt(), question.getAnswer(), question.getAnswerPrefix());
 		this.setID(question.getID());
+		this.setisPractice(true);
 		attemptLeft = 3;
 		showHint = false;
 	}

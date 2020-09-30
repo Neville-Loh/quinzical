@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import quinzical.Main;
 import quinzical.model.Question;
 import quinzical.model.QuizModel;
+import test.testSQLiteDB;
 /**
  * Controller class for question view at QuestionView.fxml.
  * Display are question and text field
@@ -68,9 +69,14 @@ public class QuestionViewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		model = Main.getQuizModel();
 		question = model.getActiveQuestion();
+		testSQLiteDB.printQuestion(question);
 		model.textToSpeech(question.toString());
-		//questionLabel.setText(question.toString());
-
+		System.out.println(question.isPractice());
+		if (question.isPractice()) {
+			questionLabel.setText(question.getPrompt());
+		} else {
+			questionLabel.setText("");
+		}
 	}
 	
 	/**

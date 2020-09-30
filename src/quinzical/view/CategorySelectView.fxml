@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #262d37;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.QuestionSelectViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #262d37;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.CategorySelectViewController">
    <center>
       <VBox alignment="CENTER" style="-fx-background-color: #262d37;" BorderPane.alignment="CENTER">
          <children>
@@ -45,7 +45,7 @@
       </HBox>
    </bottom>
    <top>
-      <Label text="Select a question" textFill="WHITE" BorderPane.alignment="CENTER">
+      <Label text="Select a category" textFill="WHITE" BorderPane.alignment="CENTER">
          <font>
             <Font name="KacstArt" size="17.0" />
          </font>

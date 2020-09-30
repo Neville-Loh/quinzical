@@ -50,7 +50,8 @@ public class MainController implements Initializable{
 	
 	@FXML
 	private void showCategorySelectView(ActionEvent event) throws IOException{
-		
+		System.out.println("showcategoryselectview");
+		ScreenController.goCategorySelect(getClass(), event);
 	}
 	
 	/**

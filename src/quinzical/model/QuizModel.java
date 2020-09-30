@@ -26,7 +26,13 @@ public class QuizModel {
 	private Session _currentSession;
 	private QuinzicalDB db;
 	private PracticeQuestion _practiceQuestion;
-
+	private Question _currentQuestion;
+//	private GameMode gameMode = GameMode.normal;
+//	
+//	enum GameMode{
+//		practice,
+//		normal
+//	}
 	
 	
 
@@ -48,7 +54,6 @@ public class QuizModel {
 		_currentUser.setUserId(99);
 		_currentSession = new Session(_currentUser);
 		List<Category> cat = db.getRandomQuestionSet(5, 5);
-		testSQLiteDB.printCategorySet(cat);
 		_currentSession.setQuestionSet(cat);
 		//db.getUserSession(1);
 		
@@ -229,14 +234,14 @@ public class QuizModel {
 	 * @param question
 	 */
 	public void setActiveQuestion(Question question) {
-		_currentSession.setActiveQuestion(question);
+		_currentQuestion = question;
 	}
 	/**
 	 * Get Method
 	 * @return current selected question
 	 */
 	public Question getActiveQuestion() {
-		return _currentSession.getActiveQuestion();
+		return _currentQuestion;
 		
 	}
 	/**
@@ -273,6 +278,9 @@ public class QuizModel {
 	// -------------------------- New implemented method -------------------------
 	public void selectRandomPracticeQuestion(int categoryId) {
 		_practiceQuestion = new PracticeQuestion(db.getRandomQuestionFromCategory(categoryId));
+		testSQLiteDB.printQuestion(_practiceQuestion);
+		_currentQuestion = _practiceQuestion;
+		
 	}
 
 
@@ -318,6 +326,10 @@ public class QuizModel {
 		session.setQuestionSet(db.getRandomQuestionSet(5, 5));
 	}
 
+	
+	public List<Category> getAllCategorywithoutQuestion(){
+		return db.getAllCategory();
+	}
 
 	public void setActiveQuestion(int id) {
 		// TODO Auto-generated method stub
@@ -329,6 +341,16 @@ public class QuizModel {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+//
+//	public GameMode getGameMode() {
+//		return gameMode;
+//	}
+//
+//
+//	public void setGameMode(GameMode gameMode) {
+//		this.gameMode = gameMode;
+//	}
 
 
 

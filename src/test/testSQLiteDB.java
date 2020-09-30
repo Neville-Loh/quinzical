@@ -36,7 +36,8 @@ public class testSQLiteDB {
 			db.getConnection();
 			
 			//testSessionSaving();
-			testgetRandomQuestionSet();
+			//testgetRandomQuestionSet();
+			testGetAllCategory();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,6 +55,10 @@ public class testSQLiteDB {
 	 * ======================================================================================
 	 */
 	
+	public void testGetAllCategory() {
+		List<Category> cat = db.getAllCategory();
+		printCategorySet(cat);
+	}
 	
 	/**
 	 * Test the session saving and loading functionality
@@ -189,7 +194,7 @@ public class testSQLiteDB {
 		System.out.printf("Category length : %d%n", cats.size());
 		
 		for (Category cat : cats) {
-			System.out.println(cat.getTitle());
+			System.out.println(cat.getTitle() + " , id : " + cat.getCategoryID());
 			for (Question question : cat.getQuestions()) {
 				printQuestion(question);
 			}
@@ -201,9 +206,9 @@ public class testSQLiteDB {
 	 * @param question
 	 */
 	public static void printQuestion(Question question) {
-		System.out.printf("Id: %d, Score: %s, attempted = %s, prompt: %s , ans: %s%n", 
+		System.out.printf("Id: %d, Score: %s, isPractice = %s, attempted = %s, prompt: %s , ans: %s%n", 
 				question.getID(), String.valueOf(question.getScore()).toString()
-		, ""+question.isAttempted(), question.toString(), question.getAnswer());
+		, ""+question.isPractice(), ""+question.isAttempted(), question.toString(), question.getAnswer());
 	}
 	
 	/**
