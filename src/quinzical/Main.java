@@ -52,8 +52,9 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		//launch(args);
+		launch(args);
+		//System.out.print("ass");
 		//test a = new test();
-		new test.testSQLiteDB();
+//		new test.testSQLiteDB();
 	}
 }

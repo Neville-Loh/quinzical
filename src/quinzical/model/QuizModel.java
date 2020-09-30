@@ -37,6 +37,9 @@ public class QuizModel {
 		
 		db = new SQLiteDB();
 		
+		_currentUser = new User("default");
+		_currentUser.setUserId(99);
+		_currentSession = new Session(_currentUser);
 		//db.getUserSession(1);
 		
 //		_cats = FileHandler.loadCategory();
