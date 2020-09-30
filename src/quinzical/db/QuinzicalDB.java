@@ -1,5 +1,6 @@
 package quinzical.db;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,9 @@ import quinzical.model.User;
  *
  */
 public interface QuinzicalDB {
-
+	
+	
+	public void getConnection() throws ClassNotFoundException, SQLException;
 	/*
 	 * =====================================================================================================
 	 * USER

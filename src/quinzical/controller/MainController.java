@@ -42,6 +42,17 @@ public class MainController implements Initializable{
 		ScreenController.goCurrentWinning(getClass(), event);
 	}
 	
+	
+	@FXML
+	private void showSettingView(ActionEvent event) throws IOException{
+		
+	}
+	
+	@FXML
+	private void showCategorySelectView(ActionEvent event) throws IOException{
+		
+	}
+	
 	/**
 	 * Send out reset Alert, if user confirm, reset the game
 	 * @param event

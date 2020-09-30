@@ -1,5 +1,6 @@
 package quinzical.model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,7 @@ import quinzical.db.SQLiteDB;
 //import quinzical.db.QuinzicalDB;
 import quinzical.util.FileHandler;
 import quinzical.util.Helper;
+import test.testSQLiteDB;
 
 /**
  * THe Quiz model of the application. This class contain all the necessary
@@ -36,10 +38,18 @@ public class QuizModel {
 	public QuizModel() {
 		
 		db = new SQLiteDB();
+		try {
+			db.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
 		
 		_currentUser = new User("default");
 		_currentUser.setUserId(99);
 		_currentSession = new Session(_currentUser);
+		List<Category> cat = db.getRandomQuestionSet(5, 5);
+		testSQLiteDB.printCategorySet(cat);
+		_currentSession.setQuestionSet(cat);
 		//db.getUserSession(1);
 		
 //		_cats = FileHandler.loadCategory();

@@ -304,9 +304,20 @@ public class SQLiteDB implements QuinzicalDB{
 				prep = conn.prepareStatement(statement);
 				ResultSet res = prep.executeQuery();
 				
+				/*
+				 * the current score is assigned from [100, 500] with 100 increment 
+				 */
+				int score = 100;
+				int increment = 100;
+				
 				while( res.next() ) {
 					Question q = new Question(res.getString(2), res.getString(3));
-					q.setID(res.getInt(1));			
+					q.setID(res.getInt(1));
+					
+					//setting and updating the score
+					q.setScore(score);
+					score += increment;
+					
 					cat.add(q);
 				}
 				

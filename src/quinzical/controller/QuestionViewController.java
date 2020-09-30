@@ -81,7 +81,7 @@ public class QuestionViewController implements Initializable {
 	 */
 	private void submitAnswer(ActionEvent event) {
 		String input = textfield.getText();
-		boolean isCorrect = model.answerQuestion(1, input); //#TODO change this
+		boolean isCorrect = model.answerQuestion(question.getID(), input); //#TODO change this
 
 		try {
 			FXMLLoader loader = new FXMLLoader();

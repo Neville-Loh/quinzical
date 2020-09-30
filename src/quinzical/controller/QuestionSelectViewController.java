@@ -51,7 +51,9 @@ public class QuestionSelectViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		
+		System.out.println("init reached");
+		
 		model = Main.getQuizModel();
 		List<Category> cats = model.getCategoryList();
 		remainingQuestion.setText(Integer.toString(model.getRemainingQuestionCount()));

@@ -7,20 +7,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@css/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.MainController">
    <center>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #262d37;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #262d37;" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Welcome to Jeopardy" textFill="WHITE">
+            <Label text="Welcome to Quinzical" textFill="WHITE">
                <font>
-                  <Font name="KacstBook" size="26.0" />
+                  <Font name="KacstBook" size="45.0" />
                </font>
                <padding>
-                  <Insets bottom="30.0" top="30.0" />
+                  <Insets bottom="200.0" top="30.0" />
                </padding>
             </Label>
-            <Button mnemonicParsing="false" onAction="#showQuestionSelectView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Select a Question" />
-            <Button mnemonicParsing="false" onAction="#showCurrentWinningView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="View Current Winning" />
+            <Button mnemonicParsing="false" onAction="#showQuestionSelectView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Start" />
+            <Button layoutX="392.0" layoutY="458.0" mnemonicParsing="false" onAction="#showCategorySelectView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Practice Mode" />
+            <Button mnemonicParsing="false" onAction="#showSettingView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Setting" />
             <Button mnemonicParsing="false" onAction="#resetButtonClick" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Reset game" />
             <Button mnemonicParsing="false" onAction="#quitButtonClick" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Save and Quit" />
          </children>
