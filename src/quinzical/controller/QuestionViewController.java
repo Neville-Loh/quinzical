@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import quinzical.Main;
+import quinzical.model.PracticeQuestion;
 import quinzical.model.Question;
 import quinzical.model.QuizModel;
 import test.testSQLiteDB;
@@ -32,6 +33,7 @@ public class QuestionViewController implements Initializable {
 	
 	@FXML private Label questionLabel;
 	@FXML private TextField textfield;
+	@FXML private Label attempLabel;
 	
 	/**
 	 * Navigate to main menu
@@ -49,7 +51,11 @@ public class QuestionViewController implements Initializable {
 	 */
 	@FXML
 	public void centerButton(ActionEvent event) {
-		submitAnswer(event);
+		if (question.isPractice()){
+			submitPracticeAnswer(event);
+		} else {
+			submitAnswer(event);
+		}
 	}
 
 	/**
@@ -58,7 +64,11 @@ public class QuestionViewController implements Initializable {
 	 */
 	@FXML
 	public void onEnter(ActionEvent event) throws IOException {
-		submitAnswer(event);
+		if (question.isPractice()){
+			submitPracticeAnswer(event);
+		} else {
+			submitAnswer(event);
+		}
 	}
 
 	/**
@@ -69,15 +79,17 @@ public class QuestionViewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		model = Main.getQuizModel();
 		question = model.getActiveQuestion();
-		testSQLiteDB.printQuestion(question);
 		model.textToSpeech(question.toString());
-		System.out.println(question.isPractice());
+		
 		if (question.isPractice()) {
 			questionLabel.setText(question.getPrompt());
+			attempLabel.setText("Attempt Left: " + ((PracticeQuestion) question).getAttemptLeft());
 		} else {
 			questionLabel.setText("");
+			attempLabel.setText("");
 		}
 	}
+	
 	
 	/**
 	 * Submit answer in the text field to check for correctness within model.
@@ -109,6 +121,48 @@ public class QuestionViewController implements Initializable {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param event
+	 */
+	private void submitPracticeAnswer(ActionEvent event) {
+		PracticeQuestion pq = (PracticeQuestion) question;
+		
+		String input = textfield.getText();
+		boolean isCorrect = model.answerPracticeQuestion(input); //#TODO change this
+		attempLabel.setText("Attempt Left: " + pq.getAttemptLeft());
+		if (pq.getAttemptLeft() == 1) {
+			//show hint
+			attempLabel.setText("Attempt Left: " + pq.getAttemptLeft() + 
+					", The answer starts with '" + pq.getAnswer().charAt(0)+"'");
+		}
+		
+		// Initialize next page if attempt left = 0 or answer is correct
+		if (pq.getAttemptLeft() == 0 || isCorrect) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/quinzical/view/AnswerResultView.fxml"));
+			Parent parent = loader.load();
+			Scene scene = new Scene(parent);
+			AnswerResultViewController controller = loader.getController();
+
+			// Initialize different page according to the user answer
+			if (isCorrect) {
+				controller.validAnswerInit(question);
+			} else {
+				controller.invalidAnswerInit(question);
+			}
+			
+			// switch to next screen
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(scene);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		}
 	}
 
