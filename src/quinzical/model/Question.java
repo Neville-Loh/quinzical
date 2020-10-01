@@ -12,6 +12,7 @@ public class Question {
 	private String _prefix;
 	private int _score;
 	private boolean _isAttempted = false;
+	private boolean _isPractice = false;
 
 	public Question(String question, String ans, int score) {
 		_answer = ans;
@@ -19,7 +20,12 @@ public class Question {
 		_score = score;
 	}
 
-	
+	/**
+	 * Constructor of Object question, 
+	 * @param question
+	 * @param ans
+	 * @param prefix
+	 */
 	public Question(String question, String ans, String prefix) {
 		_answer = ans;
 		_question = question;
@@ -118,6 +124,14 @@ public class Question {
 	 */
 	public void setAnswerPrefix(String answerPrefix) {
 		_prefix = answerPrefix;
+	}
+
+	public boolean isPractice() {
+		return _isPractice;
+	}
+
+	public void setisPractice(boolean isPractice) {
+		this._isPractice = isPractice;
 	}
 	
 

@@ -12,8 +12,7 @@ import org.sqlite.core.DB;
 import quinzical.db.DbUtils;
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
-import quinzical.db.Table;
-import quinzical.db.Table.USER;
+
 import quinzical.model.Category;
 import quinzical.model.Question;
 import quinzical.model.Session;
@@ -36,53 +35,111 @@ public class testSQLiteDB {
 			
 			db.getConnection();
 			
-//			QuestionReader rq = new QuestionReader("Quinzical.txt");
-//			rq.populateCategoriesAndQuestions(db);
-			
-			
-			
-			
-			
-//			populateUser(db);
-//			populateCategory(db);
-//			populateQuetsion(db);
-//			populateSession(db);
-//			db.deleteCategory(3);
-//			
-//			System.out.println("all is good");
-//			long stopTime = System.currentTimeMillis();
-//			System.out.println((stopTime - startTime)/1000.0);
-			
-			testgetRandomQuestionSet();
-			
-			
+			//testSessionSaving();
+			//testgetRandomQuestionSet();
+			testGetAllCategory();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		ResultSet res;
-//		db.addUser(new User());
-//		
 		
-
-//		try {
-//			res = db.displayUsers();
-//			while(res.next()) {
-//				System.out.println(res.getString("username"));
-//			}
-//			
-//		} catch (ClassNotFoundException | SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
+		long finishTime = System.currentTimeMillis();
+		System.out.println("Total Time cost: " + ((finishTime - startTime)/1000.0) + " second.");
+			
+	}
+	
+	/* ======================================================================================
+	 * Testing of the SQLiteDb implementation 
+	 * 
+	 * 
+	 * ======================================================================================
+	 */
+	
+	public void testGetAllCategory() {
+		List<Category> cat = db.getAllCategory();
+		printCategorySet(cat);
+	}
+	
+	/**
+	 * Test the session saving and loading functionality
+	 * 
+	 */
+	private void testSessionSaving() {
+		User user = new User("Neville");
+		try {
+			db.addUser(user);
+		} catch (Exception e) {
+			
+		}
 		
+		Session session = new Session(user);
+		List<Category> cats = db.getRandomQuestionSet(5, 5);
+		
+		
+		session.setQuestionSet(cats);
+		printSession(session);
+		printCategorySet(cats);
+		
+		Question q = session.getQuestionById(cats.get(0).getQuestions().get(0).getID());
+		q.setAttempted(true);
+		
+		
+		
+		db.addSession(user, session);
+		Session sessionReturn = db.getUserLastestSession(user);
+		printSession(sessionReturn);
+		printCategorySet(sessionReturn.getCategoryList());
 		
 	}
 	public void testOnDelectCascade() {
 		
 	}
-	private void populateUser(QuinzicalDB db) {
+	
+	/**
+	 * Test function of db to generate a random question set.
+	 */
+	public void testgetRandomQuestionSet(){
+	try {
+		List<Category> cats = db.getRandomQuestionSet(5,5);
+		printCategorySet(cats);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Test the implementation of get Category id;
+	 */
+	public void testGetEmptyCategory() {
+		Category cat = db.getEmptyCategory(3);
+		System.out.println("fetched category = :" + cat.getTitle());
+		
+	}
+	
+	/* ======================================================================================
+	 * Utility Method for testing
+	 * 
+	 * 
+	 * ======================================================================================
+	 */
+	/**
+	 * populate data base with some random session data
+	 * use for testing purpose
+	 * @param db
+	 */
+	public void populateSession(QuinzicalDB db) {
+		User user = new User("Tom");
+		user.setUserId(1);
+		Session session = new Session(user);
+		db.addSession(user, session);
+	}
+	
+	/**
+	 * populate data base with some random user
+	 * use for testing purpose
+	 * @param db
+	 */
+	public  void populateUser(QuinzicalDB db) {
 		User user;
 		user = new User("Tom");
 		db.addUser(user);
@@ -95,51 +152,21 @@ public class testSQLiteDB {
 		
 	}
 	
-	private void testgetRandomQuestionSet(){
-		
-	try {
-			
-		List<String> names = new ArrayList<String>();
-		names.add("Animal");
-		names.add("Sport");
-		names.add("Country");
-		
-		
-		List<Category> cats = db.getRandomQuestionSet(5);
-		printCategorySet(cats);
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		
-	}
-	
-	
-	public void testSessionSaveAndLoad(QuinzicalDB db) {
-		User user = new User("Ton");
-		
-	}
-	
-	
-	
-	private void populateSession(QuinzicalDB db) {
-		User user = new User("Tom");
-		user.setUserId(1);
-		Session session = new Session(user);
-		db.addSession(user, session);
-	}
-	
-	private void populateSessionsQuestion(QuinzicalDB db) {
-	}
-	
-	private void populateCategory(SQLiteDB db) {
+	/**
+	 * populate Category with some random value
+	 * @param db
+	 */
+	public void populateCategory(SQLiteDB db) {
 		db.addCategory(new Category("Animal"));
 		db.addCategory(new Category("Sport"));
 		db.addCategory(new Category("Country"));
 	}
 	
-	private void populateQuetsion(SQLiteDB db) {
+	/**
+	 * populate the question data with some testing question
+	 * @param db
+	 */
+	public void populateQuetsion(SQLiteDB db) {
 		Question question1 = new Question("This is the capital of New Zealand", "cloud");
 		db.addQuestion(question1, 1);
 		Question question2 = new Question("What is somthing that is blue?", "sky");
@@ -159,17 +186,42 @@ public class testSQLiteDB {
 		
 	}
 	
+	/**
+	 * Utility function to print all question in a question set 
+	 * @param cats
+	 */
 	public static void printCategorySet(List<Category> cats) {
 		System.out.printf("Category length : %d%n", cats.size());
 		
 		for (Category cat : cats) {
-			System.out.println(cat.getTitle());
+			System.out.println(cat.getTitle() + " , id : " + cat.getCategoryID());
 			for (Question question : cat.getQuestions()) {
-				System.out.printf("prompt: %s , ans: %s id = %d \n", 
-						question.toString(), question.getAnswer(), question.getID());
+				printQuestion(question);
 			}
 		}
 	}
 	
+	/**
+	 * Utility function to print all question in a question set 
+	 * @param question
+	 */
+	public static void printQuestion(Question question) {
+		System.out.printf("Id: %d, Score: %s, isPractice = %s, attempted = %s, prompt: %s , ans: %s%n", 
+				question.getID(), String.valueOf(question.getScore()).toString()
+		, ""+question.isPractice(), ""+question.isAttempted(), question.toString(), question.getAnswer());
+	}
+	
+	/**
+	 * Utility function to print all session stats;
+	 * @param question
+	 */
+	public static void printSession(Session session) {
+		System.out.printf(
+				"session_id: %d, user_id: %d, score: %d, remaining_question: %d%n"
+				+ "start_time: %s, finished_time: %s %n", 
+				session.getSessionID(), session.getUser().getUserID(), session.getWinnings(), 
+				session.getRemainingQuestion(), session.getStartTime().toString(), 
+				String.valueOf(session.getFinishTime()).toString());
+	}
 	
 }

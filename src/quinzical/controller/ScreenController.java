@@ -90,5 +90,21 @@ public class ScreenController {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * ---------------new---------
+	 * Category Select  Utility Method to go to the GameOver View
+	 * @param controllerClass
+	 * @param event of button
+	 */
+	public static void goCategorySelect(Class<?> controllerClass, ActionEvent event){
+		try {
+			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/CategorySelectView.fxml"));
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(new Scene(parent));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

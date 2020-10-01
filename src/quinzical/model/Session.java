@@ -16,12 +16,11 @@ import java.util.Map;
 public class Session {
 	
 
-	private int _ID;
+	private int _ID = -1;
 	private User _user;
 	private int _winnings;
-	private ArrayList<Category> _cats;
+	private List<Category> _cats;
 	private Map<Integer,Question> questionDic;
-	private Question _activeQuestion;
 	private int _remainingQuestion;
 	
 	
@@ -71,9 +70,12 @@ public class Session {
 	}
 	
 	public void setQuestionSet(List<Category> category) {
-		for (Category cats: category) {
-			for (Question question : cats.getQuestions()) {
+		_cats = category;
+		_remainingQuestion = 0;
+		for (Category cat: category) {
+			for (Question question : cat.getQuestions()) {
 				questionDic.put(question.getID(), question);
+				_remainingQuestion++;
 			}
 		}
 	}
@@ -106,10 +108,27 @@ public class Session {
 	}
 	
 	/**
-	 * Get the question set from the session 
-	 * @return
+	 * Set method for ID,
+	 * CAUTIOUS!, this method only meant to be called by database implementation and
+	 * not Anywhere of the application, throw illegalArgumentException if id already exist.
+	 * @param id
+	 * @throw IllegalArgumentException
 	 */
-	public ArrayList<Category> getCategoryList(){
+	public void setSessionID(int id) {
+		if (_ID == -1) {
+			_ID = id;
+		} else {
+			throw new IllegalArgumentException("Id " + _ID + "already exist for sesssion: " + _user.getName());
+		}
+
+	}
+	
+	
+	/**
+	 * Get the question set from the session 
+	 * @return category containing all quetion
+	 */
+	public List<Category> getCategoryList(){
 		return _cats;
 	}
 	
@@ -138,7 +157,7 @@ public class Session {
 	}
 	
 	
-	public Question getQuestoinById(int id) {
+	public Question getQuestionById(int id) {
 		return questionDic.get(id);
 	}
 	
@@ -157,9 +176,37 @@ public class Session {
 	 * @return Time 
 	 */
 
-	public Timestamp getCreationTime() {
+	public Timestamp getStartTime() {
 		return _startTime;
 	}
+	
+	/**
+	 * Set Method, set creationTime of Session
+	 * @param Time , time that session start
+	 */
+
+	public void setStartTime(Timestamp time) {
+		_startTime = time;
+	}
+	
+	/**
+	 * Get Method, get finish time of Session
+	 * @return Time 
+	 */
+
+	public Timestamp getFinishTime() {
+		return _endTime;
+	}
+	
+	/**
+	 * Set Method, set finish Time of Session
+	 * @param Time , time that session end
+	 */
+	public void setFinishTime(Timestamp time) {
+		_endTime = time;
+	}
+	
+	
 	
 	/**
 	 * Get the playTime for the session;
@@ -195,17 +242,20 @@ public class Session {
 		return _winnings;
 	}
 
-
-
-	public void setActiveQuestion(Question question) {
-		_activeQuestion = question;
-		
+	
+	public void setIsFinished(boolean bool) {
+		_isFinished = bool;
 	}
 
-
-	public Question getActiveQuestion() {
-		return _activeQuestion;
-	}
+//	public void setActiveQuestion(Question question) {
+//		_activeQuestion = question;
+//		
+//	}
+//
+//
+//	public Question getActiveQuestion() {
+//		return _activeQuestion;
+//	}
 	
 
 }

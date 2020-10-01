@@ -33,13 +33,15 @@ public class Main extends Application {
 		}
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Quinzical");
-		
+//		this.primaryStage.setHeight(1024);
+//		this.primaryStage.setWidth(768);
 		Parent root = FXMLLoader.load(getClass().getResource("/quinzical/view/MainView.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-		primaryStage.setOnCloseRequest(Helper.confirmCloseEventHandler);
+		//#TODO
+		//primaryStage.setOnCloseRequest(Helper.confirmCloseEventHandler);
 	}
 	
 	
@@ -52,8 +54,9 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		//launch(args);
-		//test a = new test();
-		new test.testSQLiteDB();
+		launch(args);
+		//System.out.print("ass");
+		
+		//new test.testSQLiteDB();
 	}
 }

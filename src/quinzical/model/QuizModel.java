@@ -1,7 +1,9 @@
 package quinzical.model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import quinzical.db.ObjectDB;
@@ -12,6 +14,7 @@ import quinzical.util.Festival;
 import quinzical.util.FileHandler;
 import quinzical.util.Helper;
 import quinzical.util.TextToSpeech;
+import test.testSQLiteDB;
 
 /**
  * THe Quiz model of the application. This class contain all the necessary
@@ -26,6 +29,15 @@ public class QuizModel {
 	private QuinzicalDB db;
 	private TextToSpeech tts;
 
+	private PracticeQuestion _practiceQuestion;
+	private Question _currentQuestion;
+//	private GameMode gameMode = GameMode.normal;
+//	
+//	enum GameMode{
+//		practice,
+//		normal
+//	}
+
 	
 	
 
@@ -39,6 +51,17 @@ public class QuizModel {
 		db = new SQLiteDB();
 		tts = new Festival();
 		
+		try {
+			db.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
+		_currentUser = new User("default");
+		_currentUser.setUserId(99);
+		_currentSession = new Session(_currentUser);
+		List<Category> cat = db.getRandomQuestionSet(5, 5);
+		_currentSession.setQuestionSet(cat);
 		//db.getUserSession(1);
 		
 //		_cats = FileHandler.loadCategory();
@@ -56,15 +79,14 @@ public class QuizModel {
 	
 	
 	public void loadUserSession() {
-		
+		_currentSession = db.getUserLastestSession(_currentUser); 
 	}
 	
 	/**
-	 * #TODO !!!!!!!!!!!!
 	 * Save the current session to database
 	 */
 	public void saveUserSession() {
-		
+		db.addSession(_currentUser, _currentSession);
 	}
 
 	/**
@@ -76,7 +98,9 @@ public class QuizModel {
 	 * @param User input
 	 * @return true if the answer is correct, else false
 	 */
-	public boolean answerQuestion(Question question, String input) {
+	public boolean answerQuestion(int qid , String input) {
+		
+		Question question = _currentSession.getQuestionById(qid);
 		question.setAttempted(true);
 		_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() - 1);
 		if (validate(input, question)) {
@@ -210,21 +234,21 @@ public class QuizModel {
 	 * @param question
 	 */
 	public void setActiveQuestion(Question question) {
-		_currentSession.setActiveQuestion(question);
+		_currentQuestion = question;
 	}
 	/**
 	 * Get Method
 	 * @return current selected question
 	 */
 	public Question getActiveQuestion() {
-		return _currentSession.getActiveQuestion();
+		return _currentQuestion;
 		
 	}
 	/**
 	 * Get Method
 	 * @return all Category
 	 */
-	public ArrayList<Category> getCategoryList() {
+	public List<Category> getCategoryList() {
 		return _currentSession.getCategoryList();
 	}
 	/**
@@ -249,5 +273,85 @@ public class QuizModel {
 	public int getRemainingQuestionCount() {
 		return _currentSession.getRemainingQuestion();
 	}
+
+	
+	// -------------------------- New implemented method -------------------------
+	public void selectRandomPracticeQuestion(int categoryId) {
+		_practiceQuestion = new PracticeQuestion(db.getRandomQuestionFromCategory(categoryId));
+		testSQLiteDB.printQuestion(_practiceQuestion);
+		_currentQuestion = _practiceQuestion;
+		
+	}
+
+
+	public PracticeQuestion getCurrentPracticeQuestion() {
+		return _practiceQuestion;
+	}
+
+
+	public boolean answerPracticeQuestion(String input) {
+		if (validate(input, _practiceQuestion)) {
+			return true;
+		} else {
+			int attemptLeft = _practiceQuestion.getAttemptLeft() - 1;
+			_practiceQuestion.setAttemptLeft(attemptLeft);
+			return false;
+		}
+		
+	}
+
+
+	public int createNewUser(String string) {
+		User user = new User(string);
+		db.addUser(user);
+		return user.getUserID();
+	}
+
+
+	public void setUser(int userid) {
+		// change user to user id;
+		User user = db.getUser(userid);
+		_currentUser = user;
+		
+		// load current most recent user session;
+		Session session = db.getUserLastestSession(user);
+		_currentSession = session;
+		
+	}
+
+
+	public void createNewSession() {
+		// Creating new session which associate to current user.
+		Session session = new Session(_currentUser);
+		session.setQuestionSet(db.getRandomQuestionSet(5, 5));
+	}
+
+	
+	public List<Category> getAllCategorywithoutQuestion(){
+		return db.getAllCategory();
+	}
+
+	public void setActiveQuestion(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public int getPracticeAttemptLeft() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+//
+//	public GameMode getGameMode() {
+//		return gameMode;
+//	}
+//
+//
+//	public void setGameMode(GameMode gameMode) {
+//		this.gameMode = gameMode;
+//	}
+
+
 
 }
