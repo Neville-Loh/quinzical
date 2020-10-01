@@ -7,9 +7,11 @@ import java.util.Map;
 import quinzical.db.ObjectDB;
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
+import quinzical.util.Festival;
 //import quinzical.db.QuinzicalDB;
 import quinzical.util.FileHandler;
 import quinzical.util.Helper;
+import quinzical.util.TextToSpeech;
 
 /**
  * THe Quiz model of the application. This class contain all the necessary
@@ -22,6 +24,7 @@ public class QuizModel {
 	private User _currentUser;
 	private Session _currentSession;
 	private QuinzicalDB db;
+	private TextToSpeech tts;
 
 	
 	
@@ -34,7 +37,7 @@ public class QuizModel {
 	public QuizModel() {
 		
 		db = new SQLiteDB();
-		
+		tts = new Festival();
 		
 		//db.getUserSession(1);
 		
@@ -199,14 +202,7 @@ public class QuizModel {
 	 * @param text to be turned into speach
 	 */
 	public void textToSpeech(String text) {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				String command = "echo \"" + text + "\" | festival --tts";
-				Helper.runBash(command);
-			}
-
-		}).start();
+		tts.start(text);
 	}
 
 	/**
