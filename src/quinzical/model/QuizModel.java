@@ -9,9 +9,11 @@ import java.util.Map;
 import quinzical.db.ObjectDB;
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
+import quinzical.util.Festival;
 //import quinzical.db.QuinzicalDB;
 import quinzical.util.FileHandler;
 import quinzical.util.Helper;
+import quinzical.util.TextToSpeech;
 import test.testSQLiteDB;
 
 /**
@@ -25,6 +27,8 @@ public class QuizModel {
 	private User _currentUser;
 	private Session _currentSession;
 	private QuinzicalDB db;
+	private TextToSpeech tts;
+
 	private PracticeQuestion _practiceQuestion;
 	private Question _currentQuestion;
 //	private GameMode gameMode = GameMode.normal;
@@ -33,6 +37,7 @@ public class QuizModel {
 //		practice,
 //		normal
 //	}
+
 	
 	
 
@@ -44,6 +49,8 @@ public class QuizModel {
 	public QuizModel() {
 		
 		db = new SQLiteDB();
+		tts = new Festival();
+		
 		try {
 			db.getConnection();
 		} catch (ClassNotFoundException | SQLException e) {
@@ -219,14 +226,7 @@ public class QuizModel {
 	 * @param text to be turned into speach
 	 */
 	public void textToSpeech(String text) {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				String command = "echo \"" + text + "\" | festival --tts";
-				Helper.runBash(command);
-			}
-
-		}).start();
+		tts.start(text);
 	}
 
 	/**
