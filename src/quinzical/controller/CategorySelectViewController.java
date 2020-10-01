@@ -24,12 +24,12 @@ import quinzical.model.Question;
 import quinzical.model.QuizModel;
 
 /**
- * Controller class for Question select screen, display all category
+ * Controller class for Category select screen, display all category
  * and selection buttons
  * @author Neville
  *
  */
-public class QuestionSelectViewController implements Initializable {
+public class CategorySelectViewController implements Initializable {
 	private QuizModel model;
 
 	@FXML private Label questionLabel;
@@ -51,54 +51,56 @@ public class QuestionSelectViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		System.out.println("init reached");
-		
 		model = Main.getQuizModel();
-		List<Category> cats = model.getCategoryList();
-		remainingQuestion.setText(Integer.toString(model.getRemainingQuestionCount()));
+		List<Category> cats = model.getAllCategorywithoutQuestion();
+		remainingQuestion.setText("");
 		
 		
 		
 		// populate row constrain for each row
 		if (cats.get(0) != null) {
-			for (int i = 0; i <= cats.get(0).getQuestionCount(); i++) {
+			for (int i = 0; i < 3; i++) {
 				centerGridPane.getRowConstraints()
 						.add(new RowConstraints(40, 30, -1, Priority.ALWAYS, VPos.CENTER, false));
 			}
+			for (int j = 0; j< 3; j++) {
+				centerGridPane.getColumnConstraints()
+					.add(new ColumnConstraints(-1, -1, -1, Priority.ALWAYS, HPos.CENTER, false));
+			}
+			
 		}
 		
 		
 		// populate button in each row and col
 		int col = 0;
-		int i = 1;
+		int i = 0;
 		for (Category category : cats) {
-			i = 1;
 			
-			// set constrain for the following col
-			centerGridPane.getColumnConstraints()
-					.add(new ColumnConstraints(-1, -1, -1, Priority.ALWAYS, HPos.CENTER, false));
+//			// set constrain for the following col
+//			centerGridPane.getColumnConstraints()
+//					.add(new ColumnConstraints(-1, -1, -1, Priority.ALWAYS, HPos.CENTER, false));
 
-			Label label = new Label(category.getTitle());
-			centerGridPane.add(label, col, 0);
-			for (Question question : category.getQuestions()) {
-				
-				// Display the button if the question is not attempt
-				if (!question.isAttempted()) {
-					Button button = new Button(Integer.toString(question.getScore()));
-					button.setPrefSize(150, 25);
-					centerGridPane.add(button, col, i);
-					button.setOnAction(new EventHandler<ActionEvent>() {
-						@Override
-						public void handle(ActionEvent event) {
-							model.setActiveQuestion(question);
-							ScreenController.goQuestion(getClass(), event);
-						}
-					});
+			Button button = new Button(category.getTitle());
+			button.setPrefSize(150, 25);
+			
+			// category button
+			button.setOnAction(new EventHandler<ActionEvent>() {
+				private int catID = category.getCategoryID();
+				@Override
+				public void handle(ActionEvent event) {
+					model.selectRandomPracticeQuestion(catID);
+					ScreenController.goQuestion(getClass(), event);
 				}
-				i++;
-			}
+			});
+			
+			//System.out.println(category.getTitle() + " i = " + i + ", j = " + col);
+			centerGridPane.add(button, col, i);
+			
 			col++;
+			if (col >= 3) {
+				i++;
+				col = 0;
+			}
 		}
 
 	}

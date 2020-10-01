@@ -21,7 +21,6 @@ public class Session {
 	private int _winnings;
 	private List<Category> _cats;
 	private Map<Integer,Question> questionDic;
-	private Question _activeQuestion;
 	private int _remainingQuestion;
 	
 	
@@ -248,15 +247,15 @@ public class Session {
 		_isFinished = bool;
 	}
 
-	public void setActiveQuestion(Question question) {
-		_activeQuestion = question;
-		
-	}
-
-
-	public Question getActiveQuestion() {
-		return _activeQuestion;
-	}
+//	public void setActiveQuestion(Question question) {
+//		_activeQuestion = question;
+//		
+//	}
+//
+//
+//	public Question getActiveQuestion() {
+//		return _activeQuestion;
+//	}
 	
 
 }
