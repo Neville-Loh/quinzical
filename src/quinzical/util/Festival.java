@@ -2,6 +2,7 @@ package quinzical.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.stream.Stream;
 
 public class Festival implements TextToSpeech {
 	
@@ -24,7 +25,10 @@ public class Festival implements TextToSpeech {
 	}
 	
 	public void stop() {
-		_currentProcess.destroy();
+		Stream<ProcessHandle> descendants = ProcessHandle.current().descendants();
+		descendants.filter(ProcessHandle::isAlive).forEach(ph -> {
+			ph.destroy();
+		});
 	}
 	
 	private void setVoice() {
