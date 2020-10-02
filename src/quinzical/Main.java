@@ -8,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import quinzical.model.QuizModel;
-import quinzical.model.PracticeModel;
 import quinzical.util.Helper;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -54,7 +53,7 @@ public class Main extends Application {
 		
 		System.out.print("ass");
 		
-		///////////////////////////////////////////////////////////
+		////////////////////////////////// TESTING //////////////////////////////////
 //		primaryStage.setTitle("Hello World");
 //	    StackPane root = new StackPane();
 //	    Scene scene = new Scene(root, 300, 250);
@@ -99,7 +98,7 @@ public class Main extends Application {
 //
 //	    primaryStage.setScene(scene);
 //	    primaryStage.show();
-		//////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////
 		
 		//#TODO
 		//primaryStage.setOnCloseRequest(Helper.confirmCloseEventHandler);

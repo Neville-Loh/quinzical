@@ -2,6 +2,7 @@ package quinzical.controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -71,9 +72,9 @@ public class QuestionSelectViewController implements Initializable {
 		
 		// populate button in each row and col
 		int col = 0;
-		int i = 1;
+		int row;
 		for (Category category : cats) {
-			i = 1;
+			row = 1;
 			
 			// set constrain for the following col
 			centerGridPane.getColumnConstraints()
@@ -81,13 +82,17 @@ public class QuestionSelectViewController implements Initializable {
 
 			Label label = new Label(category.getTitle());
 			centerGridPane.add(label, col, 0);
-			for (Question question : category.getQuestions()) {
-				
-				// Display the button if the question is not attempt
+			Button button = null;
+			
+			// setting button for each question
+			ArrayList<Question> questionList = category.getQuestions();
+			for (int i=0; i < questionList.size(); i++){
+			    Question question = questionList.get(i);
+			    
+			    // Display the button if the question is not attempt
 				if (!question.isAttempted()) {
-					Button button = new Button(Integer.toString(question.getScore()));
+					button = new Button(Integer.toString(question.getScore()));
 					button.setPrefSize(150, 25);
-					centerGridPane.add(button, col, i);
 					button.setOnAction(new EventHandler<ActionEvent>() {
 						@Override
 						public void handle(ActionEvent event) {
@@ -95,9 +100,20 @@ public class QuestionSelectViewController implements Initializable {
 							ScreenController.goQuestion(getClass(), event);
 						}
 					});
+					
+					// Set active question if it is the non-attempted quesion with the lower scroe
+					if (i == questionList.size() - 1 || questionList.get(i+1).isAttempted()) {
+						button.setDisable(false);
+					} else {
+						button.setDisable(true);
+					}
+					
+					centerGridPane.add(button, col, row);
 				}
-				i++;
+				
+				row++;
 			}
+
 			col++;
 		}
 

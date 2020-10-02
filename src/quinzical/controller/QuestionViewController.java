@@ -80,7 +80,7 @@ public class QuestionViewController implements Initializable {
 		try {
 		model = Main.getQuizModel();
 		question = model.getActiveQuestion();
-		//model.textToSpeech(question.toString());
+		model.textToSpeech(question.toString());
 		
 		if (question.isPractice()) {
 			questionLabel.setText(question.getPrompt());

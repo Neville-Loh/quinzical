@@ -325,7 +325,7 @@ public class SQLiteDB implements QuinzicalDB{
 				/*
 				 * the current score is assigned from [100, 500] with 100 increment 
 				 */
-				int score = 100;
+				int score = 500;
 				int increment = 100;
 				
 				while( res.next() ) {
@@ -334,7 +334,7 @@ public class SQLiteDB implements QuinzicalDB{
 					
 					//setting and updating the score
 					q.setScore(score);
-					score += increment;
+					score -= increment;
 					
 					cat.add(q);
 				}
