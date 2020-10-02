@@ -77,9 +77,10 @@ public class QuestionViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		try {
 		model = Main.getQuizModel();
 		question = model.getActiveQuestion();
-		model.textToSpeech(question.toString());
+		//model.textToSpeech(question.toString());
 		
 		if (question.isPractice()) {
 			questionLabel.setText(question.getPrompt());
@@ -87,6 +88,9 @@ public class QuestionViewController implements Initializable {
 		} else {
 			questionLabel.setText("");
 			attempLabel.setText("");
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	

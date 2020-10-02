@@ -48,8 +48,9 @@ public class QuizModel {
 	 */
 	public QuizModel() {
 		
+		System.out.println("Quiz Model init");
 		db = new SQLiteDB();
-		tts = new Festival();
+		//tts = new Festival();
 		
 		try {
 			db.getConnection();

@@ -1,10 +1,15 @@
 package quinzical.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,10 +19,20 @@ import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.util.Duration;
 import quinzical.Main;
 import quinzical.model.Category;
 import quinzical.model.Question;
@@ -32,8 +47,7 @@ import quinzical.model.QuizModel;
 public class CategorySelectViewController implements Initializable {
 	private QuizModel model;
 
-	@FXML private Label questionLabel;
-	@FXML private Label remainingQuestion;
+	@FXML private BorderPane borderPane;
 	@FXML private GridPane centerGridPane;
 	
 	/**
@@ -53,8 +67,6 @@ public class CategorySelectViewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		model = Main.getQuizModel();
 		List<Category> cats = model.getAllCategorywithoutQuestion();
-		remainingQuestion.setText("");
-		
 		
 		
 		// populate row constrain for each row
@@ -70,20 +82,22 @@ public class CategorySelectViewController implements Initializable {
 			
 		}
 		
+		// background image 
+		BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
+
+		
 		
 		// populate button in each row and col
 		int col = 0;
 		int i = 0;
 		for (Category category : cats) {
-			
-//			// set constrain for the following col
-//			centerGridPane.getColumnConstraints()
-//					.add(new ColumnConstraints(-1, -1, -1, Priority.ALWAYS, HPos.CENTER, false));
 
+
+			// Category button 
 			Button button = new Button(category.getTitle());
 			button.setPrefSize(150, 25);
 			
-			// category button
+			// ON ACTION
 			button.setOnAction(new EventHandler<ActionEvent>() {
 				private int catID = category.getCategoryID();
 				@Override
@@ -92,6 +106,49 @@ public class CategorySelectViewController implements Initializable {
 					ScreenController.goQuestion(getClass(), event);
 				}
 			});
+			
+			// ON HOVER
+			button.addEventHandler(MouseEvent.MOUSE_ENTERED,
+			        new EventHandler<MouseEvent>() {
+			          @Override
+			          public void handle(MouseEvent e) {
+			        	  
+			        	  File file = new File("src/quinzical/view/resource/background/"+ category.getCategoryID()+".jpg");
+			        	  Image image1 = new Image(file.toURI().toString());
+							
+					    borderPane.setBackground(new Background(new BackgroundImage(image1,
+					            BackgroundRepeat.NO_REPEAT,
+					            BackgroundRepeat.NO_REPEAT,
+					            BackgroundPosition.CENTER,
+					            bSize)));
+			        	  
+//			        	  final Animation animation = new Transition() {
+//
+//			                  {
+//			                      setCycleDuration(Duration.millis(1000));
+//			                      setInterpolator(Interpolator.EASE_OUT);
+//			                  }
+//
+//			                  @Override
+//			                  protected void interpolate(double frac) {
+//						            File file = new File("src/quinzical/view/resource/background/"+ category.getCategoryID()+".jpg");
+//									Image image1 = new Image(file.toURI().toString());
+//									ImageView im = new ImageView(image1);
+//									
+//							    borderPane.setBackground(new Background(new BackgroundImage(image1,
+//							            BackgroundRepeat.NO_REPEAT,
+//							            BackgroundRepeat.NO_REPEAT,
+//							            BackgroundPosition.CENTER,
+//							            bSize)));
+//							    		System.out.println(frac);
+//									borderPane.setStyle("-fx-opacity: " + frac);
+//			                  }
+//			              };
+//			              animation.play();
+			           
+			          }
+			        });
+				
 			
 			//System.out.println(category.getTitle() + " i = " + i + ", j = " + col);
 			centerGridPane.add(button, col, i);
