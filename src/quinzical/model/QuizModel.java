@@ -107,7 +107,7 @@ public class QuizModel {
 		
 		Question question = _currentSession.getQuestionById(qid);
 		question.setAttempted(true);
-		_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() - 1);
+		_currentSession.incrementRemainingQuestion(-1);
 		if (validate(input, question)) {
 			_currentSession.addWinnings(question.getScore());
 			return true;
@@ -163,11 +163,11 @@ public class QuizModel {
 	 * questions in the category and count the attempted function.
 	 */
 	public void updateRemainingQuestion() {
-		_currentSession.setRemainingQuestoin(0);
+		_currentSession.setRemainingQuestion(0);
 		for (Category cat : _currentSession.getCategoryList()) {
 			for (Question question : cat.getQuestions()) {
 				if (!question.isAttempted()) {
-					_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() + 1);
+					_currentSession.incrementRemainingQuestion(1);
 				}
 			}
 		}
@@ -220,11 +220,11 @@ public class QuizModel {
 	 */
 	public void reset() {
 		_currentSession.reset();
-		_currentSession.setRemainingQuestoin(0);
+		_currentSession.setRemainingQuestion(0);
 		for (Category cat : _currentSession.getCategoryList()) {
 			for (Question question : cat.getQuestions()) {
 				question.setAttempted(false);
-				_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() + 1);
+				_currentSession.incrementRemainingQuestion(1);
 			}
 		}
 	}
@@ -340,15 +340,9 @@ public class QuizModel {
 		return db.getAllCategory();
 	}
 
-	public void setActiveQuestion(int id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public int getPracticeAttemptLeft() {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public Session getSession() {
+		return _currentSession;
 	}
 
 
@@ -360,17 +354,6 @@ public class QuizModel {
 		}
 		
 	}
-
-//
-//	public GameMode getGameMode() {
-//		return gameMode;
-//	}
-//
-//
-//	public void setGameMode(GameMode gameMode) {
-//		this.gameMode = gameMode;
-//	}
-
 
 
 }

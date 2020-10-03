@@ -75,7 +75,9 @@ public class Session {
 		for (Category cat: category) {
 			for (Question question : cat.getQuestions()) {
 				questionDic.put(question.getID(), question);
-				_remainingQuestion++;
+				if (!question.isAttempted()) {
+					_remainingQuestion++;
+				}
 			}
 		}
 	}
@@ -142,6 +144,13 @@ public class Session {
 	}
 	
 	/**
+	 * Increment the remaining question by the input number
+	 * @param num
+	 */
+	public void incrementRemainingQuestion(int num) {
+		_remainingQuestion += num;
+	}
+	/**
 	 * Get Method
 	 * @return the current remainingQuesiion of the session
 	 */
@@ -153,7 +162,7 @@ public class Session {
 	 * Set Method, set the current remaining question of the session
 	 * @param num
 	 */
-	public void setRemainingQuestoin(int num) {
+	public void setRemainingQuestion(int num) {
 		_remainingQuestion = num;
 	}
 	

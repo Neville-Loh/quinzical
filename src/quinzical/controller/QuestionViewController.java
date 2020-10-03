@@ -95,6 +95,7 @@ public class QuestionViewController implements Initializable {
 	@FXML
 	public void dontKnowButton(ActionEvent event) throws IOException {
 		question.setAttempted(true);
+		model.getSession().incrementRemainingQuestion(-1);
 		goAnswerPage(false, event);
 	}
 

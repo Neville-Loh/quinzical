@@ -151,7 +151,7 @@ public class SQLiteDB implements QuinzicalDB{
 			Session session = new Session(user);
 			session.setSessionID(session_id);
 			session.setWinnings(score); 
-			session.setRemainingQuestoin(remaining_question);
+			session.setRemainingQuestion(remaining_question);
 			session.setIsFinished(false);
 			session.setStartTime(startTime);
 			session.setFinishTime(FinishTime);
