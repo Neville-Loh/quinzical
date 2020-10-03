@@ -7,9 +7,9 @@ public class testQuizModel {
 	QuizModel model;
 	
 	public testQuizModel(){
-		model = new QuizModel();{
+		model = QuizModel.getModel();
 			
-		}
+		
 	}
 	
 	
@@ -54,7 +54,7 @@ public class testQuizModel {
 		// game mode start
 		model.createNewSession();
 		int qid = 14;
-		model.setActiveQuestion(qid);
+		//model.setActiveQuestion(qid);
 		boolean result = model.answerQuestion(qid, "someinput");
 		System.out.println("The input is :" + result +
 				"Winning after answered a question:" +model.getWinning());

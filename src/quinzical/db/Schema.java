@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class SQLiteSchema {
+public class Schema {
 	
 	private static final int USERNAME_CHAR_LIMIT = 20;
 	private static final int CATEGORYNAME_CHAR_LIMIT = 50;
@@ -119,6 +119,7 @@ public class SQLiteSchema {
 					+ "session_id INT,"
 					+ "question_id INT,"
 					+ "isAttempted boolean, "
+					+ "question_score INT,"
 					+ "primary key(session_id, question_id),"
 					+ "FOREIGN KEY (session_id) REFERENCES session(session_id) ON DELETE CASCADE,"
 					+ "FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE);"

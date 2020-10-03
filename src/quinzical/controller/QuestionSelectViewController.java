@@ -52,14 +52,10 @@ public class QuestionSelectViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		System.out.println("init reached");
-		
+		try {
 		model = Main.getQuizModel();
 		List<Category> cats = model.getCategoryList();
 		remainingQuestion.setText(Integer.toString(model.getRemainingQuestionCount()));
-		
-		
 		
 		// populate row constrain for each row
 		if (cats.get(0) != null) {
@@ -69,17 +65,17 @@ public class QuestionSelectViewController implements Initializable {
 			}
 		}
 		
-		
-		// populate button in each row and col
+		// populate button in each row and column
 		int col = 0;
 		int row;
 		for (Category category : cats) {
 			row = 1;
 			
-			// set constrain for the following col
+			// set constraints for the following column
 			centerGridPane.getColumnConstraints()
 					.add(new ColumnConstraints(-1, -1, -1, Priority.ALWAYS, HPos.CENTER, false));
-
+			
+			// setting button for category
 			Label label = new Label(category.getTitle());
 			centerGridPane.add(label, col, 0);
 			Button button = null;
@@ -101,7 +97,7 @@ public class QuestionSelectViewController implements Initializable {
 						}
 					});
 					
-					// Set active question if it is the non-attempted quesion with the lower scroe
+					// Set active question if it is the non-attempted question with the lower score
 					if (i == questionList.size() - 1 || questionList.get(i+1).isAttempted()) {
 						button.setDisable(false);
 					} else {
@@ -115,6 +111,9 @@ public class QuestionSelectViewController implements Initializable {
 			}
 
 			col++;
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}

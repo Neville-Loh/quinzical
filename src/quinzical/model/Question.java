@@ -134,5 +134,14 @@ public class Question {
 		this._isPractice = isPractice;
 	}
 	
+	
+	/**
+	 * Utility function to print all question in a question set 
+	 */
+	public void print() {
+		System.out.printf("Id: %d, Score: %s, isPractice = %s, attempted = %s, prompt: %s , ans: %s%n", 
+				this.getID(), String.valueOf(this.getScore()).toString()
+		, ""+this.isPractice(), ""+this.isAttempted(), this.toString(), this.getAnswer());
+	}
 
 }

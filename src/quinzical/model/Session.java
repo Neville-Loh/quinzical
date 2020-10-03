@@ -75,7 +75,9 @@ public class Session {
 		for (Category cat: category) {
 			for (Question question : cat.getQuestions()) {
 				questionDic.put(question.getID(), question);
-				_remainingQuestion++;
+				if (!question.isAttempted()) {
+					_remainingQuestion++;
+				}
 			}
 		}
 	}
@@ -118,7 +120,8 @@ public class Session {
 		if (_ID == -1) {
 			_ID = id;
 		} else {
-			throw new IllegalArgumentException("Id " + _ID + "already exist for sesssion: " + _user.getName());
+			throw new IllegalArgumentException("Id " + _ID + " already exist for sesssion: " + 
+					_user.getName() + ". Cannot be set to id " + id +".\n");
 		}
 
 	}
@@ -141,6 +144,13 @@ public class Session {
 	}
 	
 	/**
+	 * Increment the remaining question by the input number
+	 * @param num
+	 */
+	public void incrementRemainingQuestion(int num) {
+		_remainingQuestion += num;
+	}
+	/**
 	 * Get Method
 	 * @return the current remainingQuesiion of the session
 	 */
@@ -152,7 +162,7 @@ public class Session {
 	 * Set Method, set the current remaining question of the session
 	 * @param num
 	 */
-	public void setRemainingQuestoin(int num) {
+	public void setRemainingQuestion(int num) {
 		_remainingQuestion = num;
 	}
 	
@@ -245,6 +255,24 @@ public class Session {
 	
 	public void setIsFinished(boolean bool) {
 		_isFinished = bool;
+	}
+	
+	public void print() {
+		System.out.printf(
+				"session_id: %d, user_id: %d, score: %d, remaining_question: %d%n"
+				+ "start_time: %s, finished_time: %s %n", 
+				this.getSessionID(), this.getUser().getUserID(), this.getWinnings(), 
+				this.getRemainingQuestion(), this.getStartTime().toString(), 
+				String.valueOf(this.getFinishTime()).toString());
+	}
+	
+	public void printCategoryList() {
+		for (Category cat : _cats) {
+			System.out.println(cat.getTitle() + " , id : " + cat.getCategoryID());
+			for (Question question : cat.getQuestions()) {
+				question.print();
+			}
+		}
 	}
 
 //	public void setActiveQuestion(Question question) {

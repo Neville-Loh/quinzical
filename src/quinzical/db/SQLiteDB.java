@@ -55,11 +55,11 @@ public class SQLiteDB implements QuinzicalDB{
 		if( !hasData ) {
 			hasData = true;
 			// create all the table
-			SQLiteSchema.createUserTable(conn);
-			SQLiteSchema.createCategoryTable(conn);
-			boolean init = SQLiteSchema.createQuestionTable(conn);
-			SQLiteSchema.createSessionTable(conn);
-			SQLiteSchema.createSessionQuestionsTable(conn);
+			Schema.createUserTable(conn);
+			Schema.createCategoryTable(conn);
+			boolean init = Schema.createQuestionTable(conn);
+			Schema.createSessionTable(conn);
+			Schema.createSessionQuestionsTable(conn);
 			
 			
 			if (init) {
@@ -128,7 +128,6 @@ public class SQLiteDB implements QuinzicalDB{
 	 */
 	@Override
 	public Session getUserLastestSession(User user) {
-		
 		int userId = user.getUserID();
 		String statement = "SELECT * FROM session WHERE user_id = " + userId + " AND  isFinished = false;";
 		PreparedStatement prep = null;
@@ -136,6 +135,9 @@ public class SQLiteDB implements QuinzicalDB{
 			prep = conn.prepareStatement(statement);
 			ResultSet res = prep.executeQuery();
 			
+			if (!res.next()){
+				return null;
+			}
 			// get all value from result set
 			int session_id = res.getInt(1);
 			int user_id = res.getInt(2);
@@ -149,14 +151,15 @@ public class SQLiteDB implements QuinzicalDB{
 			Session session = new Session(user);
 			session.setSessionID(session_id);
 			session.setWinnings(score); 
-			session.setRemainingQuestoin(remaining_question);
+			session.setRemainingQuestion(remaining_question);
 			session.setIsFinished(false);
 			session.setStartTime(startTime);
 			session.setFinishTime(FinishTime);
 			
 			
 			// select all question with session id
-			statement = "SELECT * FROM session_questions WHERE session_id = "+ session_id+";";
+			statement = "SELECT * FROM session_questions WHERE session_id = "+ session_id +
+					" ORDER by question_score DESC;";
 			prep = conn.prepareStatement(statement);
 			res = prep.executeQuery();
 			
@@ -164,11 +167,13 @@ public class SQLiteDB implements QuinzicalDB{
 			ArrayList<Category> categoryList = new ArrayList<Category>();
 			ResultSet resQuestion;
 			PreparedStatement prep2;
-			
 			while( res.next() ) {
 				
 				// select the question with question id
 				int qid = res.getInt(2);
+				boolean isAttempt = res.getBoolean(3);
+				int qScore = res.getInt(4);
+				
 				prep2 = conn.prepareStatement("SELECT * FROM question WHERE question_id = "+ qid +";");
 				resQuestion = prep2.executeQuery();
 				
@@ -179,6 +184,8 @@ public class SQLiteDB implements QuinzicalDB{
 				int category_id = resQuestion.getInt(5);
 				Question question = new Question(prompt, answer, answer_prefix);
 				question.setID(qid);
+				question.setAttempted(isAttempt);
+				question.setScore(qScore);
 				
 				// if category already exist question to it
 				if (categoryIDs.contains(category_id)){
@@ -210,39 +217,63 @@ public class SQLiteDB implements QuinzicalDB{
 		try {
 			// saving all data related to the session
 			prep = conn.prepareStatement("REPLACE INTO session"
-					+ "(user_id, score, remaining_question, isFinished, start_time, finish_time) "
-					+ "values(?,?,?,?,?,?);");
-			prep.setInt(1, user.getUserID());
-			prep.setInt(2, session.getWinnings());
-			prep.setInt(3, session.getRemainingQuestion());
-			prep.setBoolean(4, session.isFinished());
-			prep.setTimestamp(5, session.getStartTime());
-			prep.setTimestamp(6, session.getFinishTime());
+					+ "(session_id,user_id, score, remaining_question, isFinished, start_time, finish_time) "
+					+ "values(?,?,?,?,?,?,?);");
+			
+			int id = session.getSessionID();
+			if (id == -1) {
+			} else {
+				prep.setInt(1, id);
+				System.out.println(id);
+			}
+			prep.setInt(2, user.getUserID());
+			prep.setInt(3, session.getWinnings());
+			prep.setInt(4, session.getRemainingQuestion());
+			prep.setBoolean(5, session.isFinished());
+			prep.setTimestamp(6, session.getStartTime());
+			prep.setTimestamp(7, session.getFinishTime());
 			prep.execute();
 			
 			// assign a id to input object if successful
 			try (ResultSet generatedKeys = prep.getGeneratedKeys()) {
 	            if (generatedKeys.next()) {
 	            	int sessionId = generatedKeys.getInt(1);
+	            	
+	            	if (session.getSessionID() == -1) {
 	                session.setSessionID(sessionId);
+	            	}
 	                
 		            // saving each question in database
 		            List<Category> cats = session.getCategoryList();
 		            for (Category cat : cats) {
 		            	for (Question question : cat.getQuestions()) {
 		            		prep = conn.prepareStatement("REPLACE INTO session_questions("
-		            				+ "session_id, question_id, isAttempted) values(?,?,?);");
+		            				+ "session_id, question_id, isAttempted, question_score) values(?,?,?,?);");
 		            		prep.setInt(1, sessionId);
 		            		prep.setInt(2, question.getID());
 		            		prep.setBoolean(3, question.isAttempted());
+		            		prep.setInt(4, question.getScore());
 		            		prep.execute();
 		            	}
 		            }
 	            } else {
-	                throw new SQLException("Creating session failed, no ID obtained.");
+//	            	int sessionId = id;
+//	                session.setSessionID(sessionId);
+//	                
+//		            // saving each question in database
+//		            List<Category> cats = session.getCategoryList();
+//		            for (Category cat : cats) {
+//		            	for (Question question : cat.getQuestions()) {
+//		            		prep = conn.prepareStatement("REPLACE INTO session_questions("
+//		            				+ "session_id, question_id, isAttempted, question_score) values(?,?,?,?);");
+//		            		prep.setInt(1, sessionId);
+//		            		prep.setInt(2, question.getID());
+//		            		prep.setBoolean(3, question.isAttempted());
+//		            		prep.setInt(4, question.getScore());
+//		            		prep.execute();
+//		            	}
+//		            }
 	            }
-	            
-	            
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -417,9 +448,6 @@ public class SQLiteDB implements QuinzicalDB{
 			ResultSet rs = prep.executeQuery();
 			Question question = new Question(rs.getString(2), rs.getString(3), rs.getString(4));
 			question.setID(rs.getInt(1));
-			
-			//System.out.printf("rs 2 = %s, rs 3 = %s, rs4 =, %s%n", rs.getString(2), rs.getString(3), rs.getString(4));
-			
 			return question;
 			
 		} catch (SQLException e) {
