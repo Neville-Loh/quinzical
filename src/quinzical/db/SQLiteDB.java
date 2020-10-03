@@ -55,11 +55,11 @@ public class SQLiteDB implements QuinzicalDB{
 		if( !hasData ) {
 			hasData = true;
 			// create all the table
-			SQLiteSchema.createUserTable(conn);
-			SQLiteSchema.createCategoryTable(conn);
-			boolean init = SQLiteSchema.createQuestionTable(conn);
-			SQLiteSchema.createSessionTable(conn);
-			SQLiteSchema.createSessionQuestionsTable(conn);
+			Schema.createUserTable(conn);
+			Schema.createCategoryTable(conn);
+			boolean init = Schema.createQuestionTable(conn);
+			Schema.createSessionTable(conn);
+			Schema.createSessionQuestionsTable(conn);
 			
 			
 			if (init) {

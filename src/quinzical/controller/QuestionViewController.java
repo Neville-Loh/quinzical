@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -16,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import quinzical.Main;
+import quinzical.controller.component.ComponentHelper;
 import quinzical.model.PracticeQuestion;
 import quinzical.model.Question;
 import quinzical.model.QuizModel;
@@ -34,6 +38,8 @@ public class QuestionViewController implements Initializable {
 	@FXML private Label questionLabel;
 	@FXML private TextField textfield;
 	@FXML private Label attempLabel;
+	@FXML private JFXHamburger hamburger;
+	@FXML private JFXDrawer drawer;
 	
 	/**
 	 * Navigate to main menu
@@ -77,6 +83,8 @@ public class QuestionViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		//ComponentHelper.initDrawer(getClass(), drawer, hamburger);
+		
 		try {
 		model = Main.getQuizModel();
 		question = model.getActiveQuestion();

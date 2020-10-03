@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class SQLiteSchema {
+public class Schema {
 	
 	private static final int USERNAME_CHAR_LIMIT = 20;
 	private static final int CATEGORYNAME_CHAR_LIMIT = 50;
