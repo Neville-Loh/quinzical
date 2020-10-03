@@ -46,7 +46,7 @@
                   </TextField>
                </children>
             </VBox>
-            <JFXDrawer fx:id="drawer" prefHeight="547.0" prefWidth="177.0" StackPane.alignment="CENTER_LEFT" />
+            <JFXDrawer fx:id="drawer" prefHeight="547.0" prefWidth="177.0" StackPane.alignment="CENTER_RIGHT" />
          </children>
       </StackPane>
    </center>

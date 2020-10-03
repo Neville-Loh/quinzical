@@ -83,7 +83,7 @@ public class QuestionViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		//ComponentHelper.initDrawer(getClass(), drawer, hamburger);
+		ComponentHelper.initDrawer(getClass(), drawer, hamburger);
 		
 		try {
 		model = Main.getQuizModel();

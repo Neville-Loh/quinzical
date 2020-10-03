@@ -3,6 +3,8 @@ package quinzical;
 import java.io.File;
 import java.io.IOException;
 
+import com.jfoenix.controls.JFXHamburger;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -11,16 +13,7 @@ import quinzical.model.QuizModel;
 import quinzical.util.Helper;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+
 
 /**
  * Main class for the Jeopardy application. THe application is built with Javafx
@@ -50,8 +43,8 @@ public class Main extends Application {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-		System.out.print("ass");
+		JFXHamburger ass = new JFXHamburger();
+		System.out.println(ass.isCache());
 		
 		////////////////////////////////// TESTING //////////////////////////////////
 //		primaryStage.setTitle("Hello World");

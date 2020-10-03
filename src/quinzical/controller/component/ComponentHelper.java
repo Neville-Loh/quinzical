@@ -1,5 +1,6 @@
 package quinzical.controller.component;
 
+
 import java.io.IOException;
 
 import com.jfoenix.controls.JFXDrawer;
@@ -14,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -27,10 +29,17 @@ public class ComponentHelper {
 			HamburgerSlideCloseTransition task = new HamburgerSlideCloseTransition(hamburger);
 			
 			task.setRate(-1);
-			hamburger.addEventHandler(EventType.ROOT, new EventHandler<Event>() {
+			hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
 				@Override
 				public void handle(Event event) {
-					System.out.println("ass");
+					System.out.println("drawing calledrff");
+					task.setRate(task.getRate() * -1);
+					task.play();
+					if(drawer.isOpened()) {
+						drawer.close();
+					} else {
+						drawer.open();
+					}
 				}
 				
 			});
