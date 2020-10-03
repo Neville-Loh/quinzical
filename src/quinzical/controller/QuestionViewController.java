@@ -19,7 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import quinzical.Main;
-import quinzical.controller.component.ComponentHelper;
+import quinzical.controller.component.DrawerController;
 import quinzical.model.PracticeQuestion;
 import quinzical.model.Question;
 import quinzical.model.QuizModel;
@@ -83,7 +83,7 @@ public class QuestionViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ComponentHelper.initDrawer(getClass(), drawer, hamburger);
+		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		
 		try {
 		model = Main.getQuizModel();
