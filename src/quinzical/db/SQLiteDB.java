@@ -38,6 +38,8 @@ public class SQLiteDB implements QuinzicalDB{
 	 * @throws SQLException
 	 */
 	public void getConnection() throws ClassNotFoundException, SQLException {
+		
+		System.out.println("Db get connection init");
 		Class.forName("org.sqlite.JDBC");
 		SQLiteConfig config = new SQLiteConfig();  
         config.enforceForeignKeys(true);  
@@ -62,6 +64,7 @@ public class SQLiteDB implements QuinzicalDB{
 			
 			if (init) {
 				// populate question database with by reading from text file
+				System.out.println("Initializing questions");
 				QuestionReader rq = new QuestionReader("Quinzical.txt");
 				rq.populateCategoriesAndQuestions(this);
 			}
@@ -322,7 +325,7 @@ public class SQLiteDB implements QuinzicalDB{
 				/*
 				 * the current score is assigned from [100, 500] with 100 increment 
 				 */
-				int score = 100;
+				int score = 500;
 				int increment = 100;
 				
 				while( res.next() ) {
@@ -331,7 +334,7 @@ public class SQLiteDB implements QuinzicalDB{
 					
 					//setting and updating the score
 					q.setScore(score);
-					score += increment;
+					score -= increment;
 					
 					cat.add(q);
 				}

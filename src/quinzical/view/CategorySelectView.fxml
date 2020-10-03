@@ -9,21 +9,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #262d37;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.CategorySelectViewController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #262d37;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.CategorySelectViewController">
    <center>
-      <VBox alignment="CENTER" style="-fx-background-color: #262d37;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
             <GridPane fx:id="centerGridPane" alignment="CENTER" gridLinesVisible="true" minWidth="-Infinity" stylesheets="@css/GameSelect.css">
             </GridPane>
             <HBox alignment="CENTER_RIGHT">
-               <children>
-                  <Label text="Remaining question: " textFill="WHITE" />
-                  <Label fx:id="remainingQuestion" text="00" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="40.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -35,7 +27,7 @@
       </VBox>
    </center>
    <bottom>
-      <HBox alignment="CENTER" style="-fx-background-color: #262d37;" stylesheets="@css/Styles.css" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" stylesheets="@css/Styles.css" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#goMainMenu" text="Main menu">
                <HBox.margin>

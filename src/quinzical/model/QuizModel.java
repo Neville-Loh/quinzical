@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import quinzical.db.ObjectDB;
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
 import quinzical.util.Festival;
@@ -33,10 +32,7 @@ public class QuizModel {
 	private Question _currentQuestion;
 //	private GameMode gameMode = GameMode.normal;
 //	
-//	enum GameMode{
-//		practice,
-//		normal
-//	}
+
 
 	
 	
@@ -48,8 +44,9 @@ public class QuizModel {
 	 */
 	public QuizModel() {
 		
+		System.out.println("Quiz Model init");
 		db = new SQLiteDB();
-		tts = new Festival();
+		//tts = new Festival();
 		
 		try {
 			db.getConnection();
@@ -173,16 +170,16 @@ public class QuizModel {
 	 * The file is saved as an object which mimic a database
 	 */
 	public void save() {
-		ObjectDB db = new ObjectDB();
-		db.setWinning(_currentSession.getWinnings());
-		HashMap<String, Boolean> isAttemptedMap = new HashMap<String, Boolean>();
-		for (Category cat : _currentSession.getCategoryList()) {
-			for (Question question : cat.getQuestions()) {
-				isAttemptedMap.put(question.toString(), question.isAttempted());
-			}
-		}
-		db.setIsAttemptedMap(isAttemptedMap);
-		FileHandler.saveDB(db);
+//		ObjectDB db = new ObjectDB();
+//		db.setWinning(_currentSession.getWinnings());
+//		HashMap<String, Boolean> isAttemptedMap = new HashMap<String, Boolean>();
+//		for (Category cat : _currentSession.getCategoryList()) {
+//			for (Question question : cat.getQuestions()) {
+//				isAttemptedMap.put(question.toString(), question.isAttempted());
+//			}
+//		}
+//		db.setIsAttemptedMap(isAttemptedMap);
+//		FileHandler.saveDB(db);
 	}
 
 	/**
@@ -190,20 +187,20 @@ public class QuizModel {
 	 * system directory. The object mimic a database
 	 */
 	public void load() {
-		ObjectDB db = FileHandler.loadDB();
-		_currentSession.setWinnings(db.getWinning());
-		Map<String, Boolean> isAttemptedMap = db.getIsAttemptedMap();
-
-		// TODO handle exception
-		for (Category cat : _currentSession.getCategoryList()) {
-			for (Question question : cat.getQuestions()) {
-				if (isAttemptedMap.get(question.toString()) == true) {
-					question.setAttempted(true);
-				}
-			}
-
-		}
-		updateRemainingQuestion();
+//		ObjectDB db = FileHandler.loadDB();
+//		_currentSession.setWinnings(db.getWinning());
+//		Map<String, Boolean> isAttemptedMap = db.getIsAttemptedMap();
+//
+//		// TODO handle exception
+//		for (Category cat : _currentSession.getCategoryList()) {
+//			for (Question question : cat.getQuestions()) {
+//				if (isAttemptedMap.get(question.toString()) == true) {
+//					question.setAttempted(true);
+//				}
+//			}
+//
+//		}
+//		updateRemainingQuestion();
 	}
 
 	/**
@@ -226,7 +223,8 @@ public class QuizModel {
 	 * @param text to be turned into speach
 	 */
 	public void textToSpeech(String text) {
-		tts.start(text);
+		//tts.start(text);
+		System.out.println("TTS called: " + text);
 	}
 
 	/**

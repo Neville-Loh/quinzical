@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import quinzical.db.ObjectDB;
 import quinzical.model.Category;
 import quinzical.model.Question;
 
@@ -73,36 +72,36 @@ public class FileHandler {
 		return result;
 	}
 	
-	/**
-	 * Save the database object as the save_file name at the system location.
-	 * @param db
-	 */
-	public static void saveDB(ObjectDB db) {
-		// Save Object
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_FILENAME))) {
-			oos.writeObject(db);
-			System.out.println("DB has been saved");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-	
-	/**
-	 * Load the database object as the save_file name at the system location.
-	 * @param db
-	 */
-	public static ObjectDB loadDB() {
-		ObjectDB db = null;
-		// Read Object
-		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SAVE_FILENAME))) {
-			db = (ObjectDB) ois.readObject();
-		} catch (Exception e) {
-			System.out.println("DB loading error");
-			e.printStackTrace();
-		}
-		return db;
-	}
+//	/**
+//	 * Save the database object as the save_file name at the system location.
+//	 * @param db
+//	 */
+//	public static void saveDB(ObjectDB db) {
+//		// Save Object
+//		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_FILENAME))) {
+//			oos.writeObject(db);
+//			System.out.println("DB has been saved");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
+//	
+//	/**
+//	 * Load the database object as the save_file name at the system location.
+//	 * @param db
+//	 */
+//	public static ObjectDB loadDB() {
+//		ObjectDB db = null;
+//		// Read Object
+//		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SAVE_FILENAME))) {
+//			db = (ObjectDB) ois.readObject();
+//		} catch (Exception e) {
+//			System.out.println("DB loading error");
+//			e.printStackTrace();
+//		}
+//		return db;
+//	}
 	
 	/**
 	 * Return true if the file name exist, else return false,
