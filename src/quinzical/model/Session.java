@@ -118,7 +118,8 @@ public class Session {
 		if (_ID == -1) {
 			_ID = id;
 		} else {
-			throw new IllegalArgumentException("Id " + _ID + "already exist for sesssion: " + _user.getName());
+			throw new IllegalArgumentException("Id " + _ID + " already exist for sesssion: " + 
+					_user.getName() + ". Cannot be set to id " + id +".\n");
 		}
 
 	}
@@ -245,6 +246,24 @@ public class Session {
 	
 	public void setIsFinished(boolean bool) {
 		_isFinished = bool;
+	}
+	
+	public void print() {
+		System.out.printf(
+				"session_id: %d, user_id: %d, score: %d, remaining_question: %d%n"
+				+ "start_time: %s, finished_time: %s %n", 
+				this.getSessionID(), this.getUser().getUserID(), this.getWinnings(), 
+				this.getRemainingQuestion(), this.getStartTime().toString(), 
+				String.valueOf(this.getFinishTime()).toString());
+	}
+	
+	public void printCategoryList() {
+		for (Category cat : _cats) {
+			System.out.println(cat.getTitle() + " , id : " + cat.getCategoryID());
+			for (Question question : cat.getQuestions()) {
+				question.print();
+			}
+		}
 	}
 
 //	public void setActiveQuestion(Question question) {

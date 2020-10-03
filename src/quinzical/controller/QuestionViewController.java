@@ -24,9 +24,11 @@ import quinzical.model.PracticeQuestion;
 import quinzical.model.Question;
 import quinzical.model.QuizModel;
 import test.testSQLiteDB;
+
 /**
- * Controller class for question view at QuestionView.fxml.
- * Display are question and text field
+ * Controller class for question view at QuestionView.fxml. Display are question
+ * and text field
+ * 
  * @author Neville
  *
  */
@@ -34,15 +36,21 @@ public class QuestionViewController implements Initializable {
 
 	private QuizModel model;
 	private Question question;
-	
-	@FXML private Label questionLabel;
-	@FXML private TextField textfield;
-	@FXML private Label attempLabel;
-	@FXML private JFXHamburger hamburger;
-	@FXML private JFXDrawer drawer;
-	
+
+	@FXML
+	private Label questionLabel;
+	@FXML
+	private TextField textfield;
+	@FXML
+	private Label attempLabel;
+	@FXML
+	private JFXHamburger hamburger;
+	@FXML
+	private JFXDrawer drawer;
+
 	/**
 	 * Navigate to main menu
+	 * 
 	 * @param event
 	 */
 	@FXML
@@ -53,11 +61,12 @@ public class QuestionViewController implements Initializable {
 
 	/**
 	 * submit the text field as user answer
+	 * 
 	 * @param event
 	 */
 	@FXML
 	public void centerButton(ActionEvent event) {
-		if (question.isPractice()){
+		if (question.isPractice()) {
 			submitPracticeAnswer(event);
 		} else {
 			submitAnswer(event);
@@ -66,94 +75,91 @@ public class QuestionViewController implements Initializable {
 
 	/**
 	 * submit the text field as user answer
+	 * 
 	 * @param event
 	 */
 	@FXML
 	public void onEnter(ActionEvent event) throws IOException {
-		if (question.isPractice()){
+		if (question.isPractice()) {
 			submitPracticeAnswer(event);
 		} else {
 			submitAnswer(event);
 		}
 	}
 
+	@FXML
+	public void playBackButton(ActionEvent event) throws IOException {
+		System.out.println("play back button clicked");
+	}
+
+	@FXML
+	public void dontKnowButton(ActionEvent event) throws IOException {
+		question.setAttempted(true);
+		goAnswerPage(false, event);
+	}
+
 	/**
-	 *  Initialize the current page, using the active question from the model as
-	 *  a label.
+	 * Initialize the current page, using the active question from the model as a
+	 * label.
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
-		
+
 		try {
-		model = Main.getQuizModel();
-		question = model.getActiveQuestion();
-		model.textToSpeech(question.toString());
-		
-		if (question.isPractice()) {
-			questionLabel.setText(question.getPrompt());
-			attempLabel.setText("Attempt Left: " + ((PracticeQuestion) question).getAttemptLeft());
-		} else {
-			questionLabel.setText("");
-			attempLabel.setText("");
-		}
+			model = Main.getQuizModel();
+			question = model.getActiveQuestion();
+			model.textToSpeech(question.toString());
+
+			if (question.isPractice()) {
+				questionLabel.setText(question.getPrompt());
+				attempLabel.setText("Attempt Left: " + ((PracticeQuestion) question).getAttemptLeft());
+			} else {
+				questionLabel.setText("");
+				attempLabel.setText("");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	/**
 	 * Submit answer in the text field to check for correctness within model.
-	 * depending on if the answer is correct or not, the next screen initialize
-	 * will be different.
+	 * depending on if the answer is correct or not, the next screen initialize will
+	 * be different.
+	 * 
 	 * @param event
 	 */
 	private void submitAnswer(ActionEvent event) {
 		String input = textfield.getText();
-		boolean isCorrect = model.answerQuestion(question.getID(), input); //#TODO change this
-
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/quinzical/view/AnswerResultView.fxml"));
-			Parent parent = loader.load();
-			Scene scene = new Scene(parent);
-			AnswerResultViewController controller = loader.getController();
-
-			// Initialize different page according to the user answer
-			if (isCorrect) {
-				controller.validAnswerInit(question);
-			} else {
-				controller.invalidAnswerInit(question);
-			}
-			
-			// switch to next screen
-			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window.setScene(scene);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		boolean isCorrect = model.answerQuestion(question.getID(), input); // #TODO change this
+		goAnswerPage(isCorrect, event);
 	}
-	
+
 	/**
 	 * 
 	 * @param event
 	 */
 	private void submitPracticeAnswer(ActionEvent event) {
 		PracticeQuestion pq = (PracticeQuestion) question;
-		
 		String input = textfield.getText();
-		boolean isCorrect = model.answerPracticeQuestion(input); //#TODO change this
+		boolean isCorrect = model.answerPracticeQuestion(input); // #TODO change this
 		attempLabel.setText("Attempt Left: " + pq.getAttemptLeft());
-		if (pq.getAttemptLeft() == 1) {
-			//show hint
-			attempLabel.setText("Attempt Left: " + pq.getAttemptLeft() + 
-					", The answer starts with '" + pq.getAnswer().charAt(0)+"'");
-		}
 		
+		if (pq.getAttemptLeft() == 1) {
+			// show hint
+			attempLabel.setText("Attempt Left: " + pq.getAttemptLeft() + ", The answer starts with '"
+					+ pq.getAnswer().charAt(0) + "'");
+		}
+
 		// Initialize next page if attempt left = 0 or answer is correct
 		if (pq.getAttemptLeft() == 0 || isCorrect) {
+			goAnswerPage(isCorrect, event);
+		}
+	}
+	
+	
+	private void goAnswerPage(boolean isCorrect, ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/quinzical/view/AnswerResultView.fxml"));
@@ -167,14 +173,13 @@ public class QuestionViewController implements Initializable {
 			} else {
 				controller.invalidAnswerInit(question);
 			}
-			
+
 			// switch to next screen
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			window.setScene(scene);
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
 		}
 	}
 

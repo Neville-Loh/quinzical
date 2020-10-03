@@ -7,9 +7,9 @@ public class testQuizModel {
 	QuizModel model;
 	
 	public testQuizModel(){
-		model = new QuizModel();{
+		model = QuizModel.getModel();
 			
-		}
+		
 	}
 	
 	

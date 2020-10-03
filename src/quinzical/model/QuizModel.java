@@ -23,6 +23,8 @@ import test.testSQLiteDB;
  * @author Neville
  */
 public class QuizModel {
+	
+	private static QuizModel model;
 	private User _currentUser;
 	private Session _currentSession;
 	private QuinzicalDB db;
@@ -35,6 +37,18 @@ public class QuizModel {
 
 
 	
+	/**
+	 * Singleton method to return the current model
+	 * @return
+	 */
+	public static QuizModel getModel() {
+		if (model == null){
+			model = new QuizModel();
+			return model;
+		} else {
+			return model;
+		}
+	}
 	
 
 	/**
@@ -42,9 +56,7 @@ public class QuizModel {
 	 * save file in the directory, the model will load it too. If save file does not
 	 * exist, all value will be set to its initial status
 	 */
-	public QuizModel() {
-		
-		System.out.println("Quiz Model init");
+	private QuizModel() {
 		db = new SQLiteDB();
 		//tts = new Festival();
 		
@@ -53,25 +65,21 @@ public class QuizModel {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+//		User one = new User("first");
+//		db.addUser(one);
+//		Session s = new Session(_currentUser);
+//		List<Category> catt = db.getRandomQuestionSet(5, 5);
+//		s.setQuestionSet(catt);
+//		db.addSession(one, s);
+//		
 		
-		_currentUser = new User("default");
+		_currentUser = new User("Default User");
 		_currentUser.setUserId(99);
-		_currentSession = new Session(_currentUser);
-		List<Category> cat = db.getRandomQuestionSet(5, 5);
-		_currentSession.setQuestionSet(cat);
-		//db.getUserSession(1);
 		
-//		_cats = FileHandler.loadCategory();
-//		updateRemainingQuestion();
-//		try {
-//			if (FileHandler.saveFileExist()) {
-//				load();
-//				System.out.println("load file suscessfuly load");
-//			}
-//		} catch (Exception e) {
-//			System.out.println("Loading failed. Maybe trying removing user.save in the working directory");
-//			e.printStackTrace();
-//		}
+		//initSession();
+
+		_currentSession = db.getUserLastestSession(_currentUser);
+
 	}
 	
 	
@@ -170,6 +178,9 @@ public class QuizModel {
 	 * The file is saved as an object which mimic a database
 	 */
 	public void save() {
+		System.out.println("Saving Session...");
+		_currentSession.printCategoryList();
+		db.addSession(_currentUser, _currentSession);
 //		ObjectDB db = new ObjectDB();
 //		db.setWinning(_currentSession.getWinnings());
 //		HashMap<String, Boolean> isAttemptedMap = new HashMap<String, Boolean>();
@@ -338,6 +349,16 @@ public class QuizModel {
 	public int getPracticeAttemptLeft() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+	public void initSession() {
+		if (_currentSession == null) {
+			_currentSession = new Session(_currentUser);
+			List<Category> cat = db.getRandomQuestionSet(5, 5);
+			_currentSession.setQuestionSet(cat);
+		}
+		
 	}
 
 //

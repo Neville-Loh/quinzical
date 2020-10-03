@@ -3,17 +3,46 @@ package quinzical;
 import java.io.File;
 import java.io.IOException;
 
-import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXRippler.RipplerMask;
+import com.jfoenix.controls.JFXRippler.RipplerPos;
+import com.jfoenix.controls.JFXPopup.PopupHPosition;
+import com.jfoenix.controls.JFXPopup.PopupVPosition;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
+import javafx.geometry.Insets;
 import quinzical.model.QuizModel;
 import quinzical.util.Helper;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
+
+
+import com.jfoenix.animation.alert.JFXAlertAnimation;
+import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXDrawer.DrawerDirection;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.scene.CacheHint;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.stage.*;
+import javafx.util.Duration;
 
 /**
  * Main class for the Jeopardy application. THe application is built with Javafx
@@ -32,9 +61,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		// to ensure singleton assignment
-		if (model == null) {
-			model = new QuizModel();
-		}
+		model = QuizModel.getModel();
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Quinzical");
 //		this.primaryStage.setHeight(1024);
@@ -43,55 +70,13 @@ public class Main extends Application {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		JFXHamburger ass = new JFXHamburger();
-		System.out.println(ass.isCache());
 		
-		////////////////////////////////// TESTING //////////////////////////////////
-//		primaryStage.setTitle("Hello World");
-//	    StackPane root = new StackPane();
-//	    Scene scene = new Scene(root, 300, 250);
-//
-//	    File file = new File("src/quinzical/view/resource/background/place.jpg");
-//	    Image image = new Image(file.toURI().toString());
-//	    ImageView iv = new ImageView(image);
-//
-//	    root.getChildren().add(iv);
-//	    primaryStage.setScene(scene);
-//	    primaryStage.show();
+		//////////////// test
 		
-//		BorderPane borderPane = new BorderPane();
-//		
-//	    File file = new File("src/quinzical/view/resource/background/place.jpg");
-//	    Image image1 = new Image(file.toURI().toString());
-//	    //Image image1 = new Image("src/quinzical/view/resource/background/place.jpg");
-//	    Image image2 = new Image("https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.png?v=9c558ec15d8a");
-//
-//	    BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
-//
-//	    Background background2 = new Background(new BackgroundImage(image2,
-//	            BackgroundRepeat.NO_REPEAT,
-//	            BackgroundRepeat.NO_REPEAT,
-//	            BackgroundPosition.CENTER,
-//	            bSize));
-//
-//	    borderPane.setBackground(new Background(new BackgroundImage(image1,
-//	            BackgroundRepeat.NO_REPEAT,
-//	            BackgroundRepeat.NO_REPEAT,
-//	            BackgroundPosition.CENTER,
-//	            bSize)));
-//
-//	    Button btn = new Button("Change Background");
-//	    btn.setOnAction((ActionEvent event) -> {
-//	        borderPane.setBackground(background2);
-//	    });
-//
-//	    borderPane.setCenter(btn);
-//
-//	    Scene scene = new Scene(borderPane, 600, 400);
-//
-//	    primaryStage.setScene(scene);
-//	    primaryStage.show();
-		////////////////////////////////////////////////////////////////////////////////
+
+
+		
+		/////////////////////////////////
 		
 		//#TODO
 		//primaryStage.setOnCloseRequest(Helper.confirmCloseEventHandler);

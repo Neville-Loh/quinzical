@@ -119,6 +119,7 @@ public class Schema {
 					+ "session_id INT,"
 					+ "question_id INT,"
 					+ "isAttempted boolean, "
+					+ "question_score INT,"
 					+ "primary key(session_id, question_id),"
 					+ "FOREIGN KEY (session_id) REFERENCES session(session_id) ON DELETE CASCADE,"
 					+ "FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE);"
