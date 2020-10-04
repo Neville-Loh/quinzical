@@ -31,6 +31,9 @@ public class MainController implements Initializable{
 	@FXML
 	private void showQuestionSelectView(ActionEvent event){
 		model.initSession();
+		if (model.getRemainingQuestionCount() == 0) {
+			model.finishCurrentSession();
+		}
 		ScreenController.goQuestionSelect(getClass(), event);
 	}
 	

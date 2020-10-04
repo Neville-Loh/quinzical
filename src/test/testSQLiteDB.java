@@ -1,15 +1,8 @@
 package test;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.sqlite.core.DB;
-
-import quinzical.db.DbUtils;
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
 
@@ -17,13 +10,19 @@ import quinzical.model.Category;
 import quinzical.model.Question;
 import quinzical.model.Session;
 import quinzical.model.User;
-import quinzical.util.QuestionReader;
 
+/**
+ * Class to test the sql implementation of the quinical database
+ * @author Neville
+ * @version 0.2.2.1
+ */
 public class testSQLiteDB {
 
 	private SQLiteDB db;
 	
-	
+	/**
+	 * Constructor, initial test
+	 */
 	public testSQLiteDB() {
 		//
 		
@@ -55,6 +54,9 @@ public class testSQLiteDB {
 	 * ======================================================================================
 	 */
 	
+	/**
+	 * Test getting all 
+	 */
 	public void testGetAllCategory() {
 		List<Category> cat = db.getAllCategory();
 		printCategorySet(cat);

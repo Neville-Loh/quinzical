@@ -14,6 +14,12 @@ public class Question {
 	private boolean _isAttempted = false;
 	private boolean _isPractice = false;
 
+	/**
+	 * Construct of question
+	 * @param question
+	 * @param ans
+	 * @param score
+	 */
 	public Question(String question, String ans, int score) {
 		_answer = ans;
 		_question = question;
@@ -32,7 +38,11 @@ public class Question {
 		_prefix = prefix;
 	}
 	
-
+	/**
+	 * Constructor of question
+	 * @param question
+	 * @param ans
+	 */
 	public Question(String question, String ans) {
 		_answer = ans;
 		_question = question;

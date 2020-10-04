@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXSlider?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -69,7 +68,6 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="155.0" text="Button" />
       <Label text="Volume">
          <textFill>
             <RadialGradient centerX="0.4662921348314607" centerY="0.9471153846153846" radius="0.3571428571428572">
@@ -106,7 +104,7 @@
             <Insets left="20.0" right="20.0" />
          </VBox.margin>
       </JFXSlider>
-      <Button fx:id="settingButton" mnemonicParsing="false" onAction="#goSetting" prefHeight="41.0" prefWidth="163.0" text="setting" />
-      <JFXButton prefHeight="71.0" prefWidth="158.0" textFill="#ffeeee" />
+      <Button fx:id="settingButton" mnemonicParsing="false" onAction="#goReset" prefHeight="41.0" prefWidth="163.0" text="Reset" />
+      <Button fx:id="settingButton1" mnemonicParsing="false" onAction="#goMainMenu" prefHeight="41.0" prefWidth="163.0" text="Main Manu" />
    </children>
 </VBox>

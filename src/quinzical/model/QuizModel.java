@@ -163,7 +163,6 @@ public class QuizModel {
 	 */
 	public void save() {
 		System.out.println("Saving Session...");
-		_currentSession.printCategoryList();
 		db.addSession(_currentUser, _currentSession);
 	}
 
@@ -245,15 +244,22 @@ public class QuizModel {
 	}
 
 	
-	// -------------------------- New implemented method -------------------------
+	
+	/**
+	 * Select a random practice question in the model.
+	 * @param categoryId
+	 */
 	public void selectRandomPracticeQuestion(int categoryId) {
 		_practiceQuestion = new PracticeQuestion(db.getRandomQuestionFromCategory(categoryId));
-		testSQLiteDB.printQuestion(_practiceQuestion);
 		_currentQuestion = _practiceQuestion;
 		
 	}
 
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public PracticeQuestion getCurrentPracticeQuestion() {
 		return _practiceQuestion;
 	}
@@ -293,26 +299,36 @@ public class QuizModel {
 		
 	}
 
-
+	/**
+	 * create a new Session for the user
+	 * 
+	 */
 	public void createNewSession() {
 		// Creating new session which associate to current user.
 		Session session = new Session(_currentUser);
 		session.setQuestionSet(db.getRandomQuestionSet(5, 5));
 	}
 
-	
+	/**
+	 * Get an empty Category list 
+	 * @return
+	 */
 	public List<Category> getAllCategorywithoutQuestion(){
 		return db.getAllCategory();
 	}
 
-	
+	/**
+	 * Get the current session of the model
+	 * The return reference contain all question that are store in the sesions.
+	 * @return Session object
+	 */
 	public Session getSession() {
 		return _currentSession;
 	}
 
 	
 	/**
-	 * Initialte a new session if the current session is null;
+	 * initiate a new session if the current session is null;
 	 */
 	public void initSession() {
 		if (_currentSession == null) {
@@ -321,6 +337,14 @@ public class QuizModel {
 			_currentSession.setQuestionSet(cat);
 		}
 		
+	}
+	
+	public void finishCurrentSession() {
+		_currentSession.setIsFinished(true);
+		db.addSession(_currentUser, _currentSession);
+		_currentSession = new Session(_currentUser);
+		List<Category> cat = db.getRandomQuestionSet(5, 5);
+		_currentSession.setQuestionSet(cat);
 	}
 
 

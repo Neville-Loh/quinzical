@@ -19,7 +19,8 @@ import quinzical.model.User;
 import quinzical.util.QuestionReader;
 
 /**
- * 
+ * The implementation of the QuinzicalDB class
+ * For detail description @see db.QuinzicalDB.java
  * @author Neville
  *
  */
@@ -36,8 +37,7 @@ public class SQLiteDB implements QuinzicalDB{
 	 * @throws SQLException
 	 */
 	public void getConnection() throws ClassNotFoundException, SQLException {
-		
-		System.out.println("Db get connection init");
+		System.out.println("Connecting the database from current directory...");
 		Class.forName("org.sqlite.JDBC");
 		SQLiteConfig config = new SQLiteConfig();  
         config.enforceForeignKeys(true);  
@@ -62,7 +62,7 @@ public class SQLiteDB implements QuinzicalDB{
 			
 			if (init) {
 				// populate question database with by reading from text file
-				System.out.println("Initializing questions");
+				System.out.println("Initializing questions by reading \"Quinzical.txt\" from current directory");
 				QuestionReader rq = new QuestionReader("Quinzical.txt");
 				rq.populateCategoriesAndQuestions(this);
 			}
@@ -221,7 +221,6 @@ public class SQLiteDB implements QuinzicalDB{
 			if (id == -1) {
 			} else {
 				prep.setInt(1, id);
-				System.out.println(id);
 			}
 			prep.setInt(2, user.getUserID());
 			prep.setInt(3, session.getWinnings());
@@ -373,7 +372,6 @@ public class SQLiteDB implements QuinzicalDB{
 		String statement = "SELECT * FROM category ORDER by RANDOM() LIMIT " + numberofCategory + ";";
 		PreparedStatement prep = null;
 		try {			
-			//System.out.println(statement);
 			prep = conn.prepareStatement(statement);
 			ResultSet res = prep.executeQuery();
 			

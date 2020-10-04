@@ -4,6 +4,7 @@ package quinzical.controller.component;
 import java.io.IOException;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXDrawer;
@@ -20,11 +21,16 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import quinzical.controller.ScreenController;
 import quinzical.model.QuizModel;
 
 /**
@@ -50,7 +56,6 @@ public class DrawerController implements Initializable {
 	 */
 	public static void initDrawer(Class<?> controllerClass, JFXDrawer drawer, JFXHamburger hamburger) {
 		try {
-			
 			// Loading Drawer
 			VBox toolbar = FXMLLoader.load(controllerClass.getResource("/quinzical/view/component/ToolBar.fxml"));
 			drawer.setSidePane(toolbar);
@@ -104,13 +109,6 @@ public class DrawerController implements Initializable {
 						}
 						
 					}).start();
-//					if(drawer.isOpened()) {
-//						drawer.close();
-//					} else {
-//						drawer.open();
-//					}
-//					task.setRate(task.getRate() * -1fdsf);
-//					task.play();
 				}
 				
 			});
@@ -122,12 +120,35 @@ public class DrawerController implements Initializable {
 	
 	
 	/**
-	 * Go to the setting menu
+	 * Go to the main menu menu
 	 * @param event
 	 */
 	@FXML
-	private void goSetting(ActionEvent event) {
-		System.out.println("go settisnggsadffff");
+	private void goMainMenu(ActionEvent event) {
+		ScreenController.goMainMenu(getClass(), event);
+	}
+	
+	/**
+	 * reset the game if confirm , then Go to the setting menu
+	 * @param event
+	 */
+	@FXML
+	private void goReset(ActionEvent event) {
+		Alert alert = new Alert(AlertType.CONFIRMATION,
+				"Are you sure you want to reset the game? Your save will be reset to its initial status. This can not be undone.",
+				ButtonType.YES, ButtonType.NO
+			);
+		alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+		alert.setTitle("Reset Confirmation");
+		alert.setHeaderText(null);
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.YES) {
+			model.reset();
+		}
+		else {
+			event.consume();
+		}
+		goMainMenu(event);
 	}
 
 	

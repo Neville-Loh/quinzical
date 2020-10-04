@@ -12,7 +12,7 @@ public class PracticeQuestion extends Question{
 	private boolean showHint;
 	
 	/**
-	 * Constructor, craete a new practice question object
+	 * Constructor, create a new practice question object
 	 * @param question
 	 * @param ans
 	 * @param prefix

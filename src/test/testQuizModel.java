@@ -3,16 +3,27 @@ package test;
 import quinzical.model.PracticeQuestion;
 import quinzical.model.QuizModel;
 
+/**
+ * Class for testing the model of the quinzical application 
+ * @author Neville
+ * @version 0.2.2.1
+ *
+ */
 public class testQuizModel {
 	QuizModel model;
 	
+	/**
+	 * Constructor of test class
+	 */
 	public testQuizModel(){
 		model = QuizModel.getModel();
 			
 		
 	}
 	
-	
+	/**
+	 * Integrated test for testing partice mode
+	 */
 	private void testPracticeMode() {
 		
 		
@@ -42,7 +53,9 @@ public class testQuizModel {
 	
 	
 	
-	
+	/**
+	 * intergrated test for testing Game Mode
+	 */
 	private void testGameMode() {
 		
 		// set
