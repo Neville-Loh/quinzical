@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class DrawerController implements Initializable {
@@ -32,6 +33,23 @@ public class DrawerController implements Initializable {
 	
 	public static void initDrawer(Class<?> controllerClass, JFXDrawer drawer, JFXHamburger hamburger) {
 		try {
+
+			
+			drawer.setOnDrawerOpening(event ->
+			{
+			    AnchorPane.setRightAnchor(drawer, 0.0);
+			    //AnchorPane.setLeftAnchor(drawer, 0.0);
+			    AnchorPane.setTopAnchor(drawer, 0.0);
+			    AnchorPane.setBottomAnchor(drawer, 0.0);
+			});
+
+			drawer.setOnDrawerClosed(event ->
+			{
+			    //AnchorPane.clearConstraints(drawer);
+			    AnchorPane.setRightAnchor(drawer, -500.0);
+			    AnchorPane.setTopAnchor(drawer, 0.0);
+			    AnchorPane.setBottomAnchor(drawer, 0.0);
+			});
 			
 			
 			VBox toolbar = FXMLLoader.load(controllerClass.getResource("/quinzical/view/component/ToolBar.fxml"));
@@ -67,7 +85,7 @@ public class DrawerController implements Initializable {
 //					} else {
 //						drawer.open();
 //					}
-//					task.setRate(task.getRate() * -1);
+//					task.setRate(task.getRate() * -1fdsf);
 //					task.play();
 				}
 				
@@ -81,7 +99,7 @@ public class DrawerController implements Initializable {
 	
 	@FXML
 	private void goSetting(ActionEvent event) {
-		System.out.println("go setting");
+		System.out.println("go settisnggsadff");
 	}
 
 

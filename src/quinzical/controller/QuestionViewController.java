@@ -23,7 +23,6 @@ import quinzical.controller.component.DrawerController;
 import quinzical.model.PracticeQuestion;
 import quinzical.model.Question;
 import quinzical.model.QuizModel;
-import test.testSQLiteDB;
 
 /**
  * Controller class for question view at QuestionView.fxml. Display are question
@@ -90,7 +89,9 @@ public class QuestionViewController implements Initializable {
 	@FXML
 	public void dontKnowButton(ActionEvent event) throws IOException {
 		question.setAttempted(true);
-		model.getSession().incrementRemainingQuestion(-1);
+		if (!question.isPractice()){
+			model.getSession().incrementRemainingQuestion(-1);
+		}
 		goAnswerPage(false, event);
 	}
 

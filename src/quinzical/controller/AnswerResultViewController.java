@@ -52,7 +52,9 @@ public class AnswerResultViewController{
 		
 		String scoreStr = model.getWinningStr();
 		winningLabel.setText(scoreStr);
-		checkGameOverStatus();
+		if (!question.isPractice()) {
+			checkGameOverStatus();
+		}
 	}
 	
 	/**
@@ -69,7 +71,9 @@ public class AnswerResultViewController{
 		String correctAnsStr = "The correct answer is " + question.getAnswer() + ".";
 		correctAnsLabel.setText(correctAnsStr);
 		model.textToSpeech("Incorrect. " + correctAnsStr);
-		checkGameOverStatus();
+		if (!question.isPractice()) {
+			checkGameOverStatus();
+		}
 	}
 	
 	/**
