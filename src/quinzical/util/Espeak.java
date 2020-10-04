@@ -4,20 +4,20 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.stream.Stream;
 
-public class Festival implements TextToSpeech {
+public class Espeak implements TextToSpeech {
 	
-	private int _volume;
+	private int _volume = 100;
+	private int _speed = 175;
 	private Process _currentProcess;
 	
-	public Festival() {
-		setVoice();
+	public Espeak() {
 	}
 	
 	public void start(String text) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				String command = "echo \"" + text + "\" | festival --tts";
+				String command = "espeak \"" + text + "\" -a " + _volume + " -s " + _speed;
 				runTerminal(command, true);
 			}
 
@@ -25,35 +25,36 @@ public class Festival implements TextToSpeech {
 	}
 	
 	public void stop() {
-		Stream<ProcessHandle> descendants = ProcessHandle.current().descendants();
+		/*Stream<ProcessHandle> descendants = ProcessHandle.current().descendants();
 		descendants.filter(ProcessHandle::isAlive).forEach(ph -> {
 			ph.destroy();
-		});
+		});*/
+		_currentProcess.destroy();
 	}
 	
-	private void setVoice() {
-		runTerminal("festival", false);
-		runTerminal("(voice_akl_nz_jdt_diphone)", false);
-		runTerminal("(quit)", false);
-	}
-	
-	public void setVolume(int volume) {
+	/**
+	 * This sets the volume of speech synthesis. Must be an integer between 0 and 200.
+	 * Default is 100.
+	 * Throws IllegalArgumentException
+	 */
+	public void setVolume(int volume) throws IllegalArgumentException {
+		if (volume < 0 || volume > 200) {
+			throw new IllegalArgumentException();
+		}
 		_volume = volume;
 	}
 	
 	/**
 	 * This method changes the speed of the speech synthesis of festival.
-	 * @param speed is the requested speed expressed as a percentage of the default speed.
-	 * For example to set the speed as the default speed the input would be 100 
-	 * corresponding to 100%
+	 * @param speed is an integer between 80 and 450 measured in words per minute.
+	 * Default is 175. 
 	 * 
 	 */
-	public void setSpeed(int speed) {
-		double duration = 1 / ( (double) speed / 100);
-		runTerminal("festival", false);
-		String command = "(Parameter.set 'Duration_Stretch " + Double.toString(duration) + ")";
-		runTerminal(command, false);
-		runTerminal("(quit)", false);
+	public void setSpeed(int speed) throws IllegalArgumentException {
+		if (speed < 80 || speed > 450) {
+			throw new IllegalArgumentException();
+		}
+		_speed = speed;
 	}
 	
 	

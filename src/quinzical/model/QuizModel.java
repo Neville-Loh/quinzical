@@ -9,7 +9,7 @@ import java.util.Map;
 import quinzical.db.ObjectDB;
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
-import quinzical.util.Festival;
+import quinzical.util.Espeak;
 //import quinzical.db.QuinzicalDB;
 import quinzical.util.FileHandler;
 import quinzical.util.Helper;
@@ -49,7 +49,7 @@ public class QuizModel {
 	public QuizModel() {
 		
 		db = new SQLiteDB();
-		tts = new Festival();
+		tts = new Espeak();
 		
 		try {
 			db.getConnection();
