@@ -2,8 +2,12 @@ package quinzical.controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import quinzical.Main;
+import quinzical.controller.component.DrawerController;
 import quinzical.model.Category;
 import quinzical.model.Question;
 import quinzical.model.QuizModel;
@@ -35,7 +40,9 @@ public class QuestionSelectViewController implements Initializable {
 	@FXML private Label questionLabel;
 	@FXML private Label remainingQuestion;
 	@FXML private GridPane centerGridPane;
-	
+	@FXML private JFXHamburger hamburger;
+	@FXML private JFXDrawer drawer;
+
 	/**
 	 * Navigate to main menu
 	 * @param event
@@ -51,14 +58,12 @@ public class QuestionSelectViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		
-		System.out.println("init reached");
-		
+		try {
 		model = Main.getQuizModel();
 		List<Category> cats = model.getCategoryList();
 		remainingQuestion.setText(Integer.toString(model.getRemainingQuestionCount()));
-		
-		
 		
 		// populate row constrain for each row
 		if (cats.get(0) != null) {
@@ -68,26 +73,30 @@ public class QuestionSelectViewController implements Initializable {
 			}
 		}
 		
-		
-		// populate button in each row and col
+		// populate button in each row and columnS
 		int col = 0;
-		int i = 1;
+		int row;
 		for (Category category : cats) {
-			i = 1;
+			row = 1;
 			
-			// set constrain for the following col
+			// set constraints for the following column
 			centerGridPane.getColumnConstraints()
 					.add(new ColumnConstraints(-1, -1, -1, Priority.ALWAYS, HPos.CENTER, false));
-
+			
+			// setting button for category
 			Label label = new Label(category.getTitle());
 			centerGridPane.add(label, col, 0);
-			for (Question question : category.getQuestions()) {
-				
-				// Display the button if the question is not attempt
+			Button button = null;
+			
+			// setting button for each question
+			ArrayList<Question> questionList = category.getQuestions();
+			for (int i=0; i < questionList.size(); i++){
+			    Question question = questionList.get(i);
+			    
+			    // Display the button if the question is not attempt
 				if (!question.isAttempted()) {
-					Button button = new Button(Integer.toString(question.getScore()));
+					button = new Button(Integer.toString(question.getScore()));
 					button.setPrefSize(150, 25);
-					centerGridPane.add(button, col, i);
 					button.setOnAction(new EventHandler<ActionEvent>() {
 						@Override
 						public void handle(ActionEvent event) {
@@ -95,10 +104,24 @@ public class QuestionSelectViewController implements Initializable {
 							ScreenController.goQuestion(getClass(), event);
 						}
 					});
+					
+					// Set active question if it is the non-attempted question with the lower score
+					if (i == questionList.size() - 1 || questionList.get(i+1).isAttempted()) {
+						button.setDisable(false);
+					} else {
+						button.setDisable(true);
+					}
+					
+					centerGridPane.add(button, col, row);
 				}
-				i++;
+				
+				row++;
 			}
+
 			col++;
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}

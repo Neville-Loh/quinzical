@@ -7,13 +7,20 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.jfoenix.animation.alert.JFXAlertAnimation;
+import com.jfoenix.controls.JFXAlert;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialogLayout;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import quinzical.Main;
 import quinzical.model.QuizModel;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import javafx.stage.Modality;
 import javafx.scene.control.Alert.AlertType;
 /**
  * Controller class for main menu view at MainView.fxml.
@@ -30,6 +37,7 @@ public class MainController implements Initializable{
 	 */
 	@FXML
 	private void showQuestionSelectView(ActionEvent event){
+		model.initSession();
 		ScreenController.goQuestionSelect(getClass(), event);
 	}
 	
@@ -45,7 +53,7 @@ public class MainController implements Initializable{
 	
 	@FXML
 	private void showSettingView(ActionEvent event) throws IOException{
-		
+
 	}
 	
 	@FXML

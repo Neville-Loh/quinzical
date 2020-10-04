@@ -1,18 +1,13 @@
 package quinzical.model;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import quinzical.db.ObjectDB;
+
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
-import quinzical.util.Espeak;
-//import quinzical.db.QuinzicalDB;
-import quinzical.util.FileHandler;
-import quinzical.util.Helper;
+
+
 import quinzical.util.TextToSpeech;
 import test.testSQLiteDB;
 
@@ -24,6 +19,8 @@ import test.testSQLiteDB;
  * @author Neville
  */
 public class QuizModel {
+	
+	private static QuizModel model;
 	private User _currentUser;
 	private Session _currentSession;
 	private QuinzicalDB db;
@@ -31,14 +28,21 @@ public class QuizModel {
 
 	private PracticeQuestion _practiceQuestion;
 	private Question _currentQuestion;
-//	private GameMode gameMode = GameMode.normal;
-//	
-//	enum GameMode{
-//		practice,
-//		normal
-//	}
+
 
 	
+	/**
+	 * Singleton method to return the current model
+	 * @return
+	 */
+	public static QuizModel getModel() {
+		if (model == null){
+			model = new QuizModel();
+			return model;
+		} else {
+			return model;
+		}
+	}
 	
 
 	/**
@@ -46,38 +50,26 @@ public class QuizModel {
 	 * save file in the directory, the model will load it too. If save file does not
 	 * exist, all value will be set to its initial status
 	 */
-	public QuizModel() {
-		
+	private QuizModel() {
 		db = new SQLiteDB();
-		tts = new Espeak();
 		
 		try {
 			db.getConnection();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+
 		
-		_currentUser = new User("default");
+		_currentUser = new User("Default User");
 		_currentUser.setUserId(99);
-		_currentSession = new Session(_currentUser);
-		List<Category> cat = db.getRandomQuestionSet(5, 5);
-		_currentSession.setQuestionSet(cat);
-		//db.getUserSession(1);
-		
-//		_cats = FileHandler.loadCategory();
-//		updateRemainingQuestion();
-//		try {
-//			if (FileHandler.saveFileExist()) {
-//				load();
-//				System.out.println("load file suscessfuly load");
-//			}
-//		} catch (Exception e) {
-//			System.out.println("Loading failed. Maybe trying removing user.save in the working directory");
-//			e.printStackTrace();
-//		}
+		loadUserSession();
+
 	}
 	
-	
+	/**
+	 * Load the current user data using the fileHandler named user.save at the
+	 * system directory. The object mimic a database
+	 */
 	public void loadUserSession() {
 		_currentSession = db.getUserLastestSession(_currentUser); 
 	}
@@ -102,7 +94,7 @@ public class QuizModel {
 		
 		Question question = _currentSession.getQuestionById(qid);
 		question.setAttempted(true);
-		_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() - 1);
+		_currentSession.incrementRemainingQuestion(-1);
 		if (validate(input, question)) {
 			_currentSession.addWinnings(question.getScore());
 			return true;
@@ -158,11 +150,11 @@ public class QuizModel {
 	 * questions in the category and count the attempted function.
 	 */
 	public void updateRemainingQuestion() {
-		_currentSession.setRemainingQuestoin(0);
+		_currentSession.setRemainingQuestion(0);
 		for (Category cat : _currentSession.getCategoryList()) {
 			for (Question question : cat.getQuestions()) {
 				if (!question.isAttempted()) {
-					_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() + 1);
+					_currentSession.incrementRemainingQuestion(1);
 				}
 			}
 		}
@@ -173,38 +165,11 @@ public class QuizModel {
 	 * The file is saved as an object which mimic a database
 	 */
 	public void save() {
-		ObjectDB db = new ObjectDB();
-		db.setWinning(_currentSession.getWinnings());
-		HashMap<String, Boolean> isAttemptedMap = new HashMap<String, Boolean>();
-		for (Category cat : _currentSession.getCategoryList()) {
-			for (Question question : cat.getQuestions()) {
-				isAttemptedMap.put(question.toString(), question.isAttempted());
-			}
-		}
-		db.setIsAttemptedMap(isAttemptedMap);
-		FileHandler.saveDB(db);
+		System.out.println("Saving Session...");
+		_currentSession.printCategoryList();
+		db.addSession(_currentUser, _currentSession);
 	}
 
-	/**
-	 * Load the current user data using the fileHandler named user.save at the
-	 * system directory. The object mimic a database
-	 */
-	public void load() {
-		ObjectDB db = FileHandler.loadDB();
-		_currentSession.setWinnings(db.getWinning());
-		Map<String, Boolean> isAttemptedMap = db.getIsAttemptedMap();
-
-		// TODO handle exception
-		for (Category cat : _currentSession.getCategoryList()) {
-			for (Question question : cat.getQuestions()) {
-				if (isAttemptedMap.get(question.toString()) == true) {
-					question.setAttempted(true);
-				}
-			}
-
-		}
-		updateRemainingQuestion();
-	}
 
 	/**
 	 * Rest the game of the session, the user score is reset to 0 and all attempted
@@ -212,21 +177,22 @@ public class QuizModel {
 	 */
 	public void reset() {
 		_currentSession.reset();
-		_currentSession.setRemainingQuestoin(0);
+		_currentSession.setRemainingQuestion(0);
 		for (Category cat : _currentSession.getCategoryList()) {
 			for (Question question : cat.getQuestions()) {
 				question.setAttempted(false);
-				_currentSession.setRemainingQuestoin(_currentSession.getRemainingQuestion() + 1);
+				_currentSession.incrementRemainingQuestion(1);
 			}
 		}
 	}
 
 	/**
 	 * TextToSpeech function using festival bash command.
-	 * @param text to be turned into speach
+	 * @param text to be turned into speech
 	 */
 	public void textToSpeech(String text) {
-		tts.start(text);
+		//tts.start(text);
+		System.out.println("TTS called: " + text);
 	}
 
 	/**
@@ -306,7 +272,11 @@ public class QuizModel {
 		db.addUser(user);
 		return user.getUserID();
 	}
-
+	
+	
+	public User getUser() {
+		return _currentUser;
+	}
 
 	public void setUser(int userid) {
 		// change user to user id;
@@ -331,27 +301,20 @@ public class QuizModel {
 		return db.getAllCategory();
 	}
 
-	public void setActiveQuestion(int id) {
-		// TODO Auto-generated method stub
+	
+	public Session getSession() {
+		return _currentSession;
+	}
+
+
+	public void initSession() {
+		if (_currentSession == null) {
+			_currentSession = new Session(_currentUser);
+			List<Category> cat = db.getRandomQuestionSet(5, 5);
+			_currentSession.setQuestionSet(cat);
+		}
 		
 	}
-
-
-	public int getPracticeAttemptLeft() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-//
-//	public GameMode getGameMode() {
-//		return gameMode;
-//	}
-//
-//
-//	public void setGameMode(GameMode gameMode) {
-//		this.gameMode = gameMode;
-//	}
-
 
 
 }

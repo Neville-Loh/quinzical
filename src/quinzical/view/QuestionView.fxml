@@ -1,49 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1023.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.QuestionViewController">
-   <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #262d37;" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Question" textFill="#f2ecec">
-               <font>
-                  <Font name="KacstArt" size="30.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="100.0" />
-               </VBox.margin></Label>
-            <Label fx:id="questionLabel" text="placeholder" textFill="#f2ecec">
-               <font>
-                  <Font name="KacstArt" size="19.0" />
-               </font></Label>
-            <Label fx:id="attempLabel" layoutX="466.0" layoutY="291.0" text="placeholder" textFill="#f2ecec">
-               <font>
-                  <Font name="KacstArt" size="19.0" />
-               </font>
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
-            </Label>
-            <TextField fx:id="textfield" layoutX="29.0" layoutY="298.0" onAction="#onEnter" prefWidth="121.0">
-               <VBox.margin>
-                  <Insets left="150.0" right="150.0" top="100.0" />
-               </VBox.margin></TextField>
-         </children>
-      </VBox>
-   </center>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #262d37;" stylesheets="@css/Styles.css" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#centerButton" text="Press Enter" />
-         </children>
-      </HBox>
-   </bottom>
-</BorderPane>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.QuestionViewController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1023.0" style="-fx-background-color: #262d37;">
+         <center>
+            <StackPane BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Question" textFill="#f2ecec">
+                           <font>
+                              <Font name="KacstArt" size="30.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="100.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="questionLabel" text="placeholder" textFill="#f2ecec">
+                           <font>
+                              <Font name="KacstArt" size="19.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="attempLabel" layoutX="466.0" layoutY="291.0" text="placeholder" textFill="#f2ecec">
+                           <font>
+                              <Font name="KacstArt" size="19.0" />
+                           </font>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </Label>
+                        <Button mnemonicParsing="false" onAction="#playBackButton" text="play back">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                        <TextField fx:id="textfield" layoutX="29.0" layoutY="298.0" onAction="#onEnter" prefWidth="121.0">
+                           <VBox.margin>
+                              <Insets left="150.0" right="150.0" top="100.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #262d37;" stylesheets="@css/Styles.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#centerButton" text="Press Enter" />
+                  <Button mnemonicParsing="false" onAction="#dontKnowButton" text="Don't Know">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+      <JFXDrawer fx:id="drawer" minWidth="0.0" AnchorPane.rightAnchor="0.0" />
+      <JFXHamburger fx:id="hamburger" alignment="TOP_RIGHT" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </JFXHamburger>
+   </children>
+</AnchorPane>

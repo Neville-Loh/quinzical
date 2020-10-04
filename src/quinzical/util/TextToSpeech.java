@@ -1,5 +1,11 @@
 package quinzical.util;
 
+/**
+ * Text to speech interface use as adapter to different text to speech 
+ * implementation.
+ * @author Neville
+ *
+ */
 public interface TextToSpeech {
 	
 	/**
@@ -21,7 +27,7 @@ public interface TextToSpeech {
 
 	
 	/**
-	 * Set the speed of the curren text to speech
+	 * Set the speed of the current text to speech
 	 */
 	public void setSpeed(int speed);
 

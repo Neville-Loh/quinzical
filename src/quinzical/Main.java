@@ -1,20 +1,24 @@
 package quinzical;
 
+
 import java.io.IOException;
 
+
 import javafx.application.Application;
+
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import quinzical.model.QuizModel;
-import quinzical.model.PracticeModel;
-import quinzical.util.Helper;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 
 /**
- * Main class for the Jeopardy application. THe application is built with Javafx
+ * Main class for the Quinical application. THe application is built with Javafx
  * The application uses Model view controller architecture
- * @author Neville
+ * @author Neville, Daniel Cutfield
+ * @version 0.3.1.2
  */
 
 
@@ -28,9 +32,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		// to ensure singleton assignment
-		if (model == null) {
-			model = new QuizModel();
-		}
+		model = QuizModel.getModel();
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Quinzical");
 //		this.primaryStage.setHeight(1024);
@@ -38,8 +40,9 @@ public class Main extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("/quinzical/view/MainView.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
 		primaryStage.show();
-		
+
 		//#TODO
 		//primaryStage.setOnCloseRequest(Helper.confirmCloseEventHandler);
 	}
@@ -55,8 +58,5 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
-		//System.out.print("ass");
-		
-		//new test.testSQLiteDB();
 	}
 }
