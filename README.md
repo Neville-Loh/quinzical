@@ -72,28 +72,25 @@ or, less commonly, into the `doc` folder.
 All image is retrived using where it is subject to .... bla
 
 ### License information
+MIT License
 
-If you want to share your work with others, please consider choosing an open
-source license and include the text of the license into your project.
-The text of a license is usually stored in the `LICENSE` (or `LICENSE.txt`,
-`LICENSE.md`) file in the root of the project.
+Copyright (c) 2020 Neville Loh, Daniel Cutfield
 
-> You’re under no obligation to choose a license and it’s your right not to
-> include one with your code or project. But please note that opting out of
-> open source licenses doesn’t mean you’re opting out of copyright law.
-> 
-> You’ll have to check with your own legal counsel regarding your particular
-> project, but generally speaking, the absence of a license means that default
-> copyright laws apply. This means that you retain all rights to your source
-> code and that nobody else may reproduce, distribute, or create derivative
-> works from your work. This might not be what you intend.
->
-> Even in the absence of a license file, you may grant some rights in cases
-> where you publish your source code to a site that requires accepting terms
-> of service. For example, if you publish your source code in a public
-> repository on GitHub, you have accepted the [Terms of Service](https://help.github.com/articles/github-terms-of-service)
-> which do allow other GitHub users some rights. Specifically, you allow others
-> to view and fork your repository.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-For more info on how to choose a license for an open source project, please
-refer to http://choosealicense.com
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
