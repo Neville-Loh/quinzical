@@ -273,7 +273,11 @@ public class QuizModel {
 		db.addUser(user);
 		return user.getUserID();
 	}
-
+	
+	
+	public User getUser() {
+		return _currentUser;
+	}
 
 	public void setUser(int userid) {
 		// change user to user id;

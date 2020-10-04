@@ -8,6 +8,9 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -15,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Region;
 import quinzical.Main;
+import quinzical.controller.component.DrawerController;
 import quinzical.model.QuizModel;
 
 /**
@@ -27,6 +31,8 @@ public class GameOverViewController implements Initializable {
 	private QuizModel model;
 
 	@FXML private Label winningLabel;
+	@FXML private JFXHamburger hamburger;
+	@FXML private JFXDrawer drawer;
 	
 	/**
 	 * Navigate to main menu
@@ -66,6 +72,7 @@ public class GameOverViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		try {
 		model = Main.getQuizModel();
 		String scoreStr = model.getWinningStr();

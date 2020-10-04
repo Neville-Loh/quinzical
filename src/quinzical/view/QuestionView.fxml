@@ -13,7 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane minHeight="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.QuestionViewController">
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.QuestionViewController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1023.0" style="-fx-background-color: #262d37;">
          <center>
@@ -70,18 +71,11 @@
             </HBox>
          </bottom>
       </BorderPane>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="200.0" StackPane.alignment="CENTER_RIGHT">
-         <children>
-            <JFXDrawer fx:id="drawer" minWidth="0.0" AnchorPane.rightAnchor="0.0" />
-            <JFXHamburger fx:id="hamburger" alignment="TOP_RIGHT" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </JFXHamburger>
-         </children>
-         <StackPane.margin>
+      <JFXDrawer fx:id="drawer" minWidth="0.0" AnchorPane.rightAnchor="0.0" />
+      <JFXHamburger fx:id="hamburger" alignment="TOP_RIGHT" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <opaqueInsets>
             <Insets />
-         </StackPane.margin>
-      </AnchorPane>
+         </opaqueInsets>
+      </JFXHamburger>
    </children>
-</StackPane>
+</AnchorPane>
