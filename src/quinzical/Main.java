@@ -8,7 +8,7 @@ import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
 import quinzical.model.QuizModel;
-
+import test.testTTS;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -57,6 +57,7 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
+		//launch(args);
+		new testTTS();
 	}
 }
