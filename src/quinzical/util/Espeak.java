@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.stream.Stream;
 
+import javafx.concurrent.Task;
+
 public class Espeak implements TextToSpeech {
 	
 	private int _volume = 100;
@@ -17,12 +19,35 @@ public class Espeak implements TextToSpeech {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				String command = "espeak \"" + text + "\" -a " + _volume + " -s " + _speed;
-				runTerminal(command, true);
+				runTerminal(text);
 			}
 
 		}).start();
 	}
+	
+	/*
+	public void start(String text) {
+		Task<Void> task = new Task<Void>() {
+			@Override
+			public Void call() throws Exception {
+				try {
+					ProcessBuilder pb = new ProcessBuilder("espeak", "hello");
+					Process process = pb.start();
+					process.waitFor();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return null;
+			}
+		};
+		task.setOnSucceeded(event -> {
+			System.out.println("success");
+		});
+		
+		new Thread(task).run();
+	}
+	*/	
+	 
 	
 	public void stop() {
 		/*Stream<ProcessHandle> descendants = ProcessHandle.current().descendants();
@@ -33,15 +58,16 @@ public class Espeak implements TextToSpeech {
 	}
 	
 	/**
-	 * This sets the volume of speech synthesis. Must be an integer between 0 and 200.
-	 * Default is 100.
+	 * This sets the volume of speech synthesis. Input must be an integer between 0 and 100.
+	 * Default is 50.
 	 * Throws IllegalArgumentException
 	 */
 	public void setVolume(int volume) throws IllegalArgumentException {
-		if (volume < 0 || volume > 200) {
+		if (volume < 0 || volume > 100) {
 			throw new IllegalArgumentException();
 		}
-		_volume = volume;
+		
+		_volume = volume * 2;
 	}
 	
 	/**
@@ -62,14 +88,10 @@ public class Espeak implements TextToSpeech {
 	 * Run a bash command using process builder
 	 * @param command
 	 */
-	private void runTerminal(String command, boolean bash) {
+	private void runTerminal(String text) {
 		try {
 			ProcessBuilder pb;
-			if (bash) {
-				pb = new ProcessBuilder("bash", "-c", command);
-			} else {
-				pb = new ProcessBuilder(command);
-			}
+			pb = new ProcessBuilder("espeak", "-s", String.valueOf(_speed), "-a", String.valueOf(_volume), text);
 			Process process = pb.start();
 			_currentProcess = process;
 			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
