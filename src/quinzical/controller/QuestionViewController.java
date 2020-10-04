@@ -44,7 +44,6 @@ public class QuestionViewController implements Initializable {
 
 	/**
 	 * Navigate to main menu
-	 * 
 	 * @param event
 	 */
 	@FXML
@@ -79,11 +78,21 @@ public class QuestionViewController implements Initializable {
 		}
 	}
 
+	/**
+	 * play back button for the text to speech voice
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void playBackButton(ActionEvent event) throws IOException {
-		System.out.println("play back button clicked");
+		model.textToSpeech(question.toString());
 	}
 
+	/**
+	 * Don't know button which bring user to answer screen directly
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void dontKnowButton(ActionEvent event) throws IOException {
 		question.setAttempted(true);
@@ -156,6 +165,12 @@ public class QuestionViewController implements Initializable {
 	}
 	
 	
+	/**
+	 * Go to the answer page depending on if the passed in boolean is right or wrong
+	 * The initialized screen will be different depending on the boolean
+	 * @param isCorrect
+	 * @param event
+	 */
 	private void goAnswerPage(boolean isCorrect, ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();

@@ -125,11 +125,19 @@ public class Question {
 	public void setAnswerPrefix(String answerPrefix) {
 		_prefix = answerPrefix;
 	}
-
+	
+	/**
+	 * Get Method, get the boolean if the question is a practice question or not.
+	 * @return is Practice
+	 */
 	public boolean isPractice() {
 		return _isPractice;
 	}
-
+	
+	/**
+	 * Set Method, set the current isPractice boolean
+	 * @param isPractice
+	 */
 	public void setisPractice(boolean isPractice) {
 		this._isPractice = isPractice;
 	}

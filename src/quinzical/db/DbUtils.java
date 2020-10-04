@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import quinzical.exception.QunizicalEntryNotFoundException;
-import quinzical.model.Question;
 /**
  * Class for database helper functions.
  * @author Neville
@@ -64,12 +63,4 @@ public class DbUtils {
 		throw new QunizicalEntryNotFoundException("Operation not sucessful");
 	}
 	
-//	public static Question resultSetToQuestion(ResultSet res) throws SQLException {
-//		while( res.next() ) {
-//			System.out.println("" + res.getInt(1) + " "+  res.getString(2) + " "+ res.getString(3));
-//			Question q = new Question(res.getString(2), res.getString(3));
-//			q.setID(res.getInt(1));
-//		}
-//		return q;
-//	}
 }

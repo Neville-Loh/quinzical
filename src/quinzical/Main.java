@@ -8,7 +8,6 @@ import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
 import quinzical.model.QuizModel;
-import test.testTTS;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,7 +17,7 @@ import javafx.stage.Stage;
  * Main class for the Quinical application. THe application is built with Javafx
  * The application uses Model view controller architecture
  * @author Neville, Daniel Cutfield
- * @version 0.3.1.2
+ * @version 0.3.1.3
  */
 
 
@@ -31,12 +30,9 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		// to ensure singleton assignment
 		model = QuizModel.getModel();
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Quinzical");
-//		this.primaryStage.setHeight(1024);
-//		this.primaryStage.setWidth(768);
 		Parent root = FXMLLoader.load(getClass().getResource("/quinzical/view/MainView.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
@@ -57,7 +53,7 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		//launch(args);
-		new testTTS();
+		launch(args);
+
 	}
 }

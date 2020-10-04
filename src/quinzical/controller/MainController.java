@@ -7,20 +7,13 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.jfoenix.animation.alert.JFXAlertAnimation;
-import com.jfoenix.controls.JFXAlert;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialogLayout;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import quinzical.Main;
 import quinzical.model.QuizModel;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import javafx.stage.Modality;
 import javafx.scene.control.Alert.AlertType;
 /**
  * Controller class for main menu view at MainView.fxml.
@@ -42,18 +35,13 @@ public class MainController implements Initializable{
 	}
 	
 	/**
-	 * Navigate to current winning screen
+	 * Navigate to setting menu
 	 * @param event
+	 * @throws IOException
 	 */
 	@FXML
-	private void showCurrentWinningView(ActionEvent event) throws IOException{
-		ScreenController.goCurrentWinning(getClass(), event);
-	}
-	
-	
-	@FXML
 	private void showSettingView(ActionEvent event) throws IOException{
-
+		//TODO method for assignment 4
 	}
 	
 	@FXML

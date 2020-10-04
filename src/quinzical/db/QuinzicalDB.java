@@ -1,7 +1,6 @@
 package quinzical.db;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import quinzical.model.Category;
@@ -147,7 +146,7 @@ public interface QuinzicalDB {
 	 */
 	
 	/**
-	 * 
+	 * Get a single question using the questoin id
 	 * @param questionId
 	 * @return
 	 */
@@ -161,14 +160,15 @@ public interface QuinzicalDB {
 	public Question getRandomQuestionFromCategory(int categoryId);
 	
 	/**
-	 * 
+	 * Add a question to the database
 	 * @param quesiton
 	 * @param categoryId
 	 */
 	public void addQuestion(Question quesiton, int categoryId);
 	
 	/**
-	 * 
+	 * delete a question from the database, all session entry that contain the question
+	 * should be deleted accordingly
 	 * @param questionId
 	 */
 	public void deleteQuestion(int questionId);

@@ -2,6 +2,7 @@ package quinzical.controller.component;
 
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,6 +27,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import quinzical.model.QuizModel;
 
+/**
+ * Drawer Controller for the Quinzical applications
+ * @author Neville
+ *
+ */
 public class DrawerController implements Initializable {
 	
 	
@@ -36,6 +42,12 @@ public class DrawerController implements Initializable {
 	@FXML private JFXSlider volumeSlider;
 	private static QuizModel model = QuizModel.getModel();
 	
+	/**
+	 * Method to initialize the drawer
+	 * @param controllerClass
+	 * @param drawer 
+	 * @param hamburger
+	 */
 	public static void initDrawer(Class<?> controllerClass, JFXDrawer drawer, JFXHamburger hamburger) {
 		try {
 			
@@ -109,12 +121,20 @@ public class DrawerController implements Initializable {
 	}
 	
 	
+	/**
+	 * Go to the setting menu
+	 * @param event
+	 */
 	@FXML
 	private void goSetting(ActionEvent event) {
 		System.out.println("go settisnggsadffff");
 	}
 
-
+	
+	/**
+	 * Initialize the class with model and data.
+	 * Set event listener to slilder bar
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		winningLabel.setText(model.getWinningStr());

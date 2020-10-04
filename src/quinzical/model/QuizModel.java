@@ -6,9 +6,7 @@ import java.util.List;
 
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
-
-
-import quinzical.util.TextToSpeech;
+import quinzical.util.Helper;
 import test.testSQLiteDB;
 
 /**
@@ -24,7 +22,6 @@ public class QuizModel {
 	private User _currentUser;
 	private Session _currentSession;
 	private QuinzicalDB db;
-	private TextToSpeech tts;
 
 	private PracticeQuestion _practiceQuestion;
 	private Question _currentQuestion;
@@ -191,7 +188,14 @@ public class QuizModel {
 	 * @param text to be turned into speech
 	 */
 	public void textToSpeech(String text) {
-		//tts.start(text);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String command = "echo \"" + text + "\" | festival --tts";
+				Helper.runBash(command);
+			}
+
+		}).start();
 		System.out.println("TTS called: " + text);
 	}
 
@@ -306,7 +310,10 @@ public class QuizModel {
 		return _currentSession;
 	}
 
-
+	
+	/**
+	 * Initialte a new session if the current session is null;
+	 */
 	public void initSession() {
 		if (_currentSession == null) {
 			_currentSession = new Session(_currentUser);

@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,6 @@ import quinzical.model.Question;
 import quinzical.model.Session;
 import quinzical.model.User;
 import quinzical.util.QuestionReader;
-import test.testSQLiteDB;
 
 /**
  * 
@@ -364,6 +362,12 @@ public class SQLiteDB implements QuinzicalDB{
 		
 	}
 	
+	/**
+	 * Get a List of Category name in random order, the number pass in indicate the 
+	 * length of the name array to get.
+	 * @param numberofCategory to get
+	 * @return List of category name
+	 */
 	public List<String> getRandomCategoryName(int numberofCategory){
 		List<String> result = new ArrayList<String>();
 		String statement = "SELECT * FROM category ORDER by RANDOM() LIMIT " + numberofCategory + ";";
