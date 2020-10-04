@@ -1,5 +1,11 @@
 package quinzical.util;
 
+/**
+ * Text to speech interface use as adapter to different text to speech 
+ * implementation.
+ * @author Neville
+ *
+ */
 public interface TextToSpeech {
 	
 	/**

@@ -5,6 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Data base Schema
+ * The schema that use to build quinzical database using sqlite
+ * @see quinzical.db.SQLiteDB.java
+ * @author Neville
+ *
+ */
 public class Schema {
 	
 	private static final int USERNAME_CHAR_LIMIT = 20;
@@ -13,7 +20,8 @@ public class Schema {
 	
 	/**
 	 * Create User Table
-	 * 
+	 * The table meant to store all user data, where each entry correspond to one individual
+	 * user
 	 * @param conn
 	 * @throws SQLException
 	 */
@@ -33,7 +41,8 @@ public class Schema {
 	
 	/**
 	 * Create Category Table
-	 * 
+	 * The table meant to store all category, where question inside a category object is store separately in
+	 * the user table. One to many relation ship with question table.
 	 * @param conn
 	 * @throws SQLException
 	 */
@@ -54,6 +63,9 @@ public class Schema {
 	
 	/**
 	 * Create Question Table
+	 * The table meant to store all question, when question hold reference to the category table, 
+	 * when a category is deleted, question is removed in a cascade fashion. Many to one relationship
+	 * with category table.
 	 * @param conn
 	 * @throws SQLException
 	 */
@@ -82,6 +94,10 @@ public class Schema {
 	
 	/**
 	 * Create Session Table
+	 * The table meant to store all session data. Each entry represent one question in one session 
+	 * hold reference to user id as foreign key. when user is delete
+	 * session is removed in a cascade fashion. many to one relationship with user.
+	 * many to many relationship with question table.
 	 * @param conn
 	 * @throws SQLException
 	 */
@@ -105,7 +121,11 @@ public class Schema {
 	}
 	
 	/**
-	 * 
+	 * Create session_question table
+	 * This table is use to facilitate many to may relationship between question and session.
+	 * store score that is assigned to the question, and session id, question id as primary key.
+	 * and whether the question is attempted. Delete in cascade fashion if session or question is
+	 * deleted.
 	 * @param conn
 	 * @throws SQLException
 	 */

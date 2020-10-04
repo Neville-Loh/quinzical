@@ -84,8 +84,7 @@ public class SQLiteDB implements QuinzicalDB{
 	@Override
 	public User getUser(int id) {
 		// TODO Auto-generated method stub
-		User result = new User("temp");
-		return result;
+		return null;
 	}
 
 	@Override
@@ -256,23 +255,6 @@ public class SQLiteDB implements QuinzicalDB{
 		            		prep.execute();
 		            	}
 		            }
-	            } else {
-//	            	int sessionId = id;
-//	                session.setSessionID(sessionId);
-//	                
-//		            // saving each question in database
-//		            List<Category> cats = session.getCategoryList();
-//		            for (Category cat : cats) {
-//		            	for (Question question : cat.getQuestions()) {
-//		            		prep = conn.prepareStatement("REPLACE INTO session_questions("
-//		            				+ "session_id, question_id, isAttempted, question_score) values(?,?,?,?);");
-//		            		prep.setInt(1, sessionId);
-//		            		prep.setInt(2, question.getID());
-//		            		prep.setBoolean(3, question.isAttempted());
-//		            		prep.setInt(4, question.getScore());
-//		            		prep.execute();
-//		            	}
-//		            }
 	            }
 			}
 		} catch (SQLException e) {
@@ -423,11 +405,6 @@ public class SQLiteDB implements QuinzicalDB{
 		
 	}
 	
-	@Override
-	public int getCategoryId(String CategoryId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 	/*
 	 * =====================================================================================================

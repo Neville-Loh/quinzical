@@ -1,17 +1,13 @@
 package quinzical.model;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
-import quinzical.util.Festival;
-//import quinzical.db.QuinzicalDB;
-import quinzical.util.FileHandler;
-import quinzical.util.Helper;
+
+
 import quinzical.util.TextToSpeech;
 import test.testSQLiteDB;
 
@@ -32,8 +28,6 @@ public class QuizModel {
 
 	private PracticeQuestion _practiceQuestion;
 	private Question _currentQuestion;
-//	private GameMode gameMode = GameMode.normal;
-//	
 
 
 	
@@ -65,24 +59,18 @@ public class QuizModel {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-//		User one = new User("first");
-//		db.addUser(one);
-//		Session s = new Session(_currentUser);
-//		List<Category> catt = db.getRandomQuestionSet(5, 5);
-//		s.setQuestionSet(catt);
-//		db.addSession(one, s);
-//		
+
 		
 		_currentUser = new User("Default User");
 		_currentUser.setUserId(99);
-		
-		//initSession();
-
-		_currentSession = db.getUserLastestSession(_currentUser);
+		loadUserSession();
 
 	}
 	
-	
+	/**
+	 * Load the current user data using the fileHandler named user.save at the
+	 * system directory. The object mimic a database
+	 */
 	public void loadUserSession() {
 		_currentSession = db.getUserLastestSession(_currentUser); 
 	}
@@ -181,38 +169,8 @@ public class QuizModel {
 		System.out.println("Saving Session...");
 		_currentSession.printCategoryList();
 		db.addSession(_currentUser, _currentSession);
-//		ObjectDB db = new ObjectDB();
-//		db.setWinning(_currentSession.getWinnings());
-//		HashMap<String, Boolean> isAttemptedMap = new HashMap<String, Boolean>();
-//		for (Category cat : _currentSession.getCategoryList()) {
-//			for (Question question : cat.getQuestions()) {
-//				isAttemptedMap.put(question.toString(), question.isAttempted());
-//			}
-//		}
-//		db.setIsAttemptedMap(isAttemptedMap);
-//		FileHandler.saveDB(db);
 	}
 
-	/**
-	 * Load the current user data using the fileHandler named user.save at the
-	 * system directory. The object mimic a database
-	 */
-	public void load() {
-//		ObjectDB db = FileHandler.loadDB();
-//		_currentSession.setWinnings(db.getWinning());
-//		Map<String, Boolean> isAttemptedMap = db.getIsAttemptedMap();
-//
-//		// TODO handle exception
-//		for (Category cat : _currentSession.getCategoryList()) {
-//			for (Question question : cat.getQuestions()) {
-//				if (isAttemptedMap.get(question.toString()) == true) {
-//					question.setAttempted(true);
-//				}
-//			}
-//
-//		}
-//		updateRemainingQuestion();
-	}
 
 	/**
 	 * Rest the game of the session, the user score is reset to 0 and all attempted
@@ -231,7 +189,7 @@ public class QuizModel {
 
 	/**
 	 * TextToSpeech function using festival bash command.
-	 * @param text to be turned into speach
+	 * @param text to be turned into speech
 	 */
 	public void textToSpeech(String text) {
 		//tts.start(text);

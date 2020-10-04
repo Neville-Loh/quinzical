@@ -37,16 +37,11 @@ public class QuestionViewController implements Initializable {
 	private QuizModel model;
 	private Question question;
 
-	@FXML
-	private Label questionLabel;
-	@FXML
-	private TextField textfield;
-	@FXML
-	private Label attempLabel;
-	@FXML
-	private JFXHamburger hamburger;
-	@FXML
-	private JFXDrawer drawer;
+	@FXML private Label questionLabel;
+	@FXML private TextField textfield;
+	@FXML private Label attempLabel;
+	@FXML private JFXHamburger hamburger;
+	@FXML private JFXDrawer drawer;
 
 	/**
 	 * Navigate to main menu

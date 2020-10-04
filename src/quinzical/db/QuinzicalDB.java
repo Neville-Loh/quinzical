@@ -120,13 +120,7 @@ public interface QuinzicalDB {
 	 */
 	public void deleteCategory(int categoryId);
 	
-	/**
-	 * 
-	 * @param CategoryId
-	 * @return
-	 */
-	public int getCategoryId(String CategoryId);
-	
+
 	/**
 	 * Get a random QuestionSet as List of Category
 	 * The method return a category list containing input count of category which 

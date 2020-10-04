@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import quinzical.exception.QunizicalEntryNotFoundException;
 import quinzical.model.Question;
 /**
- * Class for database helper function.s
+ * Class for database helper functions.
  * @author Neville
  */
 public class DbUtils {
