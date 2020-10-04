@@ -55,7 +55,6 @@ public class QuestionViewController implements Initializable {
 
 	/**
 	 * submit the text field as user answer
-	 * 
 	 * @param event
 	 */
 	@FXML
@@ -69,7 +68,6 @@ public class QuestionViewController implements Initializable {
 
 	/**
 	 * submit the text field as user answer
-	 * 
 	 * @param event
 	 */
 	@FXML

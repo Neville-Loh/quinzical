@@ -1,12 +1,16 @@
 package quinzical.controller;
 import javafx.fxml.FXML;
 
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import quinzical.Main;
+import quinzical.controller.component.DrawerController;
 import quinzical.model.Question;
 import quinzical.model.QuizModel;
 
@@ -23,6 +27,8 @@ public class AnswerResultViewController{
 	@FXML private Label isCorrectLabel;
 	@FXML private Label correctAnsLabel;
 	@FXML private HBox bottomHBox;
+	@FXML private JFXHamburger hamburger;
+	@FXML private JFXDrawer drawer;
 	/**
 	 * Navigate to main menu
 	 * @param event
@@ -46,6 +52,7 @@ public class AnswerResultViewController{
 	 * @param question
 	 */
 	public void validAnswerInit(Question question) {
+		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		model = Main.getQuizModel();
 		isCorrectLabel.setText("Correct");
 		model.textToSpeech("Correct");
@@ -62,6 +69,7 @@ public class AnswerResultViewController{
 	 * @param question
 	 */
 	public void invalidAnswerInit(Question question) {
+		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		model = Main.getQuizModel();
 		isCorrectLabel.setText("Incorrect");
 		

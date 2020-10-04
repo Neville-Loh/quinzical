@@ -1,49 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #262d37;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.CategorySelectViewController">
-   <center>
-      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
-         <children>
-            <GridPane fx:id="centerGridPane" alignment="CENTER" gridLinesVisible="true" minWidth="-Infinity" stylesheets="@css/GameSelect.css">
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.CategorySelectViewController">
+   <children>
+      <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #262d37;">
+         <center>
+            <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+               <children>
+                  <GridPane fx:id="centerGridPane" alignment="CENTER" gridLinesVisible="true" minWidth="-Infinity" stylesheets="@css/GameSelect.css">
             </GridPane>
-            <HBox alignment="CENTER_RIGHT">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets left="40.0" />
-               </padding>
+                  <HBox alignment="CENTER_RIGHT">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" stylesheets="@css/Styles.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goMainMenu" text="Main menu">
+                     <HBox.margin>
+                        <Insets bottom="20.0" top="3.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
             </HBox>
-         </children>
-      </VBox>
-   </center>
-   <bottom>
-      <HBox alignment="CENTER" stylesheets="@css/Styles.css" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#goMainMenu" text="Main menu">
-               <HBox.margin>
-                  <Insets bottom="20.0" top="3.0" />
-               </HBox.margin></Button>
-         </children>
-      </HBox>
-   </bottom>
-   <top>
-      <Label text="Select a category" textFill="WHITE" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="KacstArt" size="17.0" />
-         </font>
-         <BorderPane.margin>
-            <Insets top="20.0" />
-         </BorderPane.margin>
-      </Label>
-   </top>
-</BorderPane>
+         </bottom>
+         <top>
+            <Label text="Select a category" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="KacstArt" size="17.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets top="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+      </BorderPane>
+      <JFXDrawer fx:id="drawer" minWidth="0.0" AnchorPane.rightAnchor="0.0" />
+      <JFXHamburger fx:id="hamburger" alignment="TOP_RIGHT" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </JFXHamburger>
+   </children>
+</AnchorPane>

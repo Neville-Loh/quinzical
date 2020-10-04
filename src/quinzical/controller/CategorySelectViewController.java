@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
@@ -34,6 +37,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.util.Duration;
 import quinzical.Main;
+import quinzical.controller.component.DrawerController;
 import quinzical.model.Category;
 import quinzical.model.Question;
 import quinzical.model.QuizModel;
@@ -49,6 +53,8 @@ public class CategorySelectViewController implements Initializable {
 
 	@FXML private BorderPane borderPane;
 	@FXML private GridPane centerGridPane;
+	@FXML private JFXHamburger hamburger;
+	@FXML private JFXDrawer drawer;
 	
 	/**
 	 * Navigate to main menu
@@ -65,6 +71,7 @@ public class CategorySelectViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		model = Main.getQuizModel();
 		List<Category> cats = model.getAllCategorywithoutQuestion();
 		

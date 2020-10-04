@@ -1,46 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.GameOverViewController">
-   <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #262d37;" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Game Over" textFill="#ebe1e1">
-               <font>
-                  <Font name="KacstArt" size="30.0" />
-               </font>
-               <padding>
-                  <Insets bottom="16.0" />
-               </padding></Label>
-            <Label text="Thank you for playing!" textFill="#ebe1e1">
-               <font>
-                  <Font name="KacstArt" size="24.0" />
-               </font>
-            </Label>
-            <Label text="Your final score is " textFill="#ebe1e1">
-               <font>
-                  <Font name="KacstArt" size="24.0" />
-               </font></Label>
-            <Label fx:id="winningLabel" text="\$10" textFill="#ebe1e1">
-               <font>
-                  <Font name="KacstArt" size="24.0" />
-               </font></Label>
-         </children>
-      </VBox>
-   </center>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="200.0" style="-fx-background-color: #262d37;" stylesheets="@css/Styles.css" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#resetButtonClick" text="Reset Game" />
-            <Button mnemonicParsing="false" onAction="#goMainMenu" text="Main Menu" />
-         </children>
-      </HBox>
-   </bottom>
-</BorderPane>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.GameOverViewController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0">
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #262d37;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Game Over" textFill="#ebe1e1">
+                     <font>
+                        <Font name="KacstArt" size="30.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="16.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Thank you for playing!" textFill="#ebe1e1">
+                     <font>
+                        <Font name="KacstArt" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Your final score is " textFill="#ebe1e1">
+                     <font>
+                        <Font name="KacstArt" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="winningLabel" text="\$10" textFill="#ebe1e1">
+                     <font>
+                        <Font name="KacstArt" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="200.0" style="-fx-background-color: #262d37;" stylesheets="@css/Styles.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#resetButtonClick" text="Reset Game" />
+                  <Button mnemonicParsing="false" onAction="#goMainMenu" text="Main Menu" />
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+      <JFXDrawer fx:id="drawer" minWidth="0.0" AnchorPane.rightAnchor="0.0" />
+      <JFXHamburger fx:id="hamburger" alignment="TOP_RIGHT" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </JFXHamburger>
+   </children>
+</AnchorPane>

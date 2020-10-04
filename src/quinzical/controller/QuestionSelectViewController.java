@@ -40,8 +40,8 @@ public class QuestionSelectViewController implements Initializable {
 	@FXML private Label questionLabel;
 	@FXML private Label remainingQuestion;
 	@FXML private GridPane centerGridPane;
-//	@FXML private JFXHamburger hamburger;
-//	@FXML private JFXDrawer drawer;
+	@FXML private JFXHamburger hamburger;
+	@FXML private JFXDrawer drawer;
 
 	/**
 	 * Navigate to main menu
@@ -58,7 +58,7 @@ public class QuestionSelectViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		//DrawerController.initDrawer(getClass(), drawer, hamburger);
+		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		
 		try {
 		model = Main.getQuizModel();
