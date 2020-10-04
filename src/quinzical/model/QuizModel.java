@@ -52,7 +52,6 @@ public class QuizModel {
 	 */
 	private QuizModel() {
 		db = new SQLiteDB();
-		//tts = new Festival();
 		
 		try {
 			db.getConnection();
