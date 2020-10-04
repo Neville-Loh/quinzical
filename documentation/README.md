@@ -1,9 +1,9 @@
 # Development Journal 
 
-# Deliverable
+# Final Project Deliverable
 - ~~Practice mode~~
-- ~~Games mode
-- ~~save/load (SQLite)
+- ~~Games mode~~
+- ~~save/load (SQLite)~~
 - add/delete question using GUI  (setting)
 - TTS (adjustable speed -> setting)
 
