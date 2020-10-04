@@ -100,12 +100,14 @@ public class QuestionViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
-
 		try {
 			model = Main.getQuizModel();
 			question = model.getActiveQuestion();
 			model.textToSpeech(question.toString());
-
+			
+			//TODO REMOVE
+			question.print();
+			
 			if (question.isPractice()) {
 				questionLabel.setText(question.getPrompt());
 				attempLabel.setText("Attempt Left: " + ((PracticeQuestion) question).getAttemptLeft());

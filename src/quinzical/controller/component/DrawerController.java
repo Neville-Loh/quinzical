@@ -24,17 +24,30 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import quinzical.model.QuizModel;
 
 public class DrawerController implements Initializable {
 	
+	
 	@FXML private Label userName;
+	@FXML private Label winningLabel;
 	@FXML private Button settingButton;
 	@FXML private JFXSlider speechSpeedSlider;
+	@FXML private JFXSlider volumeSlider;
+	private static QuizModel model = QuizModel.getModel();
 	
 	public static void initDrawer(Class<?> controllerClass, JFXDrawer drawer, JFXHamburger hamburger) {
 		try {
-
 			
+			// Loading Drawer
+			VBox toolbar = FXMLLoader.load(controllerClass.getResource("/quinzical/view/component/ToolBar.fxml"));
+			drawer.setSidePane(toolbar);
+			
+			
+			/*
+			 * The following code block is used to offset the drawer when the drawer is closed
+			 * this is done to prevent blockage of element under the drawer.
+			 */
 			drawer.setOnDrawerOpening(event ->
 			{
 			    AnchorPane.setRightAnchor(drawer, 0.0);
@@ -52,9 +65,8 @@ public class DrawerController implements Initializable {
 			});
 			
 			
-			VBox toolbar = FXMLLoader.load(controllerClass.getResource("/quinzical/view/component/ToolBar.fxml"));
-			drawer.setSidePane(toolbar);
 			
+			// Drawer Animation
 			HamburgerBasicCloseTransition task = new  HamburgerBasicCloseTransition(hamburger);
 			drawer.setDirection(DrawerDirection.RIGHT);
 			drawer.setOverLayVisible(false);
@@ -99,12 +111,15 @@ public class DrawerController implements Initializable {
 	
 	@FXML
 	private void goSetting(ActionEvent event) {
-		System.out.println("go settisnggsadff");
+		System.out.println("go settisnggsadffff");
 	}
 
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		winningLabel.setText(model.getWinningStr());
+		userName.setText(model.getUser().getName());
+		
 		// detect dragging on zoom scroll bar
 				speechSpeedSlider.valueProperty().addListener(new ChangeListener<Number>() {
 					public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {

@@ -73,7 +73,7 @@ public class QuestionSelectViewController implements Initializable {
 			}
 		}
 		
-		// populate button in each row and column
+		// populate button in each row and columnS
 		int col = 0;
 		int row;
 		for (Category category : cats) {
