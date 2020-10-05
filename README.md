@@ -1,16 +1,35 @@
 Project Quinzical
 ============================
 ## Getting Started
+To run the runable jar, use bash to run the following command
+```
+chmod +x run.sh
+./run.sh
+```
+The project assume `SQLiteQuinzical.db` is in the same directory, if the file is not presenet, try adding `Quinzical.txt`, 
+a question set to initialize the database to the same directory.
+
+It would be benifitial to have the following structure when running.
+
+    .
+    ├── src                     
+    ├── quinzical.jar
+    ├── run.sh                  
+    └── SQLiteQuinzical.db
+
+If issue still occure please try the run2.sh in below
 
 ### Scripts
+Run script to run the applciation with ease
+`run.sh`
 
-...
+`run2.sh`
+```
+```
 
 
 ### Compiled files
-
-...
-
+`SQLiteQuinzical.db`
 
 ### 3rd party libraries
 jfoenix-9.0.10.jar
@@ -20,56 +39,15 @@ sqlite-jdbc-3.32.3.2.jar
 
 
 
-### Source files
-    .
-    ├── build                   # Compiled files (alternatively `dist`)
-    ├── docs                    # Documentation files (alternatively `doc`)
-    ├── src                     # Source files (alternatively `lib` or `app`)
-    ├── test                    # Automated tests (alternatively `spec` or `tests`)
-    ├── tools                   # Tools and utilities
-    ├── LICENSE
-    └── README.md
-The actual source files of a software project are usually stored inside the
-`src` folder. Alternatively, you can put them into the `lib` (if you're
-developing a library), or into the `app` folder (if your application's source
-files are not supposed to be compiled).
-
-
 ### Automated tests
-
-Automated tests are usually placed into the `test` or, less commonly, into the `spec` or `tests` folder.
-
-> **Q: Why tests are placed into a separate folder, as opposed to having them closer to the code under test?**
->
-> **A:** Because you don't want to test the code, you want to test the *program*.
-
-    .
-    ├── ...
-    ├── test                    # Test files (alternatively `spec` or `tests`)
-    │   ├── benchmarks          # Load and stress tests
-    │   ├── integration         # End-to-end, integration tests (alternatively `e2e`)
-    │   └── unit                # Unit tests
-    └── ...
 
 
 ### Documentation files
 
-Often it is beneficial to include some reference data into the project, such as
-Rich Text Format (RTF) documentation, which is usually stored into the `docs`
-or, less commonly, into the `doc` folder.
 
-    .
-    ├── ...
-    ├── docs                    # Documentation files (alternatively `doc`)
-    │   ├── TOC.md              # Table of contents
-    │   ├── faq.md              # Frequently asked questions
-    │   ├── misc.md             # Miscellaneous information
-    │   ├── usage.md            # Getting started guide
-    │   └── ...                 # etc.
-    └── ...
 
 ### Resource 
-All image is retrived using where it is subject to .... bla
+All image is retrived from https://unsplash.com/ where it is free for commercial and non-commercial purposes with no permission needed.
 
 ### License information
 MIT License
