@@ -27,6 +27,9 @@ Run script to run the applciation with ease
 ```
 ```
 
+### Runtime crashes
+Try removing the `SQLiteQuinzical.db`. To rapidly test the programn, disable tesxt to speech using the drawer on the right by clicking the button on top right
+
 
 ### Compiled files
 `SQLiteQuinzical.db`
