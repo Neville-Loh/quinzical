@@ -17,8 +17,9 @@ It would be benifitial to have the following structure when running.
     ├── run.sh                  
     └── SQLiteQuinzical.db
 
-If issue still occure please try the adding vm argument to run configuration in below
+If issue still occure please try the adding vm argument to run configuration in below. 
 
+This program also assuem festival and espeak are installed and is callable by bash.
 ### Scripts
 Run script to run the applciation with ease
 `run.sh`
@@ -30,7 +31,10 @@ Run configuration
 ```
 
 ### Runtime crashes
-Try removing the `SQLiteQuinzical.db`. To rapidly test the programn, disable tesxt to speech using the drawer on the right by clicking the button on top right
+Try
+- removeing `SQLiteQuinzical.db`, restart the application with `Quinzical.txt` in the same directory
+- Disable `text to speech` using the drawer on the right by clicking the button on top right in any menu other than main menu
+
 
 
 ### Compiled files
