@@ -113,10 +113,7 @@ public class QuestionViewController implements Initializable {
 			model = Main.getQuizModel();
 			question = model.getActiveQuestion();
 			model.textToSpeech(question.toString());
-			
-			//TODO REMOVE
-			question.print();
-			
+		
 			if (question.isPractice()) {
 				questionLabel.setText(question.getPrompt());
 				attempLabel.setText("Attempt Left: " + ((PracticeQuestion) question).getAttemptLeft());
@@ -143,7 +140,9 @@ public class QuestionViewController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Submit answer for practice in the text field to check for correctness within model.
+	 * depending on if the answer is correct or not, the next screen initialize will
+	 * be different. If the attempted left is 1, show hint for the quetsion
 	 * @param event
 	 */
 	private void submitPracticeAnswer(ActionEvent event) {

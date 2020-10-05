@@ -80,6 +80,7 @@ public class GameOverViewController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		model.finishCurrentSession();
 	}
 
 }
