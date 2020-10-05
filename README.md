@@ -17,14 +17,16 @@ It would be benifitial to have the following structure when running.
     ├── run.sh                  
     └── SQLiteQuinzical.db
 
-If issue still occure please try the run2.sh in below
+If issue still occure please try the adding vm argument to run configuration in below
 
 ### Scripts
 Run script to run the applciation with ease
 `run.sh`
 
-`run2.sh`
+Run configuration
 ```
+--module-path /home/se2062020/javafx-sdk-11.0.2/lib  --add-modules javafx.controls,javafx.media,javafx.base,javafx.fxml
+--module-path {PROJECT_DIR}/lib --add-modules com.jfoenix
 ```
 
 ### Runtime crashes
@@ -39,14 +41,6 @@ jfoenix-9.0.10.jar
 sqlite-jdbc-3.32.3.2.jar
 
 ...
-
-
-
-### Automated tests
-
-
-### Documentation files
-
 
 
 ### Resource 
