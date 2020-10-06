@@ -5,7 +5,9 @@ import java.util.List;
 
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
+import quinzical.util.Espeak;
 import quinzical.util.Helper;
+import quinzical.util.TextToSpeech;
 import test.testSQLiteDB;
 
 /**
@@ -22,6 +24,7 @@ public class QuizModel {
 	private Session _currentSession;
 	private QuinzicalDB db;
 	private boolean _enableSpeech = true;
+	private TextToSpeech tts = new Espeak();
 
 	private PracticeQuestion _practiceQuestion;
 	private Question _currentQuestion;
@@ -185,13 +188,14 @@ public class QuizModel {
 	}
 
 	/**
-	 * TextToSpeech function using festival bash command.
+	 * TextToSpeech function using espeak bash command.
 	 * 
 	 * @param text to be turned into speech
 	 */
 	public void textToSpeech(String text) {
 		if (_enableSpeech) {
-			new Thread(new Runnable() {
+			tts.start(text);
+			/*new Thread(new Runnable() {
 				@Override
 				public void run() {
 					String command = "echo \"" + text + "\" | festival --tts";
@@ -199,7 +203,7 @@ public class QuizModel {
 				}
 
 			}).start();
-			System.out.println("TTS called: " + text);
+			System.out.println("TTS called: " + text);*/
 		}
 	}
 
