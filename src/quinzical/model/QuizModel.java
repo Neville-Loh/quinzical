@@ -122,9 +122,31 @@ public class QuizModel {
 		while (true) {
 			if (userInput.equalsIgnoreCase(answer) || userInput.equalsIgnoreCase(prefix + " " + answer)) {
 				return true;
+			} else if (userInput.startsWith(" ")) {
+				userInput = userInput.substring(1);
+			} else if (userInput.endsWith(" ") || userInput.endsWith(".")) {
+				userInput = userInput.substring(0, userInput.length() - 1);
 			} else if (i == 0) {
 				answer = replaceMacrons(answer);
-				i = 1;
+				i++;
+			} else if (i == 1) {
+				userInput = userInput.toLowerCase();
+				if (userInput.startsWith("the ")) {
+					userInput = userInput.substring(4);
+				} else if (userInput.startsWith("a ")) {
+					userInput = userInput.substring(2);
+				}
+				i++;
+			} else if (i == 2) {
+				if (answer.contains("/")) {
+					String[] answers = answer.split("/");
+					for (int j = 0; j < answers.length; j++) {
+						if (userInput.equalsIgnoreCase(answers[j]) || userInput.equalsIgnoreCase(prefix + " " + answers[j])) {
+							return true;
+						}
+					}
+				}
+				i++;
 			} else {
 				return false;
 			}

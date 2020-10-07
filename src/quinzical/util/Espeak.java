@@ -8,8 +8,8 @@ import javafx.concurrent.Task;
 
 public class Espeak implements TextToSpeech {
 	
-	private int _volume = 100;
-	private int _speed = 175;
+	private int _volume = 50;
+	private int _speed = 50;
 	private Process _currentProcess;
 	
 	public Espeak() {
@@ -24,29 +24,6 @@ public class Espeak implements TextToSpeech {
 
 		}).start();
 	}
-	
-	/*
-	public void start(String text) {
-		Task<Void> task = new Task<Void>() {
-			@Override
-			public Void call() throws Exception {
-				try {
-					ProcessBuilder pb = new ProcessBuilder("espeak", "hello");
-					Process process = pb.start();
-					process.waitFor();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				return null;
-			}
-		};
-		task.setOnSucceeded(event -> {
-			System.out.println("success");
-		});
-		
-		new Thread(task).run();
-	}
-	*/	
 	 
 	
 	public void stop() {
@@ -67,17 +44,17 @@ public class Espeak implements TextToSpeech {
 			throw new IllegalArgumentException();
 		}
 		
-		_volume = volume * 2;
+		_volume = volume;
 	}
 	
 	/**
 	 * This method changes the speed of the speech synthesis of festival.
-	 * @param speed is an integer between 80 and 450 measured in words per minute.
-	 * Default is 175. 
+	 * @param speed is an integer between 0 and 100
+	 * Default is 50. 
 	 * 
 	 */
 	public void setSpeed(int speed) throws IllegalArgumentException {
-		if (speed < 80 || speed > 450) {
+		if (speed < 0 || speed > 100) {
 			throw new IllegalArgumentException();
 		}
 		_speed = speed;
@@ -91,7 +68,7 @@ public class Espeak implements TextToSpeech {
 	private void runTerminal(String text) {
 		try {
 			ProcessBuilder pb;
-			pb = new ProcessBuilder("espeak", "-s", String.valueOf(_speed), "-a", String.valueOf(_volume), text);
+			pb = new ProcessBuilder("espeak", "-s", String.valueOf(_speed * 2 + 80), "-a", String.valueOf(_volume * 2), text);
 			Process process = pb.start();
 			_currentProcess = process;
 			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
