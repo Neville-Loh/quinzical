@@ -128,6 +128,10 @@ public class QuizModel {
 		while (true) {
 			if (userInput.equalsIgnoreCase(answer) || userInput.equalsIgnoreCase(prefix + " " + answer)) {
 				return true;
+			} else if (userInput.startsWith(" ")) {
+				userInput = userInput.substring(1);
+			} else if (userInput.endsWith(" ") || userInput.endsWith(".")) {
+				userInput = userInput.substring(0, userInput.length() - 1);
 			} else if (i == 0) {
 				answer = replaceMacrons(answer);
 				i++;
