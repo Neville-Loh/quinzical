@@ -228,6 +228,14 @@ public class QuizModel {
 			System.out.println("TTS called: " + text);*/
 		}
 	}
+	
+	public void setSpeechSpeed(int speed) {
+		tts.setSpeed(speed);
+	}
+	
+	public void setSpeechVolume(int volume) {
+		tts.setVolume(volume);
+	}
 
 	/**
 	 * Set Method. set the active question
