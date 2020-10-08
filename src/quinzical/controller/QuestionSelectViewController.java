@@ -17,6 +17,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -35,9 +36,9 @@ import quinzical.model.QuizModel;
  */
 public class QuestionSelectViewController implements Initializable {
 	private QuizModel model;
-
 	@FXML private Label questionLabel;
 	@FXML private Label remainingQuestion;
+	@FXML private BorderPane borderPane;
 	@FXML private GridPane centerGridPane;
 	@FXML private JFXHamburger hamburger;
 	@FXML private JFXDrawer drawer;
@@ -122,6 +123,8 @@ public class QuestionSelectViewController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		borderPane = ScreenController.getLoadingScreen(getClass());
 
 	}
 }
