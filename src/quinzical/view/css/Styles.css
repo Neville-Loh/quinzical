@@ -48,3 +48,7 @@
 	-fx-border-width: 3;
 }
 
+
+.jfx-hamburger StackPane {
+	-fx-background-color: lightgrey;
+}
