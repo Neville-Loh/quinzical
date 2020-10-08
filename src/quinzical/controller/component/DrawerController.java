@@ -21,6 +21,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -31,6 +32,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import quinzical.controller.ScreenController;
 import quinzical.model.QuizModel;
+import quinzical.util.TextToSpeech;
 
 /**
  * Drawer Controller for the Quinzical applications
@@ -40,16 +42,12 @@ import quinzical.model.QuizModel;
  */
 public class DrawerController implements Initializable {
 
-	@FXML
-	private Label userName;
-	@FXML
-	private Label winningLabel;
-	@FXML
-	private JFXSlider speechSpeedSlider;
-	@FXML
-	private JFXSlider volumeSlider;
-	@FXML 
-	private JFXToggleButton toggleButton;
+	@FXML private Label userName;
+	@FXML private Label winningLabel;
+	@FXML private JFXSlider speechSpeedSlider;
+	@FXML private JFXSlider volumeSlider;
+	@FXML private JFXToggleButton toggleButton;
+	@FXML private JFXToggleButton highContrastToggle;
 	
 	private static QuizModel model = QuizModel.getModel();
 
@@ -122,7 +120,6 @@ public class DrawerController implements Initializable {
 
 	/**
 	 * Go to the main menu menu
-	 * 
 	 * @param event
 	 */
 	@FXML
@@ -132,7 +129,6 @@ public class DrawerController implements Initializable {
 
 	/**
 	 * reset the game if confirm , then Go to the setting menu
-	 * 
 	 * @param event
 	 */
 	@FXML
@@ -161,12 +157,31 @@ public class DrawerController implements Initializable {
 		userName.setText(model.getUser().getName());
 		toggleButton.setSelected(model.isEnableSpeech());
 		
+		TextToSpeech tts = model.getTextToSpeechObject();
+		speechSpeedSlider.setValue(tts.getSpeed());
+		volumeSlider.setValue(tts.getVolume());
+		
 		// set event handler for toggle button enable speech
 		toggleButton.setOnAction(e -> {
 			if (toggleButton.isSelected()) {
 				model.setEnableSpeech(true);
 			} else {
 				model.setEnableSpeech(false);
+				
+			}
+			e.consume();
+		});
+		
+		
+		highContrastToggle.setOnAction(e -> {
+			javafx.scene.Parent p = ((Node) e.getSource()).getScene().getRoot();
+			if (highContrastToggle.isSelected()) {
+				p.getStylesheets().remove(0);
+				p.getStylesheets().add(0, getClass().getResource("/quinzical/view/css/HighContrast.css").toExternalForm());
+			} else {
+				p.getStylesheets().remove(0);
+				p.getStylesheets().add(0, getClass().getResource("/quinzical/view/css/Styles.css").toExternalForm());
+				
 			}
 			e.consume();
 		});
@@ -176,8 +191,6 @@ public class DrawerController implements Initializable {
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
 				if (old_val != new_val) {
 					// Change scale of map based on slider position.
-					System.out.println(new_val.intValue());
-					// double d = SettlementMapPanel.DEFAULT_SCALE;
 					model.setSpeechSpeed(new_val.intValue());
 
 				} else {
@@ -191,8 +204,6 @@ public class DrawerController implements Initializable {
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
 				if (old_val != new_val) {
 					// Change scale of map based on slider position.
-					System.out.println(new_val.intValue());
-					// double d = SettlementMapPanel.DEFAULT_SCALE;
 					model.setSpeechVolume(new_val.intValue());
 
 				} else {

@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javafx.animation.Animation;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import quinzical.Main;

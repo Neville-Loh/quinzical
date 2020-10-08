@@ -2,23 +2,28 @@ package quinzical.controller;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
  * Utility Controller for switch different scene.
+ * 
  * @author Neville
  */
 public class ScreenController {
 
 	/**
 	 * Main Menu Utility Method to go to the main menu
+	 * 
 	 * @param controllerClass
-	 * @param event of button
+	 * @param event          
 	 */
 	public static void goMainMenu(Class<?> controllerClass, ActionEvent event) {
 		try {
@@ -32,21 +37,73 @@ public class ScreenController {
 
 	/**
 	 * Question Select Utility Method to go to the Question Select View
+	 * S
 	 * @param controllerClass
-	 * @param event of button
+	 * @param event    
 	 */
 	public static void goQuestionSelect(Class<?> controllerClass, ActionEvent event) {
 		try {
-			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/QuestionSelectView.fxml"));
+			// Set loading screen
+			Scene Loading = getLoadingScene(controllerClass);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window.setScene(new Scene(parent));
-		} catch (IOException e) {
+			window.setScene(Loading);			
+			// Load the next screen concurrently using worker thread
+			Task<Void> task = new Task<Void>() {
+				@Override
+				public Void call() throws IOException {
+					Parent parent = FXMLLoader
+							.load(controllerClass.getResource("/quinzical/view/QuestionSelectView.fxml"));
+					
+					Platform.runLater(new Runnable() {
+		                @Override public void run() {
+		                	window.setScene(new Scene(parent));
+		                }
+		            });
+					return null;
+				}
+			};
+			new Thread(task).start();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Category Select Utility Method to go to the GameOver View
+	 * 
+	 * @param controllerClass
+	 * @param event  
+	 */
+	public static void goCategorySelect(Class<?> controllerClass, ActionEvent event) {
+		try {
+			// Set loading screen
+			Scene Loading = getLoadingScene(controllerClass);
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(Loading);			
+			// Load the next screen concurrently using worker thread
+			Task<Void> task = new Task<Void>() {
+				@Override
+				public Void call() throws IOException {
+					Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/CategorySelectView.fxml"));
+					Platform.runLater(new Runnable() {
+		                @Override public void run() {
+		                	window.setScene(new Scene(parent));
+		                }
+		            });
+					return null;
+				}
+			};
+			new Thread(task).start();
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
 	 * Question Page Utility Method to go to the Question View
+	 * 
 	 * @param controllerClass
 	 * @param event of button
 	 */
@@ -61,27 +118,11 @@ public class ScreenController {
 	}
 
 	/**
-	 * Current Winning Utility Method to go to the Current Winning View
-	 * @param controllerClass
-	 * @param event of button
-	 */
-	public static void goCurrentWinning(Class<?> controllerClass, ActionEvent event) {
-		try {
-			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/CurrentWinningView.fxml"));
-			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window.setScene(new Scene(parent));
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Game Over Utility Method to go to the GameOver View
 	 * @param controllerClass
-	 * @param event of button
+	 * @param event     
 	 */
-	public static void goGameOver(Class<?> controllerClass, ActionEvent event){
+	public static void goGameOver(Class<?> controllerClass, ActionEvent event) {
 		try {
 			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/GameOverView.fxml"));
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -90,21 +131,34 @@ public class ScreenController {
 			e.printStackTrace();
 		}
 	}
-	
+
+
 	/**
-	 * ---------------new---------
-	 * Category Select  Utility Method to go to the GameOver View
 	 * @param controllerClass
-	 * @param event of button
+	 * @param event
 	 */
-	public static void goCategorySelect(Class<?> controllerClass, ActionEvent event){
+	public static BorderPane getLoadingScreen(Class<?> controllerClass) {
 		try {
-			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/CategorySelectView.fxml"));
-			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window.setScene(new Scene(parent));
+			BorderPane pane = FXMLLoader.load(controllerClass.getResource("/quinzical/view/component/Spinner.fxml"));
+			return pane;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	/**
+	 * @param controllerClass
+	 * @param event
+	 */
+	public static Scene getLoadingScene(Class<?> controllerClass) {
+		try {
+			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/component/Spinner.fxml"));
+			return new Scene(parent);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

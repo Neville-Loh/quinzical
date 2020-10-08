@@ -60,6 +60,7 @@ public class GameOverViewController implements Initializable {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.YES) {
 			model.reset();
+			ScreenController.goMainMenu(getClass(), event);
 		}
 		else {
 			event.consume();
