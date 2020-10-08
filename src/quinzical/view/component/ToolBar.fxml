@@ -108,5 +108,6 @@
       <Button mnemonicParsing="false" onAction="#goReset" prefHeight="41.0" prefWidth="163.0" text="Reset" />
       <Button mnemonicParsing="false" onAction="#goMainMenu" prefHeight="41.0" prefWidth="163.0" text="Main Manu" />
       <JFXToggleButton fx:id="toggleButton" text="Enable Speech" textFill="WHITE" />
+      <JFXToggleButton fx:id="highContrastToggle" text="High Contrast" textFill="WHITE" />
    </children>
 </VBox>

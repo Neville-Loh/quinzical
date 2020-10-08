@@ -1,20 +1,20 @@
 .root {
-    -fx-background-color:  #262d37;
+    -fx-background-color:  #000000;
 }
 
 .button {
 	-fx-font-weight: bold;
-	-fx-background-color: #2196f3;
+	-fx-background-color: #1aebfd;
 	-fx-front-size: 16;
-	-fx-text-fill: white;
+	-fx-text-fill: black;
 }
 
 .button:hover{
 	-fx-font-weight: bold;
-	-fx-background-color: #2196f3;
+	-fx-background-color: white;
 	-fx-front-size: 16;
-	-fx-text-fill: white;
-	-fx-border-color: #2196f3;
+	-fx-text-fill: black;
+	-fx-border-color: white;
 	-fx-border-radius: 20;
 	-fx-border-width: 3;
 }
@@ -33,17 +33,17 @@
 
 .grid-pane > .button {
 	-fx-font-weight: bold;
-	-fx-background-color: #595ebf;
+	-fx-background-color: #1aebfd;
 	-fx-front-size: 16;
 	-fx-text-fill: white;
 }
 
 .grid-pane > .button:hover{
 	-fx-font-weight: bold;
-	-fx-background-color: #2196f3;
+	-fx-background-color: white;
 	-fx-front-size: 16;
-	-fx-text-fill: white;
-	-fx-border-color: #2196f3;
+	-fx-text-fill: black;
+	-fx-border-color: white;
 	-fx-border-radius: 20;
 	-fx-border-width: 3;
 }

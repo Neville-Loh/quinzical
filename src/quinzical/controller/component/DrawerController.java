@@ -21,6 +21,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -41,16 +42,12 @@ import quinzical.util.TextToSpeech;
  */
 public class DrawerController implements Initializable {
 
-	@FXML
-	private Label userName;
-	@FXML
-	private Label winningLabel;
-	@FXML
-	private JFXSlider speechSpeedSlider;
-	@FXML
-	private JFXSlider volumeSlider;
-	@FXML 
-	private JFXToggleButton toggleButton;
+	@FXML private Label userName;
+	@FXML private Label winningLabel;
+	@FXML private JFXSlider speechSpeedSlider;
+	@FXML private JFXSlider volumeSlider;
+	@FXML private JFXToggleButton toggleButton;
+	@FXML private JFXToggleButton highContrastToggle;
 	
 	private static QuizModel model = QuizModel.getModel();
 
@@ -170,6 +167,21 @@ public class DrawerController implements Initializable {
 				model.setEnableSpeech(true);
 			} else {
 				model.setEnableSpeech(false);
+				
+			}
+			e.consume();
+		});
+		
+		
+		highContrastToggle.setOnAction(e -> {
+			javafx.scene.Parent p = ((Node) e.getSource()).getScene().getRoot();
+			if (highContrastToggle.isSelected()) {
+				p.getStylesheets().remove(0);
+				p.getStylesheets().add(0, getClass().getResource("/quinzical/view/css/HighContrast.css").toExternalForm());
+			} else {
+				p.getStylesheets().remove(0);
+				p.getStylesheets().add(0, getClass().getResource("/quinzical/view/css/Styles.css").toExternalForm());
+				
 			}
 			e.consume();
 		});

@@ -12,14 +12,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.QuestionSelectViewController">
+<AnchorPane stylesheets="@css/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.QuestionSelectViewController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #262d37;">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0">
          <center>
-            <VBox alignment="CENTER" style="-fx-background-color: #262d37;" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" BorderPane.alignment="CENTER">
                <children>
-                  <GridPane fx:id="centerGridPane" alignment="CENTER" gridLinesVisible="true" minWidth="-Infinity" stylesheets="@css/GameSelect.css">
+                  <GridPane fx:id="centerGridPane" alignment="CENTER" gridLinesVisible="true" minWidth="-Infinity" styleClass="grid-pane">
             </GridPane>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
@@ -41,7 +40,7 @@
             </VBox>
          </center>
          <bottom>
-            <HBox alignment="CENTER" style="-fx-background-color: #262d37;" stylesheets="@css/Styles.css" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" BorderPane.alignment="CENTER">
                <children>
                   <Button mnemonicParsing="false" onAction="#goMainMenu" text="Main menu">
                      <HBox.margin>
