@@ -15,10 +15,10 @@ import javafx.stage.Stage;
 
 
 /**
- * Main class for the Quinical application. THe application is built with Javafx
+ * Main class for the Quinical application. THe application is built with Javafx11
  * The application uses Model view controller architecture
  * @author Neville, Daniel Cutfield
- * @version 0.3.1.3
+ * @version 0.3.1.4
  */
 
 
@@ -39,7 +39,7 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
-
+		
 		//#TODO
 		primaryStage.setOnCloseRequest(Helper.confirmCloseEventHandler);
 	}

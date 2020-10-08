@@ -15,24 +15,24 @@ import test.testSQLiteDB;
  * computation required by the quiz. The model is passed throughout all
  * controller.
  * 
- * @author Neville
+ * @author Neville, Daniel Cutfield
  */
 public class QuizModel {
 
 	private static QuizModel model;
+	private QuinzicalDB db;
 	private User _currentUser;
 	private Session _currentSession;
-	private QuinzicalDB db;
-	private boolean _enableSpeech = true;
+	private Question _currentQuestion;
+	private PracticeQuestion _practiceQuestion;
+	
+	private boolean _enableSpeech = false;
 	private TextToSpeech tts = new Espeak();
 
-	private PracticeQuestion _practiceQuestion;
-	private Question _currentQuestion;
 
 	/**
 	 * Singleton method to return the current model
-	 * 
-	 * @return
+	 * @return quiz model
 	 */
 	public static QuizModel getModel() {
 		if (model == null) {
@@ -239,7 +239,6 @@ public class QuizModel {
 
 	/**
 	 * Set Method. set the active question
-	 * 
 	 * @param question
 	 */
 	public void setActiveQuestion(Question question) {
@@ -248,7 +247,6 @@ public class QuizModel {
 
 	/**
 	 * Get Method
-	 * 
 	 * @return current selected question
 	 */
 	public Question getActiveQuestion() {
@@ -258,7 +256,6 @@ public class QuizModel {
 
 	/**
 	 * Get Method
-	 * 
 	 * @return all Category
 	 */
 	public List<Category> getCategoryList() {
@@ -267,7 +264,6 @@ public class QuizModel {
 
 	/**
 	 * Get Method
-	 * 
 	 * @return score of the player
 	 */
 	public int getWinning() {
@@ -276,7 +272,6 @@ public class QuizModel {
 
 	/**
 	 * Get Method
-	 * 
 	 * @return Score as a string with dollar sign
 	 */
 	public String getWinningStr() {
@@ -285,7 +280,6 @@ public class QuizModel {
 
 	/**
 	 * Get Method
-	 * 
 	 * @return total question left
 	 */
 	public int getRemainingQuestionCount() {
@@ -294,7 +288,6 @@ public class QuizModel {
 
 	/**
 	 * Select a random practice question in the model.
-	 * 
 	 * @param categoryId
 	 */
 	public void selectRandomPracticeQuestion(int categoryId) {
@@ -305,7 +298,6 @@ public class QuizModel {
 
 	/**
 	 * Get Method
-	 * 
 	 * @return the current practice question of the model
 	 */
 	public PracticeQuestion getCurrentPracticeQuestion() {
@@ -314,7 +306,6 @@ public class QuizModel {
 
 	/**
 	 * Method to answer a practice question
-	 * 
 	 * @param input, user input text
 	 * @return boolean if the answer is correct
 	 */
@@ -331,7 +322,6 @@ public class QuizModel {
 
 	/**
 	 * Create new user and add user to db
-	 * 
 	 * @param name of the user
 	 * @return userId if successful
 	 */
@@ -343,7 +333,6 @@ public class QuizModel {
 
 	/**
 	 * Get the current user of the model
-	 * 
 	 * @return user object
 	 */
 	public User getUser() {
@@ -352,7 +341,6 @@ public class QuizModel {
 
 	/**
 	 * Set the current user of the model
-	 * 
 	 * @param userid
 	 */
 	public void setUser(int userid) {
@@ -377,7 +365,6 @@ public class QuizModel {
 
 	/**
 	 * Get Category list which contain category with no question
-	 * 
 	 * @return Category List
 	 */
 	public List<Category> getAllCategorywithoutQuestion() {
@@ -387,7 +374,6 @@ public class QuizModel {
 	/**
 	 * Get the current session of the model The return reference contain all
 	 * question that are store in the sesions.
-	 * 
 	 * @return Session object
 	 */
 	public Session getSession() {
@@ -430,6 +416,10 @@ public class QuizModel {
 	 */
 	public boolean isEnableSpeech() {
 		return _enableSpeech;
+	}
+	
+	public TextToSpeech getTextToSpeechObject() {
+		return tts;
 	}
 
 }

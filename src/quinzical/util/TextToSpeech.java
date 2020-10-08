@@ -24,11 +24,23 @@ public interface TextToSpeech {
 	 * Set the volume of the current text to speech
 	 */
 	public void setVolume(int volume);
-
 	
+	/**
+	 * Get the volume of the current text to speech
+	 * @return volume
+	 */
+	public int getVolume();
+
 	/**
 	 * Set the speed of the current text to speech
 	 */
 	public void setSpeed(int speed);
+	
+	
+	/**
+	 * Get the current speed of current speech
+	 * @return speed 
+	 */
+	public int getSpeed();
 
 }

@@ -31,6 +31,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import quinzical.controller.ScreenController;
 import quinzical.model.QuizModel;
+import quinzical.util.TextToSpeech;
 
 /**
  * Drawer Controller for the Quinzical applications
@@ -122,7 +123,6 @@ public class DrawerController implements Initializable {
 
 	/**
 	 * Go to the main menu menu
-	 * 
 	 * @param event
 	 */
 	@FXML
@@ -132,7 +132,6 @@ public class DrawerController implements Initializable {
 
 	/**
 	 * reset the game if confirm , then Go to the setting menu
-	 * 
 	 * @param event
 	 */
 	@FXML
@@ -161,6 +160,10 @@ public class DrawerController implements Initializable {
 		userName.setText(model.getUser().getName());
 		toggleButton.setSelected(model.isEnableSpeech());
 		
+		TextToSpeech tts = model.getTextToSpeechObject();
+		speechSpeedSlider.setValue(tts.getSpeed());
+		volumeSlider.setValue(tts.getVolume());
+		
 		// set event handler for toggle button enable speech
 		toggleButton.setOnAction(e -> {
 			if (toggleButton.isSelected()) {
@@ -176,8 +179,6 @@ public class DrawerController implements Initializable {
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
 				if (old_val != new_val) {
 					// Change scale of map based on slider position.
-					System.out.println(new_val.intValue());
-					// double d = SettlementMapPanel.DEFAULT_SCALE;
 					model.setSpeechSpeed(new_val.intValue());
 
 				} else {
@@ -191,8 +192,6 @@ public class DrawerController implements Initializable {
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
 				if (old_val != new_val) {
 					// Change scale of map based on slider position.
-					System.out.println(new_val.intValue());
-					// double d = SettlementMapPanel.DEFAULT_SCALE;
 					model.setSpeechVolume(new_val.intValue());
 
 				} else {

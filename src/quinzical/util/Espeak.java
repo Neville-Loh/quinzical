@@ -2,14 +2,16 @@ package quinzical.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.stream.Stream;
 
-import javafx.concurrent.Task;
-
+/**
+ * Espeak Implementation of the text to speech system
+ * @author Daniel Cutfield
+ *
+ */
 public class Espeak implements TextToSpeech {
 	
-	private int _volume = 50;
-	private int _speed = 50;
+	private int _volume = 30;
+	private int _speed = 30;
 	private Process _currentProcess;
 	
 	public Espeak() {
@@ -19,6 +21,10 @@ public class Espeak implements TextToSpeech {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				// kill the speech if text to speech is in progress
+				if (_currentProcess != null) {
+					_currentProcess.destroy();
+				}
 				runTerminal(text);
 			}
 
@@ -71,24 +77,34 @@ public class Espeak implements TextToSpeech {
 			pb = new ProcessBuilder("espeak", "-s", String.valueOf(_speed * 2 + 80), "-a", String.valueOf(_volume * 2), text);
 			Process process = pb.start();
 			_currentProcess = process;
-			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-			int exitStatus = process.waitFor();
-			if (exitStatus == 0) {
-				String line;
-				while ((line = stdout.readLine()) != null) {
-					System.out.println(line);
-				}
-			} else {
-				String line;
-				while ((line = stderr.readLine()) != null) {
-					System.err.println(line);
-				}
-			}
-			process.destroy();
+//			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//			BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+//			int exitStatus = process.waitFor();
+//			if (exitStatus == 0) {
+//				String line;
+//				while ((line = stdout.readLine()) != null) {
+//					System.out.println(line);
+//				}
+//			} else {
+//				String line;
+//				while ((line = stderr.readLine()) != null) {
+//					System.err.println(line);
+//				}
+//			}
+//			process.destroy();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public int getVolume() {
+		return _volume;
+	}
+
+	@Override
+	public int getSpeed() {
+		return _speed;
 	}
 
 }
