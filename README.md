@@ -27,7 +27,7 @@ Run script to run the applciation with ease
 Run configuration
 ```
 --module-path /home/se2062020/javafx-sdk-11.0.2/lib  --add-modules javafx.controls,javafx.media,javafx.base,javafx.fxml
---module-path {PROJECT_DIR}/lib --add-modules com.jfoenix
+--module-path {PROJECT_DIR}/lib --add-modules com.jfoenix --add-exports=javafx.graphics/com.sun.javafx.scene=com.jfoenix
 ```
 
 ### Runtime crashes
