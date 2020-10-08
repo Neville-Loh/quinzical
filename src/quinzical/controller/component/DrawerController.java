@@ -172,16 +172,32 @@ public class DrawerController implements Initializable {
 			e.consume();
 		});
 
-		// Set event handler for scroll bar text spped
+		// Set event handler for scroll bar text speed
 		speechSpeedSlider.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
 				if (old_val != new_val) {
 					// Change scale of map based on slider position.
 					System.out.println(new_val.intValue());
 					// double d = SettlementMapPanel.DEFAULT_SCALE;
+					model.setSpeechSpeed(new_val.intValue());
 
 				} else {
 					speechSpeedSlider.setValue(1);
+				}
+			}
+		});
+		
+		// Set event handler for scroll bar text volume
+		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+				if (old_val != new_val) {
+					// Change scale of map based on slider position.
+					System.out.println(new_val.intValue());
+					// double d = SettlementMapPanel.DEFAULT_SCALE;
+					model.setSpeechVolume(new_val.intValue());
+
+				} else {
+					volumeSlider.setValue(1);
 				}
 			}
 		});
