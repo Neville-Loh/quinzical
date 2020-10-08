@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -46,6 +47,7 @@ public class CategorySelectViewController implements Initializable {
 	@FXML private GridPane centerGridPane;
 	@FXML private JFXHamburger hamburger;
 	@FXML private JFXDrawer drawer;
+	@FXML private Label categoryLabel;
 	
 	/**
 	 * Navigate to main menu
@@ -65,7 +67,8 @@ public class CategorySelectViewController implements Initializable {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		model = Main.getQuizModel();
 		List<Category> cats = model.getAllCategorywithoutQuestion();
-		
+		centerGridPane.setGridLinesVisible(false);
+		categoryLabel.setText("");
 		
 		// populate row constrain for each row
 		if (cats.get(0) != null) {
@@ -110,6 +113,7 @@ public class CategorySelectViewController implements Initializable {
 			        new EventHandler<MouseEvent>() {
 			          @Override
 			          public void handle(MouseEvent e) {
+			        	  categoryLabel.setText(category.getTitle());
 			        	  
 			        	  File file = new File("src/quinzical/view/resource/background/"+ category.getCategoryID()+".jpg");
 			        	  Image image1 = new Image(file.toURI().toString());

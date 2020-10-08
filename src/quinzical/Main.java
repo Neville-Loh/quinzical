@@ -39,7 +39,7 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
-		System.out.println("assfaasdfsdfsssaf");
+		System.out.println("assfaasdfsdfssasdfasdfsaf");
 		//#TODO
 		primaryStage.setOnCloseRequest(Helper.confirmCloseEventHandler);
 	}

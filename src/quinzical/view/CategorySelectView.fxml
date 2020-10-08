@@ -43,14 +43,26 @@
             </HBox>
          </bottom>
          <top>
-            <Label text="Select a category" textFill="WHITE" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="KacstArt" size="17.0" />
-               </font>
+            <VBox alignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
-                  <Insets top="20.0" />
+                  <Insets top="40.0" />
                </BorderPane.margin>
-            </Label>
+               <children>
+                  <Label text="Select a category" textFill="WHITE">
+                     <font>
+                        <Font name="DejaVu Sans Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="categoryLabel" text="Category" textFill="WHITE">
+                     <font>
+                        <Font name="KacstOne Bold" size="39.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
          </top>
       </BorderPane>
       <JFXDrawer fx:id="drawer" minWidth="0.0" AnchorPane.rightAnchor="0.0" />
