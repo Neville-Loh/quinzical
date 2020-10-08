@@ -275,15 +275,6 @@ public class Session {
 		}
 	}
 
-//	public void setActiveQuestion(Question question) {
-//		_activeQuestion = question;
-//		
-//	}
-//
-//
-//	public Question getActiveQuestion() {
-//		return _activeQuestion;
-//	}
 	
 
 }
