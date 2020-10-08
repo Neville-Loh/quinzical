@@ -217,22 +217,21 @@ public class QuizModel {
 	public void textToSpeech(String text) {
 		if (_enableSpeech) {
 			tts.start(text);
-			/*new Thread(new Runnable() {
-				@Override
-				public void run() {
-					String command = "echo \"" + text + "\" | festival --tts";
-					Helper.runBash(command);
-				}
-
-			}).start();
-			System.out.println("TTS called: " + text);*/
 		}
 	}
 	
+	/**
+	 * Set the speed of text to speech
+	 * @param speed
+	 */
 	public void setSpeechSpeed(int speed) {
 		tts.setSpeed(speed);
 	}
 	
+	/**
+	 * Set the volume of text to speech
+	 * @param volume
+	 */
 	public void setSpeechVolume(int volume) {
 		tts.setVolume(volume);
 	}
