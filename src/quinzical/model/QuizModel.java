@@ -26,7 +26,7 @@ public class QuizModel {
 	private Question _currentQuestion;
 	private PracticeQuestion _practiceQuestion;
 	
-	private boolean _enableSpeech = false;
+	private boolean _enableSpeech = true;
 	private TextToSpeech tts = new Espeak();
 
 
@@ -60,11 +60,11 @@ public class QuizModel {
 		_currentUser = new User("Default User");
 		_currentUser.setUserId(99);
 		loadUserSession();
+		//_currentSession.printCategoryList();
 
 		if (_currentSession == null) {
 			initSession();
 		}
-
 	}
 
 	/**

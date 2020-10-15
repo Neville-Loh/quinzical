@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXSnackbar.SnackbarEvent;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -28,6 +31,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.util.Duration;
 import quinzical.Main;
 import quinzical.controller.component.DrawerController;
 import quinzical.model.Category;
@@ -46,6 +50,7 @@ public class CategorySelectViewController implements Initializable {
 	@FXML private GridPane centerGridPane;
 	@FXML private JFXHamburger hamburger;
 	@FXML private JFXDrawer drawer;
+	@FXML private Label categoryLabel;
 	
 	/**
 	 * Navigate to main menu
@@ -65,7 +70,8 @@ public class CategorySelectViewController implements Initializable {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		model = Main.getQuizModel();
 		List<Category> cats = model.getAllCategorywithoutQuestion();
-		
+		centerGridPane.setGridLinesVisible(false);
+		categoryLabel.setText("");
 		
 		// populate row constrain for each row
 		if (cats.get(0) != null) {
@@ -110,6 +116,7 @@ public class CategorySelectViewController implements Initializable {
 			        new EventHandler<MouseEvent>() {
 			          @Override
 			          public void handle(MouseEvent e) {
+			        	  categoryLabel.setText(category.getTitle());
 			        	  
 			        	  File file = new File("src/quinzical/view/resource/background/"+ category.getCategoryID()+".jpg");
 			        	  Image image1 = new Image(file.toURI().toString());
