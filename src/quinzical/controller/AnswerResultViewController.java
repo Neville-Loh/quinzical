@@ -29,6 +29,8 @@ public class AnswerResultViewController{
 	@FXML private HBox bottomHBox;
 	@FXML private JFXHamburger hamburger;
 	@FXML private JFXDrawer drawer;
+	@FXML private Label winningText;
+	
 	/**
 	 * Navigate to main menu
 	 * @param event
@@ -56,10 +58,13 @@ public class AnswerResultViewController{
 		model = Main.getQuizModel();
 		isCorrectLabel.setText("Correct");
 		model.textToSpeech("Correct");
+		winningText.setText("");
+		winningLabel.setText("");
 		
-		String scoreStr = model.getWinningStr();
-		winningLabel.setText(scoreStr);
 		if (!question.isPractice()) {
+			String scoreStr = model.getWinningStr();
+			winningText.setText("Your current Winning is");
+			winningLabel.setText(scoreStr);
 			checkGameOverStatus();
 		}
 	}
@@ -72,14 +77,16 @@ public class AnswerResultViewController{
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		model = Main.getQuizModel();
 		isCorrectLabel.setText("Incorrect");
-		
-		String scoreStr = model.getWinningStr();
-		winningLabel.setText(scoreStr);
+		winningText.setText("");
+		winningLabel.setText("");
 		
 		String correctAnsStr = "The correct answer is " + question.getAnswer() + ".";
 		correctAnsLabel.setText(correctAnsStr);
 		model.textToSpeech("Incorrect. " + correctAnsStr);
 		if (!question.isPractice()) {
+			String scoreStr = model.getWinningStr();
+			winningText.setText("Your current Winning is");
+			winningLabel.setText(scoreStr);
 			checkGameOverStatus();
 		}
 	}
