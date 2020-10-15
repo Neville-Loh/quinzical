@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import quinzical.Main;
 import quinzical.controller.component.DrawerController;
 import quinzical.model.PracticeQuestion;
@@ -47,9 +48,9 @@ public class QuestionViewController implements Initializable {
 	@FXML private JFXDrawer drawer;
 	@FXML private Label d0;
 	@FXML private Label d1;
+	@FXML private GridPane digitpanel;
 	@FXML private Button dontKnowBtn;
 	private Thread countdownThread;
-	private Object timer;
 	private int timeRemaining = 11;
 
 	/**
@@ -118,7 +119,6 @@ public class QuestionViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
-		startCountdown();
 		
 		try {
 			model = Main.getQuizModel();
@@ -128,7 +128,9 @@ public class QuestionViewController implements Initializable {
 			if (question.isPractice()) {
 				questionLabel.setText(question.getPrompt());
 				attempLabel.setText("Attempt Left: " + ((PracticeQuestion) question).getAttemptLeft());
+				digitpanel.setVisible(false);
 			} else {
+				startCountdown();
 				questionLabel.setText("");
 				attempLabel.setText("");
 			}
