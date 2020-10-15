@@ -3,7 +3,7 @@ package quinzical;
 
 import java.io.IOException;
 
-
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
@@ -31,6 +31,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws IOException {
+		
 		model = QuizModel.getModel();
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Quinzical");
