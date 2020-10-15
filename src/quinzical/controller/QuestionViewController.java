@@ -7,15 +7,19 @@ import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 
+import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import quinzical.Main;
@@ -41,6 +45,12 @@ public class QuestionViewController implements Initializable {
 	@FXML private Label attempLabel;
 	@FXML private JFXHamburger hamburger;
 	@FXML private JFXDrawer drawer;
+	@FXML private Label d0;
+	@FXML private Label d1;
+	@FXML private Button dontKnowBtn;
+	private Thread countdownThread;
+	private Object timer;
+	private int timeRemaining = 11;
 
 	/**
 	 * Navigate to main menu
@@ -49,7 +59,6 @@ public class QuestionViewController implements Initializable {
 	@FXML
 	private void goMainMenu(ActionEvent event) {
 		ScreenController.goMainMenu(getClass(), event);
-
 	}
 
 	/**
@@ -109,6 +118,8 @@ public class QuestionViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
+		startCountdown();
+		
 		try {
 			model = Main.getQuizModel();
 			question = model.getActiveQuestion();
@@ -172,6 +183,7 @@ public class QuestionViewController implements Initializable {
 	 */
 	private void goAnswerPage(boolean isCorrect, ActionEvent event) {
 		try {
+			stopCountdown();
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/quinzical/view/AnswerResultView.fxml"));
 			Parent parent = loader.load();
@@ -193,5 +205,44 @@ public class QuestionViewController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void startCountdown() {
+        countdownThread = new Thread(() -> {
+            while (timeRemaining >= -1 && !Thread.interrupted()) {
+                Platform.runLater(() -> {
+                	if (timeRemaining == -1) {
+                		dontKnowBtn.fire();
+                	}
+                	setDigit();
+                	timeRemaining -= 1;
+                	System.out.println(timeRemaining);
+                });
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+        countdownThread.start();
+    }
+
+    public void stopCountdown() {
+        if (countdownThread != null) {
+            countdownThread.interrupt();
+            countdownThread = null;
+        }
+    }
+    
+    private void setDigit() {
+    	String digits = Integer.toString(timeRemaining);
+    	if (digits.length() == 1) {
+    		d0.setText("" + digits.charAt(0));
+    		d1.setText("0");
+    	} else {
+    		d0.setText("" + digits.charAt(1));
+    		d1.setText("" + digits.charAt(0));
+    	}
+    }
 
 }

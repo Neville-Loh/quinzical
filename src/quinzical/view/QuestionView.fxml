@@ -8,7 +8,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -29,12 +32,36 @@
                               <Insets bottom="100.0" />
                            </VBox.margin>
                         </Label>
-                        <Label fx:id="questionLabel" text="placeholder" textFill="#f2ecec">
+                        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #244949;">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="d1" alignment="CENTER" text="0" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="Abyssinica SIL" size="96.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="d0" alignment="CENTER" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="Abyssinica SIL" size="96.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </GridPane>
+                        <Label fx:id="questionLabel" text="questionLabel" textFill="#f2ecec">
                            <font>
                               <Font name="KacstArt" size="19.0" />
                            </font>
                         </Label>
-                        <Label fx:id="attempLabel" layoutX="466.0" layoutY="291.0" text="placeholder" textFill="#f2ecec">
+                        <Label fx:id="attempLabel" layoutX="466.0" layoutY="291.0" text="attempLabel" textFill="#f2ecec">
                            <font>
                               <Font name="KacstArt" size="19.0" />
                            </font>
@@ -61,7 +88,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Button mnemonicParsing="false" onAction="#centerButton" text="Press Enter" />
-                  <Button mnemonicParsing="false" onAction="#dontKnowButton" text="Don't Know">
+                  <Button fx:id="dontKnowBtn" mnemonicParsing="false" onAction="#dontKnowButton" text="Don't Know">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
