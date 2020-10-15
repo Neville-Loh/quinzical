@@ -7,8 +7,6 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXSnackbar;
-import com.jfoenix.controls.JFXSnackbar.SnackbarEvent;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,7 +29,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import javafx.util.Duration;
 import quinzical.Main;
 import quinzical.controller.component.DrawerController;
 import quinzical.model.Category;
