@@ -7,9 +7,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXSpinner;
 
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
