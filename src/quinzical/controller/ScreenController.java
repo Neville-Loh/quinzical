@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -21,7 +20,6 @@ public class ScreenController {
 
 	/**
 	 * Main Menu Utility Method to go to the main menu
-	 * 
 	 * @param controllerClass
 	 * @param event          
 	 */
@@ -37,7 +35,6 @@ public class ScreenController {
 
 	/**
 	 * Question Select Utility Method to go to the Question Select View
-	 * S
 	 * @param controllerClass
 	 * @param event    
 	 */
@@ -71,7 +68,6 @@ public class ScreenController {
 	
 	/**
 	 * Category Select Utility Method to go to the GameOver View
-	 * 
 	 * @param controllerClass
 	 * @param event  
 	 */
@@ -100,10 +96,50 @@ public class ScreenController {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Go to the user select screen
+	 * @param controllerClass
+	 * @param event
+	 */
+	public static void goUserSelect(Class<?> controllerClass, ActionEvent event) {
+		try {
+			// Set loading screen
+			Scene Loading = getLoadingScene(controllerClass);
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(Loading);			
+			// Load the next screen concurrently using worker thread
+			Task<Void> task = new Task<Void>() {
+				@Override
+				public Void call() throws IOException {
+					Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/UserSelectView.fxml"));
+					Platform.runLater(new Runnable() {
+		                @Override public void run() {
+		                	window.setScene(new Scene(parent));
+		                }
+		            });
+					return null;
+				}
+			};
+			new Thread(task).start();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void goUserSelect2(Class<?> controllerClass, ActionEvent event) {
+		try {
+			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/UserSelectView.fxml"));
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(new Scene(parent));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Question Page Utility Method to go to the Question View
-	 * 
 	 * @param controllerClass
 	 * @param event of button
 	 */
@@ -132,22 +168,15 @@ public class ScreenController {
 		}
 	}
 
-
-	/**
-	 * @param controllerClass
-	 * @param event
+	
+	/*
+	 * =======================================================================================================
+	 * Utility Method
+	 * 
+	 * =======================================================================================================
 	 */
-	public static BorderPane getLoadingScreen(Class<?> controllerClass) {
-		try {
-			BorderPane pane = FXMLLoader.load(controllerClass.getResource("/quinzical/view/component/Spinner.fxml"));
-			return pane;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	/**
+	 * Get Loading screen as a Scene
 	 * @param controllerClass
 	 * @param event
 	 */
