@@ -77,7 +77,7 @@ public class DrawerController implements Initializable {
 
 			drawer.setOnDrawerClosed(event -> {
 				// AnchorPane.clearConstraints(drawer);
-				AnchorPane.setRightAnchor(drawer, -500.0);
+				AnchorPane.setRightAnchor(drawer, -900.0);
 				AnchorPane.setTopAnchor(drawer, 0.0);
 				AnchorPane.setBottomAnchor(drawer, 0.0);
 			});
@@ -86,7 +86,7 @@ public class DrawerController implements Initializable {
 			HamburgerBasicCloseTransition task = new HamburgerBasicCloseTransition(hamburger);
 			drawer.setDirection(DrawerDirection.RIGHT);
 			drawer.setOverLayVisible(false);
-			drawer.setDefaultDrawerSize(200);
+			drawer.setDefaultDrawerSize(300);
 			drawer.setPrefWidth(0);
 			;
 
@@ -125,6 +125,11 @@ public class DrawerController implements Initializable {
 	@FXML
 	private void goMainMenu(ActionEvent event) {
 		ScreenController.goMainMenu(getClass(), event);
+	}
+	
+	@FXML
+	private void changeUser(ActionEvent event) {
+		ScreenController.goUserSelect2(getClass(), event);
 	}
 
 	/**

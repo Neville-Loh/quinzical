@@ -40,7 +40,7 @@ import quinzical.model.QuizModel;
  * @author Neville
  *
  */
-public class CategorySelectViewController implements Initializable {
+public class SelectCategoryViewController implements Initializable {
 	private QuizModel model;
 
 	@FXML private BorderPane borderPane;
@@ -115,7 +115,7 @@ public class CategorySelectViewController implements Initializable {
 			          public void handle(MouseEvent e) {
 			        	  categoryLabel.setText(category.getTitle());
 			        	  
-			        	  File file = new File("src/quinzical/view/resource/background/"+ category.getCategoryID()+".jpg");
+			        	  File file = new File("resource/background/"+ category.getCategoryID()+".jpg");
 			        	  Image image1 = new Image(file.toURI().toString());
 							
 					    borderPane.setBackground(new Background(new BackgroundImage(image1,

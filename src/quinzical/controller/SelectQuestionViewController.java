@@ -35,7 +35,7 @@ import quinzical.model.QuizModel;
  * @author Neville
  *
  */
-public class QuestionSelectViewController implements Initializable {
+public class SelectQuestionViewController implements Initializable {
 	private QuizModel model;
 	@FXML private Label questionLabel;
 	@FXML private Label remainingQuestion;
