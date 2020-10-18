@@ -61,10 +61,6 @@ public class QuizModel {
 		_currentUser.setUserId(99);
 		loadUserSession();
 		//_currentSession.printCategoryList();
-
-		if (_currentSession == null) {
-			initSession();
-		}
 	}
 
 	/**
@@ -72,7 +68,11 @@ public class QuizModel {
 	 * system directory. The object mimic a database
 	 */
 	public void loadUserSession() {
+		_currentUser.print();
 		_currentSession = db.getUserLastestSession(_currentUser);
+		if (_currentSession == null) {
+			initSession();
+		}
 	}
 
 	/**
@@ -348,8 +348,19 @@ public class QuizModel {
 		_currentUser = user;
 
 		// load current most recent user session;
-		Session session = db.getUserLastestSession(user);
-		_currentSession = session;
+		loadUserSession();
+
+	}
+	
+	/**
+	 * Set the current user of the model
+	 * @param userid
+	 */
+	public void setUser(User user) {
+		// change user to user id;
+		_currentUser = user;
+		// load current most recent user session;
+		loadUserSession();
 
 	}
 
@@ -399,7 +410,14 @@ public class QuizModel {
 		List<Category> cat = db.getRandomQuestionSet(5, 5);
 		_currentSession.setQuestionSet(cat);
 	}
-
+	
+	/**
+	 * Get method
+	 * @return db;
+	 */
+	public QuinzicalDB getDb() {
+		return db;
+	}
 	/**
 	 * set method, set enable speech to a boolean
 	 * @param true/false

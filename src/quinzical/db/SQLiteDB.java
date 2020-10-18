@@ -87,8 +87,24 @@ public class SQLiteDB implements QuinzicalDB{
 
 	@Override
 	public List<User> getAllUser() {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> result = new ArrayList<User>();
+		String statement = "SELECT * FROM user;";
+		PreparedStatement prep = null;
+		try {			
+			prep = conn.prepareStatement(statement);
+			ResultSet res = prep.executeQuery();
+			
+			while( res.next() ) {
+				User user  = new User(res.getString(2));
+				System.out.println(res.getInt(1));
+				user.setUserId(res.getInt(1));
+				result.add(user);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return result;
 	}
 
 	@Override
@@ -125,8 +141,10 @@ public class SQLiteDB implements QuinzicalDB{
 	 */
 	@Override
 	public Session getUserLastestSession(User user) {
+		user.print();
 		int userId = user.getUserID();
 		String statement = "SELECT * FROM session WHERE user_id = " + userId + " AND  isFinished = false;";
+		System.out.println(statement);
 		PreparedStatement prep = null;
 		try {
 			prep = conn.prepareStatement(statement);
