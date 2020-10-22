@@ -73,12 +73,6 @@ public class testQuizModel {
 				"Winning after answered a question:" +model.getWinning());
 		
 		
-		
-		
-		
-		
-		
-		
 		// save session
 		
 		model.saveUserSession();
@@ -87,11 +81,6 @@ public class testQuizModel {
 		
 		// load session
 		
-		
-		
-		
-		
-		//  
 		
 
 	}

@@ -6,9 +6,7 @@ import java.util.List;
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
 import quinzical.util.Espeak;
-import quinzical.util.Helper;
 import quinzical.util.TextToSpeech;
-import test.testSQLiteDB;
 
 /**
  * THe Quiz model of the application. This class contain all the necessary

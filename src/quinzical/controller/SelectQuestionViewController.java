@@ -22,7 +22,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import quinzical.Main;
 import quinzical.controller.component.DrawerController;
 import quinzical.model.Category;
 import quinzical.model.Question;
@@ -63,7 +62,7 @@ public class SelectQuestionViewController implements Initializable {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
 
 		try {
-			model = Main.getQuizModel();
+			model = QuizModel.getModel();
 			List<Category> cats = model.getCategoryList();
 			remainingQuestion.setText(Integer.toString(model.getRemainingQuestionCount()));
 

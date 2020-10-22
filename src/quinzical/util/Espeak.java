@@ -1,7 +1,5 @@
 package quinzical.util;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 /**
  * Espeak Implementation of the text to speech system

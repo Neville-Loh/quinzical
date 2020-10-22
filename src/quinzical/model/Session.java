@@ -2,7 +2,6 @@ package quinzical.model;
 
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -253,10 +252,17 @@ public class Session {
 	}
 
 	
+	/**
+	 * Set Method, set is finish status of the session
+	 * @param bool
+	 */
 	public void setIsFinished(boolean bool) {
 		_isFinished = bool;
 	}
 	
+	/**
+	 * Utility method for printing all the field of session
+	 */
 	public void print() {
 		System.out.printf(
 				"session_id: %d, user_id: %d, score: %d, remaining_question: %d%n"
@@ -266,6 +272,9 @@ public class Session {
 				String.valueOf(this.getFinishTime()).toString());
 	}
 	
+	/**
+	 * Utility method for printing all the question of the session.
+	 */
 	public void printCategoryList() {
 		for (Category cat : _cats) {
 			System.out.println(cat.getTitle() + " , id : " + cat.getCategoryID());

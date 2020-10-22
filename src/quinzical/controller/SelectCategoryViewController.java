@@ -29,7 +29,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import quinzical.Main;
 import quinzical.controller.component.DrawerController;
 import quinzical.model.Category;
 import quinzical.model.QuizModel;
@@ -65,7 +64,7 @@ public class SelectCategoryViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
-		model = Main.getQuizModel();
+		model = QuizModel.getModel();
 		List<Category> cats = model.getAllCategorywithoutQuestion();
 		centerGridPane.setGridLinesVisible(false);
 		categoryLabel.setText("");

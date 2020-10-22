@@ -7,12 +7,10 @@ import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
@@ -23,7 +21,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import quinzical.Main;
 import quinzical.controller.component.DrawerController;
 import quinzical.model.PracticeQuestion;
 import quinzical.model.Question;
@@ -121,7 +118,7 @@ public class QuestionViewController implements Initializable {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		
 		try {
-			model = Main.getQuizModel();
+			model = QuizModel.getModel();
 			question = model.getActiveQuestion();
 			model.textToSpeech(question.toString());
 		

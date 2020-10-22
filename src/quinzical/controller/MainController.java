@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import quinzical.Main;
 import quinzical.model.QuizModel;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -85,7 +84,7 @@ public class MainController implements Initializable{
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		model = Main.getQuizModel();
+		model = QuizModel.getModel();
 	}
 	
 

@@ -9,7 +9,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import quinzical.Main;
 import quinzical.controller.component.DrawerController;
 import quinzical.model.Question;
 import quinzical.model.QuizModel;
@@ -55,7 +54,7 @@ public class AnswerResultViewController{
 	 */
 	public void validAnswerInit(Question question) {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
-		model = Main.getQuizModel();
+		model = QuizModel.getModel();
 		isCorrectLabel.setText("Correct");
 		model.textToSpeech("Correct");
 		winningText.setText("");
@@ -75,7 +74,7 @@ public class AnswerResultViewController{
 	 */
 	public void invalidAnswerInit(Question question) {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
-		model = Main.getQuizModel();
+		model = QuizModel.getModel();
 		isCorrectLabel.setText("Incorrect");
 		winningText.setText("");
 		winningLabel.setText("");

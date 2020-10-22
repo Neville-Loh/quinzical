@@ -17,7 +17,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Region;
-import quinzical.Main;
 import quinzical.controller.component.DrawerController;
 import quinzical.model.QuizModel;
 
@@ -75,7 +74,7 @@ public class GameOverViewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		try {
-		model = Main.getQuizModel();
+		model = QuizModel.getModel();
 		String scoreStr = model.getWinningStr();
 		winningLabel.setText(scoreStr);
 		} catch (Exception e) {
