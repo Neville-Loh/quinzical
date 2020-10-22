@@ -13,6 +13,7 @@ import quinzical.Main;
 import quinzical.db.QuinzicalDB;
 import quinzical.model.QuizModel;
 import quinzical.model.User;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -24,8 +25,6 @@ import javafx.scene.layout.VBox;
  */
 public class UserSelectViewController implements Initializable{
 	private QuizModel model;
-	@FXML Button btn1;
-	@FXML Button btn2;
 	@FXML TextField userName;
 	@FXML VBox vbox;
 	/**
@@ -37,6 +36,7 @@ public class UserSelectViewController implements Initializable{
 		if (userName.getText() != null || userName.getText().strip() != "") {
 			System.out.println(userName.getText());
 			model.createNewUser(userName.getText());
+			ScreenController.goMainMenu(this.getClass(), event);
 		}
 		//ScreenController.goQuestionSelect(getClass(), event);
 	}
@@ -61,8 +61,7 @@ public class UserSelectViewController implements Initializable{
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		model = Main.getQuizModel();
+		model = QuizModel.getModel();
 		QuinzicalDB db = model.getDb();
 		List<User> users = db.getAllUser();
 		

@@ -41,7 +41,7 @@ public class Main extends Application {
 		primaryStage.setResizable(false);
 		primaryStage.show();
 		//#TODO
-		primaryStage.setOnCloseRequest(Helper.confirmCloseEventHandler);
+		//primaryStage.setOnCloseRequest(Helper.confirmCloseEventHandler);
 	
 	}
 	

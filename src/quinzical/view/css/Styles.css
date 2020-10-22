@@ -3,28 +3,56 @@
 }
 
 .button {
+	-fx-pref-height: 70px;
+    -fx-pref-width: 380px;
 	-fx-font-weight: bold;
-	-fx-background-color: #2196f3;
-	-fx-front-size: 16;
-	-fx-text-fill: white;
+	-fx-background-color: #002a33;
+	-fx-font-size: 30;
+	-fx-text-fill: #00d4fc;
+	-fx-border-color: #00d4fc;
 }
 
 .button:hover{
 	-fx-font-weight: bold;
-	-fx-background-color: #2196f3;
-	-fx-front-size: 16;
+	-fx-background-color: #005566;
+	-fx-front-size: 30;
 	-fx-text-fill: white;
-	-fx-border-color: #2196f3;
-	-fx-border-radius: 20;
+	-fx-border-color: #00d4fc;
 	-fx-border-width: 3;
 }
 .popup {
     -fx-padding: 10;
     -fx-border-width: 5;
-    -fx-font-size: 16;
+    -fx-font-size: 30;
     -fx-text-fill: white;
 }
 
+
+.grid-pane-game > .label {
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+
+.grid-pane-game > .button {
+	-fx-pref-height: 40px;
+    -fx-pref-width: 160px;
+	-fx-font-weight: bold;
+	-fx-background-color: #595ebf;
+	-fx-front-size: 30;
+	-fx-text-fill: white;
+	-fx-border-color: #595ebf;
+}
+
+.grid-pane-game > .button:hover{
+	-fx-font-weight: bold;
+	-fx-background-color: #2196f3;
+	-fx-front-size: 30;
+	-fx-text-fill: white;
+	-fx-border-color: #2196f3;
+	-fx-border-radius: 20;
+	-fx-border-width: 3;
+}
 
 .grid-pane > .label {
 	-fx-font-weight: bold;
@@ -32,16 +60,20 @@
 }
 
 .grid-pane > .button {
+	-fx-pref-height: 50px;
+    -fx-pref-width: 320px;
 	-fx-font-weight: bold;
 	-fx-background-color: #595ebf;
-	-fx-front-size: 16;
+	-fx-front-size: 25;
 	-fx-text-fill: white;
+	-fx-opacity: 0.95;
+	-fx-border-color: #595ebf;
 }
 
 .grid-pane > .button:hover{
 	-fx-font-weight: bold;
 	-fx-background-color: #2196f3;
-	-fx-front-size: 16;
+	-fx-front-size: 35;
 	-fx-text-fill: white;
 	-fx-border-color: #2196f3;
 	-fx-border-radius: 20;

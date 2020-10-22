@@ -18,7 +18,7 @@
          <center>
             <VBox alignment="CENTER" BorderPane.alignment="CENTER">
                <children>
-                  <GridPane fx:id="centerGridPane" alignment="CENTER" gridLinesVisible="true" minWidth="-Infinity" styleClass="grid-pane">
+                  <GridPane fx:id="centerGridPane" alignment="CENTER" gridLinesVisible="true" minWidth="-Infinity" styleClass="grid-pane-game">
             </GridPane>
                   <HBox alignment="CENTER_RIGHT">
                      <children>

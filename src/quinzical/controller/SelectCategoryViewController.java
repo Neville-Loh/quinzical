@@ -74,7 +74,7 @@ public class SelectCategoryViewController implements Initializable {
 		if (cats.get(0) != null) {
 			for (int i = 0; i < 3; i++) {
 				centerGridPane.getRowConstraints()
-						.add(new RowConstraints(40, 30, -1, Priority.ALWAYS, VPos.CENTER, false));
+						.add(new RowConstraints(80, 40, -1, Priority.ALWAYS, VPos.CENTER, false));
 			}
 			for (int j = 0; j< 3; j++) {
 				centerGridPane.getColumnConstraints()

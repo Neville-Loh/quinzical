@@ -30,8 +30,7 @@ public class MainController implements Initializable{
 	 */
 	@FXML
 	private void showQuestionSelectView(ActionEvent event){
-		ScreenController.goUserSelect2(getClass(), event);
-		//ScreenController.goQuestionSelect(getClass(), event);
+		ScreenController.goQuestionSelect(getClass(), event);
 	}
 	
 	/**

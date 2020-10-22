@@ -71,7 +71,7 @@ public class SelectQuestionViewController implements Initializable {
 			if (cats.get(0) != null) {
 				for (int i = 0; i <= cats.get(0).getQuestionCount(); i++) {
 					centerGridPane.getRowConstraints()
-							.add(new RowConstraints(40, 30, -1, Priority.ALWAYS, VPos.CENTER, false));
+							.add(new RowConstraints(70, 50, -1, Priority.ALWAYS, VPos.CENTER, false));
 				}
 			}
 

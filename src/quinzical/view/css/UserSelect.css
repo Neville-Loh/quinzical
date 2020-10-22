@@ -1,0 +1,68 @@
+.root {
+    -fx-background-color:  #262d37;
+}
+
+
+.button{
+
+    -fx-background-color: #252526;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-pref-height: 100px;
+    -fx-pref-width: 600px;
+    -fx-font-size: 20;
+
+}
+.button:hover{
+
+    -fx-background-color: linear-gradient(#be1d00,#ff5400);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+
+}
+
+
+
+.addBtn {
+	-fx-background-color: linear-gradient(#ff5400,#ff5400);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 200px;
+}
+
+.popup {
+    -fx-padding: 10;
+    -fx-border-width: 5;
+    -fx-font-size: 30;
+    -fx-text-fill: white;
+}
+
+
+.grid-pane > .label {
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+
+.grid-pane > .button {
+	-fx-font-weight: bold;
+	-fx-background-color: #595ebf;
+	-fx-front-size: 30;
+	-fx-text-fill: white;
+	-fx-opacity: 0.9;
+}
+
+.grid-pane > .button:hover{
+	-fx-font-weight: bold;
+	-fx-background-color: #2196f3;
+	-fx-front-size: 30;
+	-fx-text-fill: white;
+	-fx-border-color: #2196f3;
+	-fx-border-radius: 20;
+	-fx-border-width: 3;
+}
+
+
+.jfx-hamburger StackPane {
+	-fx-background-color: lightgrey;
+}
