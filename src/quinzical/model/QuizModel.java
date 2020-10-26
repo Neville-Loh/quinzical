@@ -443,6 +443,7 @@ public class QuizModel {
 
 	public void setUserAsLastUser() {
 		int id = config.getLastUserId();
+		System.out.println("id" + id);
 		if (id == -1) {
 			setUser(1);
 		} else {
