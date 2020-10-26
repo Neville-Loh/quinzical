@@ -55,9 +55,10 @@ public class SQLiteDB implements QuinzicalDB{
 			// create all the table
 			Schema.createUserTable(conn);
 			Schema.createCategoryTable(conn);
-			boolean init = Schema.createQuestionTable(conn);
 			Schema.createSessionTable(conn);
 			Schema.createSessionQuestionsTable(conn);
+			Schema.createSettingTable(conn);
+			boolean init = Schema.createQuestionTable(conn);
 			
 			
 			if (init) {
@@ -81,7 +82,19 @@ public class SQLiteDB implements QuinzicalDB{
 	 */
 	@Override
 	public User getUser(int id) {
-		// TODO Auto-generated method stub
+		PreparedStatement prep = null;
+		try {
+			String statement = "SELECT * FROM user WHERE user_id = "+ id +";";
+			prep = conn.prepareStatement(statement);
+			ResultSet res = prep.executeQuery();
+			User result = new User(res.getString(2));
+			result.setHighestScore(res.getInt(3));
+			result.setUserId(id);
+			return result;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -106,13 +119,30 @@ public class SQLiteDB implements QuinzicalDB{
 		} 
 		return result;
 	}
+	
+	@Override
+	public void updateUser(User user) {
+		PreparedStatement prep = null;
+		try {
+			// saving all data related to the session
+			prep = conn.prepareStatement("REPLACE INTO user"
+					+ "(user_id, user_name, highest_score) "
+					+ "values(?,?,?);");
+			prep.setInt(1, user.getUserID());
+			prep.setString(2, user.getName());
+			prep.setInt(3, user.getHighestScore());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void addUser(User user) {
 		PreparedStatement prep = null;
 			try {
-				prep = conn.prepareStatement("INSERT INTO user(user_name) values(?);");
+				prep = conn.prepareStatement("INSERT INTO user(user_name, highest_score) values(?,?);");
 				prep.setString(1, user.getName());
+				prep.setInt(2, user.getHighestScore());
 				prep.execute();
 				
 				// Try see if result set return a generatedKeys, set the input object key to id
@@ -501,6 +531,7 @@ public class SQLiteDB implements QuinzicalDB{
 		DbUtils.deleteEntryInTable(conn, questionId, "question");
 		
 	}
+
 
 
 }

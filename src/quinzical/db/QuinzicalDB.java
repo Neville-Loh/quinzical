@@ -38,6 +38,8 @@ public interface QuinzicalDB {
 	 */
 	public List<User> getAllUser();
 	
+	public void updateUser(User user);
+	
 	/**
 	 * Add a user to data base,
 	 * After this method called, the input object, user, will be assigned a user 
