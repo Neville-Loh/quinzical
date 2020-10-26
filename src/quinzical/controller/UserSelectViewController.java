@@ -34,11 +34,10 @@ public class UserSelectViewController implements Initializable{
 	@FXML
 	private void createUserButton(ActionEvent event){
 		if (userName.getText() != null || userName.getText().strip() != "") {
-			System.out.println(userName.getText());
-			model.createNewUser(userName.getText());
+			int resultid = model.createNewUser(userName.getText());
+			model.setUser(resultid);
 			ScreenController.goMainMenu(this.getClass(), event);
 		}
-		//ScreenController.goQuestionSelect(getClass(), event);
 	}
 	
 	

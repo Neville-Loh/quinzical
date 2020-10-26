@@ -13,6 +13,7 @@ public class User {
 	private String _name;
 	private boolean showHiddenCategory = false;
 	private Session _currentSession;
+	private int highestScore = 0;
 
 	
 	/**
@@ -63,14 +64,15 @@ public class User {
 		
 	}
 	
-	/**
-	 * Clear all statistic that are associated with the user
-	 * and reset the user to its initial status
-	 */
-	public void clearUserHistory() {
-		// TODO Auto-generated method stub
+	public int getHighestScore() {
+		return highestScore;
 	}
-	
+
+
+	public void setHighestScore(int highestScore) {
+		this.highestScore = highestScore;
+	}
+
 	/**
 	 * Get all statistic associated to the user as an array which included
 	 * DateTime, score pairs.

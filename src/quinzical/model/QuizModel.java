@@ -3,6 +3,7 @@ package quinzical.model;
 import java.sql.SQLException;
 import java.util.List;
 
+import quinzical.db.AppConfig;
 import quinzical.db.QuinzicalDB;
 import quinzical.db.SQLiteDB;
 import quinzical.util.Espeak;
@@ -26,6 +27,7 @@ public class QuizModel {
 	
 	private boolean _enableSpeech = true;
 	private TextToSpeech tts = new Espeak();
+	private AppConfig config = AppConfig.loadconfig();
 
 
 	/**
@@ -66,12 +68,12 @@ public class QuizModel {
 	 * system directory. The object mimic a database
 	 */
 	public void loadUserSession() {
-		_currentUser.print();
 		_currentSession = db.getUserLastestSession(_currentUser);
 		if (_currentSession == null) {
 			initSession();
 		}
 	}
+
 
 	/**
 	 * Save the current session to database
@@ -190,6 +192,8 @@ public class QuizModel {
 	public void save() {
 		System.out.println("Saving Session...");
 		db.addSession(_currentUser, _currentSession);
+		config.setLastUserId(_currentUser.getUserID());
+		AppConfig.saveConfig(config);
 	}
 
 	/**
@@ -209,7 +213,6 @@ public class QuizModel {
 
 	/**
 	 * TextToSpeech function using espeak bash command.
-	 * 
 	 * @param text to be turned into speech
 	 */
 	public void textToSpeech(String text) {
@@ -344,7 +347,7 @@ public class QuizModel {
 		// change user to user id;
 		User user = db.getUser(userid);
 		_currentUser = user;
-
+		user.print();
 		// load current most recent user session;
 		loadUserSession();
 
@@ -436,5 +439,15 @@ public class QuizModel {
 	public TextToSpeech getTextToSpeechObject() {
 		return tts;
 	}
+	
 
+	public void setUserAsLastUser() {
+		int id = config.getLastUserId();
+		if (id == -1) {
+			setUser(1);
+		} else {
+			setUser(id);
+		}
+	}
+	
 }
