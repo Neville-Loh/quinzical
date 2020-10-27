@@ -21,6 +21,7 @@
             </Label>
             <Button mnemonicParsing="false" onAction="#showQuestionSelectView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Start" />
             <Button layoutX="392.0" layoutY="458.0" mnemonicParsing="false" onAction="#showCategorySelectView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Practice Mode" />
+            <Button layoutX="520.0" layoutY="694.0" mnemonicParsing="false" onAction="#showLeaderboardView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Leaderboard" />
             <Button mnemonicParsing="false" onAction="#resetButtonClick" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Reset game" />
             <Button mnemonicParsing="false" onAction="#quitButtonClick" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Save and Quit" />
          </children>

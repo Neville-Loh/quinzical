@@ -47,6 +47,17 @@ public class MainController implements Initializable{
 		ScreenController.goCategorySelect(getClass(), event);
 	}
 	
+	
+	/**
+	 * Navigate to leaderboard
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	private void showLeaderboardView(ActionEvent event) throws IOException {
+		ScreenController.goLeaderboard(getClass(), event);
+	}
+	
 	/**
 	 * Send out reset Alert, if user confirm, reset the game
 	 * @param event
