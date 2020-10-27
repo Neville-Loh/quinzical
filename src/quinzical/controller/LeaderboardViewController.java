@@ -27,10 +27,9 @@ import quinzical.model.User;
 
 public class LeaderboardViewController implements Initializable {
 	private QuizModel model;
-	@FXML private TableView<Session> tableView;
-	@FXML private TableColumn<Session, Integer> rankColumn;
-	@FXML private TableColumn<Session, String> userNameColumn;
-	@FXML private TableColumn<Session, Integer> scoreColumn;
+	@FXML private TableView<User> tableView;
+	@FXML private TableColumn<User, String> userNameColumn;
+	@FXML private TableColumn<User, Integer> scoreColumn;
 	@FXML private BorderPane borderPane;
 	@FXML private Button mainMenuButton;
 	
@@ -53,33 +52,24 @@ public class LeaderboardViewController implements Initializable {
 		try {
 			model = QuizModel.getModel();
 			
-			userNameColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("user"));
-			scoreColumn.setCellValueFactory(new PropertyValueFactory<Session, Integer>("winnings"));
-			//TODO add function that gets all sessions
-			//List<Session> sessions = model.getDb();
-			// Populate table
-			ObservableList<Session> sessions = getSessions();
-			tableView.setItems(sessions);
+			userNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
+			scoreColumn.setCellValueFactory(new PropertyValueFactory<User, Integer>("highestScore"));
+			
+			//Populate list
+			List<User> users = model.getDb().getAllUser();
+			ObservableList<User> usersObservable = FXCollections.observableArrayList();
+			for (int i = 0; i < users.size(); i++) {
+				usersObservable.add(users.get(i));
+			}
+			
+			//Put list into table
+			tableView.setItems(usersObservable);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
 	
-	/**
-	 * populates a list of sessions for testing purposes
-	 * @return
-	 */
-	private ObservableList<Session> getSessions() {
-		ObservableList<Session> sessions = FXCollections.observableArrayList();
-		sessions.add(new Session(new User("Daniel")));
-		Session session = new Session(new User("Neville"));
-		session.setWinnings(500);
-		sessions.add(session);
-		session = new Session(new User("Random"));
-		session.setWinnings(300);
-		sessions.add(session);
-		return sessions;
-	}
 
 }
