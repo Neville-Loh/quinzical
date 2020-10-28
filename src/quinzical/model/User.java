@@ -99,6 +99,10 @@ public class User {
 	public void setShowHiddenCategory(boolean showHiddenCategory) {
 		this.showHiddenCategory = showHiddenCategory;
 	}
+	
+	public String toString() {
+		return _name;
+	}
 
 	
 	public void print() {

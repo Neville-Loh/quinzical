@@ -152,6 +152,21 @@ public class ScreenController {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Leaderboard Utility Method to go to the Leaderboard View
+	 * @param controllerClass
+	 * @param event of button
+	 */
+	public static void goLeaderboard(Class<?> controllerClass, ActionEvent event) {
+		try {
+			Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/LeaderboardView.fxml"));
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(new Scene(parent));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Game Over Utility Method to go to the GameOver View
