@@ -85,7 +85,18 @@ public class MainController implements Initializable{
 		model.save();
 		Platform.exit();
 	}
-
+	
+	/**
+	 * Method for testing purposes
+	 * Sets all questions in the current session except for 1 to attempted
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	private void completeSession(ActionEvent event) throws IOException {
+		model.getSession().completeSession();
+	}
+	
 	/**
 	 * Populate the quiz model
 	 */

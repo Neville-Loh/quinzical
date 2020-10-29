@@ -62,10 +62,14 @@ public class Session {
 		_startTime = new Timestamp(System.currentTimeMillis());
 		_endTime = null;
 		_winnings = 0;
+		showHiddenCategory = false;
 		for (Category cat : _cats) {
 			for (Question question : cat.getQuestions()) {
 				question.setAttempted(false);
 			}
+		}
+		for (Question question: _hiddenCategory.getQuestions()) {
+			question.setAttempted(false);
 		}
 	}
 	
@@ -99,6 +103,22 @@ public class Session {
 		}
 	}
 	
+	public void completeSession() {
+		int i = 0;
+		for (Category cat: _cats) {
+			for (Question question: cat.getQuestions()) {
+				question.setAttempted(true);
+				if (i == 4 && question.getScore() == 500) {
+					question.setAttempted(false);
+				}
+			}
+			i++;
+		}
+		for (Question question: _hiddenCategory.getQuestions()) {
+			question.setAttempted(true);
+		}
+		addWinnings((int) (Math.random() * 5000));
+	}
 	
 	/*
 	 *  ----------------------------------------------------------------------------
