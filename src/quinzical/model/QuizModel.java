@@ -372,6 +372,14 @@ public class QuizModel {
 		// Creating new session which associate to current user.
 		Session session = new Session(_currentUser);
 		session.setQuestionSet(db.getRandomQuestionSet(5, 5));
+		Category hiddenCat;
+		while (true) {
+			hiddenCat = db.getRandomQuestionSet(1, 5).get(0);
+			if (hiddenCat.getTitle().equals("International")) {
+				break;
+			}
+		}
+		session.setHiddenCategory(hiddenCat);
 	}
 
 	/**

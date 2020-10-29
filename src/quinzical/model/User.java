@@ -11,7 +11,6 @@ public class User {
 
 	private int _ID = -1;
 	private String _name;
-	private boolean showHiddenCategory = false;
 	private Session _currentSession;
 	private int highestScore = 0;
 
@@ -85,19 +84,6 @@ public class User {
 	
 	public void setSession(Session session) {
 		_currentSession = session;
-	}
-	
-	/**
-	 * @return the showHiddenCategory
-	 */
-	public boolean isShowHiddenCategory() {
-		return showHiddenCategory;
-	}
-	/**
-	 * @param showHiddenCategory the showHiddenCategory to set
-	 */
-	public void setShowHiddenCategory(boolean showHiddenCategory) {
-		this.showHiddenCategory = showHiddenCategory;
 	}
 	
 	public String toString() {

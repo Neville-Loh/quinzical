@@ -21,7 +21,8 @@ public class Session {
 	private List<Category> _cats;
 	private Map<Integer,Question> questionDic;
 	private int _remainingQuestion;
-	
+	private boolean showHiddenCategory = false;
+	private Category _hiddenCategory;
 	
 	private Timestamp _startTime;
 	private Timestamp _endTime;
@@ -78,6 +79,13 @@ public class Session {
 					_remainingQuestion++;
 				}
 			}
+		}
+	}
+	
+	public void setHiddenCategory(Category hiddenCategory) {
+		_hiddenCategory = hiddenCategory;
+		for (Question question: hiddenCategory.getQuestions()) {
+			questionDic.put(question.getID(), question);
 		}
 	}
 	
@@ -168,6 +176,45 @@ public class Session {
 	
 	public Question getQuestionById(int id) {
 		return questionDic.get(id);
+	}
+	
+	/**
+	 * This method checks if the enough categories have been completed to
+	 * unlock the hidden category and returns a boolean value.
+	 * @return showHiddenCategory
+	 */
+	public boolean isShowHiddenCategory() {
+		int catsCompleted = 0;
+		for (Category cat: _cats) {
+			int questionsAttempted = 0;
+			
+			for (Question question: cat.getQuestions()) {
+				if (question.isAttempted()) {
+					questionsAttempted++;
+				}
+			}
+			
+			if (questionsAttempted >= 5) {
+				catsCompleted++;
+			}
+		}
+		
+		if (catsCompleted >= 2) {
+			showHiddenCategory = true;
+			_remainingQuestion += 5;
+		}
+		
+		return showHiddenCategory;
+	}
+	/**
+	 * @param showHiddenCategory the showHiddenCategory to set
+	 */
+	public void setShowHiddenCategory(boolean showHiddenCategory) {
+		this.showHiddenCategory = showHiddenCategory;
+	}
+
+	public Category getHiddenCategory() {
+		return _hiddenCategory;
 	}
 	
 	

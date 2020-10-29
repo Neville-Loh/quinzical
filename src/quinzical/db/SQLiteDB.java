@@ -247,6 +247,14 @@ public class SQLiteDB implements QuinzicalDB{
 			}
 			
 			session.setQuestionSet(categoryList);
+			Category hiddenCat;
+			while (true) {
+				hiddenCat = getRandomQuestionSet(1, 5).get(0);
+				if (hiddenCat.getTitle().equals("International")) {
+					break;
+				}
+			}
+			session.setHiddenCategory(hiddenCat);
 			return session;
 			
 		} catch (SQLException e) {
@@ -424,7 +432,16 @@ public class SQLiteDB implements QuinzicalDB{
 			ResultSet res = prep.executeQuery();
 			
 			while( res.next() ) {
-				result.add(res.getString(2));
+				if (!res.getString(2).equals("International")) {
+					result.add(res.getString(2));
+				}
+			}
+			
+			if (result.size() < numberofCategory) {
+				statement = "SELECT * FROM category ORDER by RANDOM() LIMIT 1;";
+				prep = conn.prepareStatement(statement);
+				ResultSet replacement = prep.executeQuery();
+				result.add(replacement.getString(2));
 			}
 			
 		} catch (SQLException e) {
