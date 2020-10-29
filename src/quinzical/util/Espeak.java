@@ -3,7 +3,7 @@ package quinzical.util;
 
 /**
  * Espeak Implementation of the text to speech system
- * @author Daniel Cutfield
+ * @author Daniel
  *
  */
 public class Espeak implements TextToSpeech {
@@ -12,9 +12,15 @@ public class Espeak implements TextToSpeech {
 	private int _speed = 30;
 	private Process _currentProcess;
 	
+	/**
+	 * default constructor
+	 */
 	public Espeak() {
 	}
 	
+	/**
+	 * Start playing the speech synthesis for the given string
+	 */
 	public void start(String text) {
 		new Thread(new Runnable() {
 			@Override
@@ -29,12 +35,10 @@ public class Espeak implements TextToSpeech {
 		}).start();
 	}
 	 
-	
+	/**
+	 * Stop the text to speech if it is still playing
+	 */
 	public void stop() {
-		/*Stream<ProcessHandle> descendants = ProcessHandle.current().descendants();
-		descendants.filter(ProcessHandle::isAlive).forEach(ph -> {
-			ph.destroy();
-		});*/
 		_currentProcess.destroy();
 	}
 	
@@ -75,31 +79,22 @@ public class Espeak implements TextToSpeech {
 			pb = new ProcessBuilder("espeak", "-s", String.valueOf(_speed * 2 + 80), "-a", String.valueOf(_volume * 2), text);
 			Process process = pb.start();
 			_currentProcess = process;
-//			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//			BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-//			int exitStatus = process.waitFor();
-//			if (exitStatus == 0) {
-//				String line;
-//				while ((line = stdout.readLine()) != null) {
-//					System.out.println(line);
-//				}
-//			} else {
-//				String line;
-//				while ((line = stderr.readLine()) != null) {
-//					System.err.println(line);
-//				}
-//			}
-//			process.destroy();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Get the current volume 
+	 */
 	@Override
 	public int getVolume() {
 		return _volume;
 	}
 
+	/**
+	 * Get the current speed
+	 */
 	@Override
 	public int getSpeed() {
 		return _speed;

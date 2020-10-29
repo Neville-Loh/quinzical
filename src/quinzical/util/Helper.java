@@ -15,7 +15,6 @@ import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import quinzical.Main;
 import quinzical.model.QuizModel;
 
 /**

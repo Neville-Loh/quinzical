@@ -14,9 +14,9 @@ public class DbUtils {
 	
 	/**
 	 * Delete an entry from the give tableName, irreversible action.
-	 * All entry related to the entry will be deleted in a cascade faction.
+	 * All entries related to the entry will be deleted in a cascade fashion.
 	 * @param conn connection of the database
-	 * @param entryId the id asigned to the entry
+	 * @param entryId the id assigned to the entry
 	 * @param tableName the table Name
 	 */
 	public static void deleteEntryInTable(Connection conn, int entryId, String tableName) {
@@ -34,7 +34,7 @@ public class DbUtils {
 	
 	
 	/**
-	 * get an entry ID given the table name, column  name, where the column value to match it
+	 * get an entry ID given to the table name, column name, where the column value to match it
 	 * Will only return the first entry if there are multiple matches
 	 * catch exception if no matches
 	 * 

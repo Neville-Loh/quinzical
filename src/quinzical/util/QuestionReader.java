@@ -13,7 +13,7 @@ import quinzical.model.Question;
  * This class reads the categories, questions and answers from the provided txt file
  * into the database for use in the game.
  * 
- * @author danielcutfield
+ * @author Daniel
  *
  */
 
@@ -22,13 +22,18 @@ public class QuestionReader {
 	private final String FILENAME;
 	
 	/**
-	 * Constructor of the 
+	 * Constructor of the question reader
 	 * @param location
 	 */
 	public QuestionReader(String location) {
 		FILENAME = location;
 	}
 	
+	/**
+	 * Reads the categories and questions from the given text file and saves
+	 * in the database for use in the game
+	 * @param db
+	 */
 	public void populateCategoriesAndQuestions(SQLiteDB db) {
 		try {
 			File file = new File(FILENAME);
@@ -57,6 +62,12 @@ public class QuestionReader {
 		}
 	}
 	
+	/**
+	 * Creates a question object by splitting the given string into the
+	 * prompt, prefix and answer
+	 * @param line from text file
+	 * @return question object
+	 */
 	private Question createQuestion(String line) {
 		int bracket = line.indexOf(")");
 		String question = line.substring(0, line.indexOf(","));
@@ -69,6 +80,11 @@ public class QuestionReader {
 		return q;
 	}
 	
+	/**
+	 * Removes spaces from the start and end of the given string
+	 * @param str
+	 * @return string without spaces
+	 */
 	private String removeSpaces(String str) {
 		if (str.startsWith(" ")) {
 			str = str.substring(1);

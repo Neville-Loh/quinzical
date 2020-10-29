@@ -91,7 +91,7 @@ public class AnswerResultViewController{
 	}
 	
 	/**
-	 * Check the number of remaining question, if 0 remains,
+	 * Check the number of remaining questions, if 0 remain,
 	 * set bottom bar to a next button which brings user to the game over
 	 * screen.
 	 */

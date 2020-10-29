@@ -109,7 +109,6 @@ public class SQLiteDB implements QuinzicalDB{
 			
 			while( res.next() ) {
 				User user  = new User(res.getString(2));
-				System.out.println(res.getInt(1));
 				user.setUserId(res.getInt(1));
 				result.add(user);
 			}
@@ -164,17 +163,15 @@ public class SQLiteDB implements QuinzicalDB{
 	/*
 	 * =====================================================================================================
 	 * Session
-	 * Implementation of all end point method of the related
+	 * Implementation of all end point method related
 	 * to the class Session 
 	 * 
 	 * =====================================================================================================
 	 */
 	@Override
 	public Session getUserLastestSession(User user) {
-		user.print();
 		int userId = user.getUserID();
 		String statement = "SELECT * FROM session WHERE user_id = " + userId + " AND  isFinished = false;";
-		System.out.println(statement);
 		PreparedStatement prep = null;
 		try {
 			prep = conn.prepareStatement(statement);
@@ -185,10 +182,8 @@ public class SQLiteDB implements QuinzicalDB{
 			}
 			// get all value from result set
 			int session_id = res.getInt(1);
-			int user_id = res.getInt(2);
 			int score = res.getInt(3);
 			int remaining_question = res.getInt(4);
-			boolean isFinished = res.getBoolean(5);
 			Timestamp startTime = res.getTimestamp(6);
 			Timestamp FinishTime = res.getTimestamp(7);
 			
@@ -249,7 +244,6 @@ public class SQLiteDB implements QuinzicalDB{
 			session.setQuestionSet(categoryList);
 			Category hiddenCat = getInternationalQuestionSet(5);
 			session.setHiddenCategory(hiddenCat);
-			System.out.println(hiddenCat.getTitle());
 			return session;
 			
 		} catch (SQLException e) {
@@ -320,7 +314,7 @@ public class SQLiteDB implements QuinzicalDB{
 	/*
 	 * =====================================================================================================
 	 * Category
-	 * Implementation of all end point method of the related
+	 * Implementation of all end point method related
 	 * to the class Category
 	 * 
 	 * =====================================================================================================
@@ -516,7 +510,7 @@ public class SQLiteDB implements QuinzicalDB{
 	/*
 	 * =====================================================================================================
 	 * Question
-	 * Implementation of all end point method of the related
+	 * Implementation of all end point method related
 	 * to the class Question
 	 * 
 	 * =====================================================================================================

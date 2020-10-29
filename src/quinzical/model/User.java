@@ -86,11 +86,6 @@ public class User {
 		_currentSession = session;
 	}
 	
-	public String toString() {
-		return _name;
-	}
-
-	
 	public void print() {
 		System.out.println("User name: " + _name + ",user_ID = " + _ID);
 	}

@@ -69,6 +69,11 @@ public class Session {
 		}
 	}
 	
+	/**
+	 * Sets the question set for the game. Takes a list of categories and puts
+	 * all the questions into a map corresponding to their questionID
+	 * @param category
+	 */
 	public void setQuestionSet(List<Category> category) {
 		_cats = category;
 		_remainingQuestion = 0;
@@ -82,6 +87,11 @@ public class Session {
 		}
 	}
 	
+	/**
+	 * Sets the hidden category questions for the game. Takes a single category 
+	 * as input and puts the questions into a map corresponding to their question ID
+	 * @param hiddenCategory
+	 */
 	public void setHiddenCategory(Category hiddenCategory) {
 		_hiddenCategory = hiddenCategory;
 		for (Question question: hiddenCategory.getQuestions()) {
@@ -93,7 +103,7 @@ public class Session {
 	/*
 	 *  ----------------------------------------------------------------------------
 	 *  SESSION INFOMATION
-	 *  The following method are get method and set method for the current session
+	 *  The following methods are get method and set method for the current session
 	 *  which related to the session information
 	 *  
 	 *  ----------------------------------------------------------------------------
@@ -118,8 +128,8 @@ public class Session {
 	
 	/**
 	 * Set method for ID,
-	 * CAUTIOUS!, this method only meant to be called by database implementation and
-	 * not Anywhere of the application, throw illegalArgumentException if id already exist.
+	 * CAUTION!, this method is only meant to be called by database implementation and
+	 * not anywhere of the application, throw illegalArgumentException if id already exist.
 	 * @param id
 	 * @throw IllegalArgumentException
 	 */
@@ -136,7 +146,7 @@ public class Session {
 	
 	/**
 	 * Get the question set from the session 
-	 * @return category containing all quetion
+	 * @return category containing all question
 	 */
 	public List<Category> getCategoryList(){
 		return _cats;
@@ -173,7 +183,11 @@ public class Session {
 		_remainingQuestion = num;
 	}
 	
-	
+	/**
+	 * Gets question based on its questionID
+	 * @param id
+	 * @return question
+	 */
 	public Question getQuestionById(int id) {
 		return questionDic.get(id);
 	}
@@ -207,12 +221,17 @@ public class Session {
 		return showHiddenCategory;
 	}
 	/**
+	 * 
 	 * @param showHiddenCategory the showHiddenCategory to set
 	 */
 	public void setShowHiddenCategory(boolean showHiddenCategory) {
 		this.showHiddenCategory = showHiddenCategory;
 	}
 
+	/**
+	 * Gets the hidden category for the current game.
+	 * @return
+	 */
 	public Category getHiddenCategory() {
 		return _hiddenCategory;
 	}

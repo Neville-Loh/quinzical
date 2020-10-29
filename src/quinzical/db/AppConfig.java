@@ -21,17 +21,23 @@ public class AppConfig implements Serializable {
     
     /**
      * Constructor, initialize winning as 0 and isAttempted as a empty
-     * hashed map
+     * hash map
      */
     public AppConfig() {
     }
 
-
+    /**
+     * Get the id of the last user that logged in
+     * @return
+     */
 	public int getLastUserId() {
 		return lastUserId;
 	}
 
-
+	/**
+	 * Set the lastUserId to the id of the last user that logged in
+	 * @param lastUserId
+	 */
 	public void setLastUserId(int lastUserId) {
 		this.lastUserId = lastUserId;
 	}

@@ -28,7 +28,7 @@ import quinzical.model.Question;
 import quinzical.model.QuizModel;
 
 /**
- * Controller class for Question select screen, display all category and
+ * Controller class for Question select screen, display all category and question
  * selection buttons
  * 
  * @author Neville
@@ -54,7 +54,7 @@ public class SelectQuestionViewController implements Initializable {
 	}
 
 	/**
-	 * initialize the current screen, population category and question button in
+	 * initialize the current screen, populate category and question button in
 	 * category.
 	 */
 	@Override
