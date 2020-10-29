@@ -77,8 +77,15 @@ public class SelectQuestionViewController implements Initializable {
 			// populate button in each row and columnS
 			int col = 0;
 			int row;
+			boolean showingHiddenCategory = false;
 			for (Category category : cats) {
 				row = 1;
+				
+				//Replaces category with the hidden category if it is unlocked
+				if (model.getSession().isShowHiddenCategory() && !showingHiddenCategory && category.isComplete()) {
+					category = model.getSession().getHiddenCategory();
+					showingHiddenCategory = true;
+				}
 
 				// set constraints for the following column
 				centerGridPane.getColumnConstraints()

@@ -135,6 +135,14 @@ public interface QuinzicalDB {
 	List<Category> getRandomQuestionSet(int categoryCount, int questionCount);
 	
 	/**
+	 * Get a random set of questions for the hidden international category
+	 * Returns a category object containing the randomly selected international questions
+	 * @param questionCount
+	 * @return
+	 */
+	public Category getInternationalQuestionSet(int questionCount);
+	
+	/**
 	 * Retrieve all the question and category from the database
 	 * @return
 	 */

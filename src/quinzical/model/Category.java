@@ -58,6 +58,15 @@ public class Category {
 		return _questions.size();
 	}
 	
+	public boolean isComplete() {
+		for (Question question: _questions) {
+			if (!question.isAttempted()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	/**
 	 * Get Method 
 	 * @return the id of the current category

@@ -247,14 +247,9 @@ public class SQLiteDB implements QuinzicalDB{
 			}
 			
 			session.setQuestionSet(categoryList);
-			Category hiddenCat;
-			while (true) {
-				hiddenCat = getRandomQuestionSet(1, 5).get(0);
-				if (hiddenCat.getTitle().equals("International")) {
-					break;
-				}
-			}
+			Category hiddenCat = getInternationalQuestionSet(5);
 			session.setHiddenCategory(hiddenCat);
+			System.out.println(hiddenCat.getTitle());
 			return session;
 			
 		} catch (SQLException e) {
@@ -416,6 +411,51 @@ public class SQLiteDB implements QuinzicalDB{
 		return result;
 		
 	}
+
+	
+	public Category getInternationalQuestionSet(int questionCount) {
+		
+		String catName = "International";
+		Category cat = new Category(catName);
+			
+		// Adding new question 
+		PreparedStatement prep = null;
+		try {
+			String statement = "SELECT question_id, prompt, answer FROM question "
+					+ "WHERE category_id = "
+					+ DbUtils.getEntryIDInTable(conn, "category" , "category_name" , catName)
+					+ " ORDER by RANDOM() LIMIT "+ questionCount +";";
+				
+			prep = conn.prepareStatement(statement);
+			ResultSet res = prep.executeQuery();
+				
+			/*
+			* the current score is assigned from [100, 500] with 100 increment 
+			*/
+			int score = 500;
+			int increment = 100;
+				
+			while( res.next() ) {
+				Question q = new Question(res.getString(2), res.getString(3));
+				q.setID(res.getInt(1));
+					
+				//setting and updating the score
+				q.setScore(score);
+				score -= increment;
+					
+				cat.add(q);
+			}
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (QunizicalEntryNotFoundException e) {
+			e.printStackTrace();
+		} 
+			
+		return cat;
+		
+	}
+	
 	
 	/**
 	 * Get a List of Category name in random order, the number pass in indicate the 
