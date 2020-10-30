@@ -28,7 +28,7 @@ import quinzical.model.Question;
 import quinzical.model.QuizModel;
 
 /**
- * Controller class for Question select screen, display all category and
+ * Controller class for Question select screen, display all category and question
  * selection buttons
  * 
  * @author Neville
@@ -54,7 +54,7 @@ public class SelectQuestionViewController implements Initializable {
 	}
 
 	/**
-	 * initialize the current screen, population category and question button in
+	 * initialize the current screen, populate category and question button in
 	 * category.
 	 */
 	@Override
@@ -77,8 +77,15 @@ public class SelectQuestionViewController implements Initializable {
 			// populate button in each row and columnS
 			int col = 0;
 			int row;
+			boolean showingHiddenCategory = false;
 			for (Category category : cats) {
 				row = 1;
+				
+				//Replaces category with the hidden category if it is unlocked
+				if (model.getSession().isShowHiddenCategory() && !showingHiddenCategory && category.isComplete()) {
+					category = model.getSession().getHiddenCategory();
+					showingHiddenCategory = true;
+				}
 
 				// set constraints for the following column
 				centerGridPane.getColumnConstraints()

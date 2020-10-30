@@ -7,7 +7,6 @@ import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
 import quinzical.model.QuizModel;
-import quinzical.util.Helper;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -52,6 +51,10 @@ public class Main extends Application {
 	
 	}
 	
+	/**
+	 * Main method to start the application
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 

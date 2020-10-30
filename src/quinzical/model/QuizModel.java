@@ -10,11 +10,11 @@ import quinzical.util.Espeak;
 import quinzical.util.TextToSpeech;
 
 /**
- * THe Quiz model of the application. This class contain all the necessary
+ * The Quiz model of the application. This class contain all the necessary
  * computation required by the quiz. The model is passed throughout all
  * controller.
  * 
- * @author Neville, Daniel Cutfield
+ * @author Neville, Daniel
  */
 public class QuizModel {
 
@@ -44,9 +44,9 @@ public class QuizModel {
 	}
 
 	/**
-	 * Constructor. The class initiate by loading all category. If there is also a
-	 * save file in the directory, the model will load it too. If save file does not
-	 * exist, all value will be set to its initial status
+	 * Constructor. The class initiates by loading all categories. If there is also a
+	 * save file in the directory, the model will load that too. If a save file does not
+	 * exist, all values will be set to their initial status
 	 */
 	private QuizModel() {
 		db = new SQLiteDB();
@@ -60,12 +60,11 @@ public class QuizModel {
 		_currentUser = new User("Default User");
 		_currentUser.setUserId(99);
 		loadUserSession();
-		//_currentSession.printCategoryList();
 	}
 
 	/**
 	 * Load the current user data using the fileHandler named user.save at the
-	 * system directory. The object mimic a database
+	 * system directory. The object mimics a database
 	 */
 	public void loadUserSession() {
 		_currentSession = db.getUserLastestSession(_currentUser);
@@ -83,12 +82,12 @@ public class QuizModel {
 	}
 
 	/**
-	 * Perform game feature of answering question, the method checks if the answer
-	 * is correct, update the score of the user, and return a boolean according to
+	 * Perform game feature of answering a question, the method checks if the answer
+	 * is correct, updates the score of the user, and returns a boolean according to
 	 * if the answer is correct or not.
 	 * 
 	 * @param question
-	 * @param User     input
+	 * @param input
 	 * @return true if the answer is correct, else false
 	 */
 	public boolean answerQuestion(int qid, String input) {
@@ -115,7 +114,7 @@ public class QuizModel {
 	 * @return true if answer is correct, else false
 	 */
 
-	public boolean validate(String userInput, Question question) {
+	private boolean validate(String userInput, Question question) {
 		String answer = question.getAnswer();
 		String prefix = question.getAnswerPrefix();
 		int i = 0;
@@ -171,8 +170,8 @@ public class QuizModel {
 	}
 
 	/**
-	 * Count and update the question remaining, the function loop though all
-	 * questions in the category and count the attempted function.
+	 * Count and update the number of questions remaining, the function loops though all
+	 * questions in the category and counts the attempted questions.
 	 */
 	public void updateRemainingQuestion() {
 		_currentSession.setRemainingQuestion(0);
@@ -187,7 +186,7 @@ public class QuizModel {
 
 	/**
 	 * Save the current user data to a file named user.save at The system directory
-	 * The file is saved as an object which mimic a database
+	 * The file is saved as an object which mimics a database
 	 */
 	public void save() {
 		System.out.println("Saving Session...");
@@ -197,7 +196,7 @@ public class QuizModel {
 	}
 
 	/**
-	 * Rest the game of the session, the user score is reset to 0 and all attempted
+	 * Reset the game of the session, the user score is reset to 0 and all attempted
 	 * question will be set to its non attempted status
 	 */
 	public void reset() {
@@ -347,7 +346,6 @@ public class QuizModel {
 		// change user to user id;
 		User user = db.getUser(userid);
 		_currentUser = user;
-		user.print();
 		// load current most recent user session;
 		loadUserSession();
 
@@ -372,10 +370,11 @@ public class QuizModel {
 		// Creating new session which associate to current user.
 		Session session = new Session(_currentUser);
 		session.setQuestionSet(db.getRandomQuestionSet(5, 5));
+		session.setHiddenCategory(db.getInternationalQuestionSet(5));
 	}
 
 	/**
-	 * Get Category list which contain category with no question
+	 * Get Category list which contain category with no questions
 	 * @return Category List
 	 */
 	public List<Category> getAllCategorywithoutQuestion() {
@@ -384,7 +383,7 @@ public class QuizModel {
 
 	/**
 	 * Get the current session of the model The return reference contain all
-	 * question that are store in the sesions.
+	 * question that are stored in the sessions.
 	 * @return Session object
 	 */
 	public Session getSession() {
@@ -398,6 +397,7 @@ public class QuizModel {
 		_currentSession = new Session(_currentUser);
 		List<Category> cat = db.getRandomQuestionSet(5, 5);
 		_currentSession.setQuestionSet(cat);
+		_currentSession.setHiddenCategory(db.getInternationalQuestionSet(5));
 
 	}
 
@@ -410,6 +410,7 @@ public class QuizModel {
 		_currentSession = new Session(_currentUser);
 		List<Category> cat = db.getRandomQuestionSet(5, 5);
 		_currentSession.setQuestionSet(cat);
+		_currentSession.setHiddenCategory(db.getInternationalQuestionSet(5));
 	}
 	
 	/**
@@ -436,14 +437,19 @@ public class QuizModel {
 		return _enableSpeech;
 	}
 	
+	/**
+	 * returns the text to speech object
+	 * @return
+	 */
 	public TextToSpeech getTextToSpeechObject() {
 		return tts;
 	}
 	
-
+	/**
+	 * Sets the current user as the last user of the app
+	 */
 	public void setUserAsLastUser() {
 		int id = config.getLastUserId();
-		System.out.println("id" + id);
 		if (id == -1) {
 			setUser(1);
 		} else {

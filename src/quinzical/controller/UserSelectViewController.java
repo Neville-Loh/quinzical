@@ -9,17 +9,15 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import quinzical.Main;
 import quinzical.db.QuinzicalDB;
 import quinzical.model.QuizModel;
 import quinzical.model.User;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 /**
- * Controller class for main menu view at MainView.fxml.
- * class control each button in the main menu
+ * Controller class for User select view at UserSelectView.fxml.
+ * class control the buttons and text field for user creation and selection
  * @author Neville
  * 
  */

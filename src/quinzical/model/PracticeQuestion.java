@@ -2,7 +2,7 @@ package quinzical.model;
 
 /**
  * Practice Question is a class which extends Question, has all the functionality related to 
- * questions but are straightly used for practice mode. 
+ * questions but are only used for practice mode. 
  * @author Neville
  *
  */
@@ -37,7 +37,7 @@ public class PracticeQuestion extends Question{
 	}
 
 	/**
-	 * Get the attempt left for the current practice question
+	 * Get the number of attempts left for the current practice question
 	 * @return attempt left
 	 */
 	public int getAttemptLeft() {
@@ -45,7 +45,7 @@ public class PracticeQuestion extends Question{
 	}
 	
 	/**
-	 * Set the practice question attempt left, for practice mode only
+	 * Set the practice question attempts left, for practice mode only
 	 * @param attemptLeft
 	 */
 	public void setAttemptLeft(int attemptLeft) {

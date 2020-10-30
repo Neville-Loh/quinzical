@@ -10,7 +10,7 @@ import quinzical.model.User;
 
 /**
  * Interface for data base required functions for the application  
- * @author Neville
+ * @author Neville, Daniel
  *
  */
 public interface QuinzicalDB {
@@ -20,14 +20,14 @@ public interface QuinzicalDB {
 	/*
 	 * =====================================================================================================
 	 * USER
-	 * Method related to user
+	 * Methods related to user
 	 * =====================================================================================================
 	 */
 	
 	/**
 	 * Retrieve the user object in the database.
 	 * @param id, the id of the user
-	 * @return user, an user object with id attached to it
+	 * @return user, a user object with id attached to it
 	 */
 	public User getUser(int id);
 	
@@ -38,6 +38,11 @@ public interface QuinzicalDB {
 	 */
 	public List<User> getAllUser();
 	
+	/**
+	 * Update the user object in the database if any changes have been made to the
+	 * object
+	 * @param user
+	 */
 	public void updateUser(User user);
 	
 	/**
@@ -51,7 +56,7 @@ public interface QuinzicalDB {
 	public void addUser(User user);
 	
 	/**
-	 * Delete an user from the database.
+	 * Delete a user from the database.
 	 * All session related to user will be deleted in a cascade fashion
 	 * @param userId
 	 */
@@ -61,7 +66,7 @@ public interface QuinzicalDB {
 	/*
 	 * =====================================================================================================
 	 * SESSION
-	 * Method related to user
+	 * Methods related to session
 	 * =====================================================================================================
 	 */
 	
@@ -98,25 +103,26 @@ public interface QuinzicalDB {
 	/*
 	 * =====================================================================================================
 	 * CATEGORY 
-	 * Method related to user
+	 * Methods related to category
 	 * =====================================================================================================
 	 */
 	
 	/**
-	 * 
+	 * Returns an new category object with the name matching the id provided
+	 * but without any questions in it
 	 * @param categoryId
 	 * @return
 	 */
 	public Category getEmptyCategory(int categoryId);
 	
 	/**
-	 * 
+	 * Adds a category to the database
 	 * @param category
 	 */
 	public void addCategory(Category category);
 	
 	/**
-	 * 
+	 * Deletes the category from the database with the matching category id
 	 * @param categoryId
 	 */
 	public void deleteCategory(int categoryId);
@@ -124,8 +130,8 @@ public interface QuinzicalDB {
 
 	/**
 	 * Get a random QuestionSet as List of Category
-	 * The method return a category list containing input count of category which 
-	 * are selected randomly, and the question count number of question within 
+	 * The method return a category list where categoryCount is the number of categories which 
+	 * are selected randomly, and the questionCount is the number of questions within 
 	 * each category
 	 * 
 	 * @param categoryCount, 
@@ -133,6 +139,14 @@ public interface QuinzicalDB {
 	 * @return
 	 */
 	List<Category> getRandomQuestionSet(int categoryCount, int questionCount);
+	
+	/**
+	 * Get a random set of questions for the hidden international category
+	 * Returns a category object containing the randomly selected international questions
+	 * @param questionCount
+	 * @return
+	 */
+	public Category getInternationalQuestionSet(int questionCount);
 	
 	/**
 	 * Retrieve all the question and category from the database
@@ -143,12 +157,12 @@ public interface QuinzicalDB {
 	/*
 	 * =====================================================================================================
 	 * QUESTION
-	 * Method related to question
+	 * Methods related to question
 	 * =====================================================================================================
 	 */
 	
 	/**
-	 * Get a single question using the questoin id
+	 * Get a single question using the question id
 	 * @param questionId
 	 * @return
 	 */
@@ -156,7 +170,7 @@ public interface QuinzicalDB {
 	
 	/**
 	 * Get a random question from a category
-	 * @param categoryId, id of the cateogry
+	 * @param categoryId, id of the category
 	 * @return question
 	 */
 	public Question getRandomQuestionFromCategory(int categoryId);

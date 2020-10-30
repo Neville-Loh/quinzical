@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 /**
  * Data base Schema
- * The schema that use to build quinzical database using sqlite
+ * The schema that is used to build quinzical database using sqlite
  * @see quinzical.db.SQLiteDB.java
  * @author Neville
  *
@@ -20,7 +20,7 @@ public class Schema {
 	
 	/**
 	 * Create User Table
-	 * The table meant to store all user data, where each entry correspond to one individual
+	 * The table meant to store all user data, where each entry corresponds to one individual
 	 * user
 	 * @param conn
 	 * @throws SQLException
@@ -74,7 +74,7 @@ public class Schema {
 		Statement state = conn.createStatement();
 		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='question'");		
 		if ( !res.next() ) {
-			System.out.println("Building the question talbe");
+			System.out.println("Building the question table");
 			Statement state2 = conn.createStatement();
 			state2.execute("Create TABLE question("
 					+ "question_id integer,"
@@ -123,7 +123,7 @@ public class Schema {
 	
 	/**
 	 * Create session_question table
-	 * This table is use to facilitate many to may relationship between question and session.
+	 * This table is used to facilitate many to many relationship between question and session.
 	 * store score that is assigned to the question, and session id, question id as primary key.
 	 * and whether the question is attempted. Delete in cascade fashion if session or question is
 	 * deleted.
@@ -151,7 +151,7 @@ public class Schema {
 	
 	/**
 	 * Create setting table
-	 * Facilitate all data related to setting, for example last user and user setting
+	 * Facilitate all data related to settings, for example last user and user settings
 	 * @param conn
 	 * @throws SQLException
 	 */

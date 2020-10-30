@@ -15,7 +15,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import quinzical.model.QuizModel;
-import quinzical.model.Session;
 import quinzical.model.User;
 
 /**

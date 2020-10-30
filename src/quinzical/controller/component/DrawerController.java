@@ -35,7 +35,7 @@ import quinzical.model.QuizModel;
 import quinzical.util.TextToSpeech;
 
 /**
- * Drawer Controller for the Quinzical applications
+ * Drawer Controller for the Quinzical application
  * 
  * @author Neville
  *
@@ -66,7 +66,7 @@ public class DrawerController implements Initializable {
 
 			/*
 			 * The following code block is used to offset the drawer when the drawer is
-			 * closed this is done to prevent blockage of element under the drawer.
+			 * closed this is done to prevent blockage of elements under the drawer.
 			 */
 			drawer.setOnDrawerOpening(event -> {
 				AnchorPane.setRightAnchor(drawer, 0.0);
@@ -127,13 +127,17 @@ public class DrawerController implements Initializable {
 		ScreenController.goMainMenu(getClass(), event);
 	}
 	
+	/**
+	 * Change to a different user
+	 * @param event
+	 */
 	@FXML
 	private void changeUser(ActionEvent event) {
 		ScreenController.goUserSelect2(getClass(), event);
 	}
 
 	/**
-	 * reset the game if confirm , then Go to the setting menu
+	 * reset the game if confirmed , then Go to the main menu
 	 * @param event
 	 */
 	@FXML
@@ -154,7 +158,7 @@ public class DrawerController implements Initializable {
 	}
 
 	/**
-	 * Initialize the class with model and data. Set event listener to slilder bar
+	 * Initialize the class with model and data. Set event listener to slider bar
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

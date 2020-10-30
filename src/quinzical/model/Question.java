@@ -3,7 +3,7 @@ package quinzical.model;
  * Class for implementation of the question data structure, the class stores the
  * question prompt, the answer and score of the question.
  * 
- * @author Neville, danielcutfield
+ * @author Neville, Daniel
  */
 public class Question {
 	private int _id = -1;
@@ -15,7 +15,7 @@ public class Question {
 	private boolean _isPractice = false;
 
 	/**
-	 * Construct of question
+	 * Constructor of question
 	 * @param question
 	 * @param ans
 	 * @param score
@@ -46,10 +46,11 @@ public class Question {
 	public Question(String question, String ans) {
 		_answer = ans;
 		_question = question;
-
 	}
+	
 	/**
 	 * set attribute isAttempted to a boolean
+	 * Set true if question has been attempted
 	 * @param bool
 	 */
 	public void setAttempted(boolean bool) {
@@ -63,6 +64,7 @@ public class Question {
 	public boolean isAttempted() {
 		return _isAttempted;
 	}
+	
 	/**
 	 * return the question prompt as a string.
 	 */
@@ -70,6 +72,7 @@ public class Question {
 	public String toString() {
 		return _question;
 	}
+	
 	/**
 	 * Get Method, get the answer of the question
 	 * @return Answer
@@ -78,9 +81,14 @@ public class Question {
 		return _answer;
 	}
 	
+	/**
+	 * Sets the current score
+	 * @param score
+	 */
 	public void setScore(int score) {
 		_score = score;
 	}
+	
 	/**
 	 * Get the score of the question
 	 * @return question Score
@@ -99,8 +107,8 @@ public class Question {
 	
 	/**
 	 * Set method for ID,
-	 * CAUTIOUS!, this method only meant to be called by database implementation and
-	 * not Anywhere of the application, throw illegalArgumentException if id already exist.
+	 * CAUTION!, this method is only meant to be called by database implementation and
+	 * not anywhere of the application, throw illegalArgumentException if id already exist.
 	 * @param id
 	 */
 	public void setID(int id) {
