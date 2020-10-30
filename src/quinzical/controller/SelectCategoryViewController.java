@@ -58,8 +58,8 @@ public class SelectCategoryViewController implements Initializable {
 	}
 	
 	/**
-	 * initialize the current screen, population category and 
-	 * question button in category.
+	 * initialize the current screen, populate categories and 
+	 * buttons
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

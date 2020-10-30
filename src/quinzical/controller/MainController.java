@@ -17,7 +17,7 @@ import javafx.scene.control.Alert.AlertType;
 /**
  * Controller class for main menu view at MainView.fxml.
  * class control each button in the main menu
- * @author Neville
+ * @author Neville, Daniel
  * 
  */
 public class MainController implements Initializable{
@@ -32,16 +32,12 @@ public class MainController implements Initializable{
 		ScreenController.goQuestionSelect(getClass(), event);
 	}
 	
+	
 	/**
-	 * Navigate to setting menu
+	 * Navigate to Category select menu
 	 * @param event
 	 * @throws IOException
 	 */
-	@FXML
-	private void showSettingView(ActionEvent event) throws IOException{
-		//TODO method for assignment 4
-	}
-	
 	@FXML
 	private void showCategorySelectView(ActionEvent event) throws IOException{
 		ScreenController.goCategorySelect(getClass(), event);
@@ -89,7 +85,18 @@ public class MainController implements Initializable{
 		model.save();
 		Platform.exit();
 	}
-
+	
+	/**
+	 * Method for testing purposes
+	 * Sets all questions in the current session except for 1 to attempted
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	private void completeSession(ActionEvent event) throws IOException {
+		model.getSession().completeSession();
+	}
+	
 	/**
 	 * Populate the quiz model
 	 */

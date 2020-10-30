@@ -27,4 +27,7 @@
          </children>
       </VBox>
    </center>
+   <top>
+      <Button mnemonicParsing="false" onAction="#completeSession" text="Complete session" BorderPane.alignment="CENTER" />
+   </top>
 </BorderPane>

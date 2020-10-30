@@ -21,8 +21,9 @@ import quinzical.controller.component.DrawerController;
 import quinzical.model.QuizModel;
 
 /**
- * Controller class for question view at QuestionView.fxml.
- * Display are question and text field
+ * Controller class for Game over view at GameOverView.fxml.
+ * Display a message saying that the game is over and must be reset
+ * to play again
  * @author Neville
  */
 public class GameOverViewController implements Initializable {
@@ -43,7 +44,7 @@ public class GameOverViewController implements Initializable {
 	}
 	
 	/**
-	 * Raise alert for rest option, if user proceed if yes, reset the model
+	 * Raise alert for reset option, if user proceed by clicking yes, reset the model
 	 * to its initial state.
 	 * @param event
 	 */

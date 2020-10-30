@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 /**
  * Utility Controller for switch different scene.
  * 
- * @author Neville
+ * @author Neville, Daniel
  */
 public class ScreenController {
 
@@ -67,7 +67,7 @@ public class ScreenController {
 	}
 	
 	/**
-	 * Category Select Utility Method to go to the GameOver View
+	 * Category Select Utility Method to go to the Category select View
 	 * @param controllerClass
 	 * @param event  
 	 */

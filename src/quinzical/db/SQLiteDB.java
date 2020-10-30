@@ -109,7 +109,6 @@ public class SQLiteDB implements QuinzicalDB{
 			
 			while( res.next() ) {
 				User user  = new User(res.getString(2));
-				System.out.println(res.getInt(1));
 				user.setUserId(res.getInt(1));
 				result.add(user);
 			}
@@ -164,17 +163,15 @@ public class SQLiteDB implements QuinzicalDB{
 	/*
 	 * =====================================================================================================
 	 * Session
-	 * Implementation of all end point method of the related
+	 * Implementation of all end point method related
 	 * to the class Session 
 	 * 
 	 * =====================================================================================================
 	 */
 	@Override
 	public Session getUserLastestSession(User user) {
-		user.print();
 		int userId = user.getUserID();
 		String statement = "SELECT * FROM session WHERE user_id = " + userId + " AND  isFinished = false;";
-		System.out.println(statement);
 		PreparedStatement prep = null;
 		try {
 			prep = conn.prepareStatement(statement);
@@ -185,10 +182,8 @@ public class SQLiteDB implements QuinzicalDB{
 			}
 			// get all value from result set
 			int session_id = res.getInt(1);
-			int user_id = res.getInt(2);
 			int score = res.getInt(3);
 			int remaining_question = res.getInt(4);
-			boolean isFinished = res.getBoolean(5);
 			Timestamp startTime = res.getTimestamp(6);
 			Timestamp FinishTime = res.getTimestamp(7);
 			
@@ -247,6 +242,8 @@ public class SQLiteDB implements QuinzicalDB{
 			}
 			
 			session.setQuestionSet(categoryList);
+			Category hiddenCat = getInternationalQuestionSet(5);
+			session.setHiddenCategory(hiddenCat);
 			return session;
 			
 		} catch (SQLException e) {
@@ -317,7 +314,7 @@ public class SQLiteDB implements QuinzicalDB{
 	/*
 	 * =====================================================================================================
 	 * Category
-	 * Implementation of all end point method of the related
+	 * Implementation of all end point method related
 	 * to the class Category
 	 * 
 	 * =====================================================================================================
@@ -408,6 +405,51 @@ public class SQLiteDB implements QuinzicalDB{
 		return result;
 		
 	}
+
+	
+	public Category getInternationalQuestionSet(int questionCount) {
+		
+		String catName = "International";
+		Category cat = new Category(catName);
+			
+		// Adding new question 
+		PreparedStatement prep = null;
+		try {
+			String statement = "SELECT question_id, prompt, answer FROM question "
+					+ "WHERE category_id = "
+					+ DbUtils.getEntryIDInTable(conn, "category" , "category_name" , catName)
+					+ " ORDER by RANDOM() LIMIT "+ questionCount +";";
+				
+			prep = conn.prepareStatement(statement);
+			ResultSet res = prep.executeQuery();
+				
+			/*
+			* the current score is assigned from [100, 500] with 100 increment 
+			*/
+			int score = 500;
+			int increment = 100;
+				
+			while( res.next() ) {
+				Question q = new Question(res.getString(2), res.getString(3));
+				q.setID(res.getInt(1));
+					
+				//setting and updating the score
+				q.setScore(score);
+				score -= increment;
+					
+				cat.add(q);
+			}
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (QunizicalEntryNotFoundException e) {
+			e.printStackTrace();
+		} 
+			
+		return cat;
+		
+	}
+	
 	
 	/**
 	 * Get a List of Category name in random order, the number pass in indicate the 
@@ -424,7 +466,16 @@ public class SQLiteDB implements QuinzicalDB{
 			ResultSet res = prep.executeQuery();
 			
 			while( res.next() ) {
-				result.add(res.getString(2));
+				if (!res.getString(2).equals("International")) {
+					result.add(res.getString(2));
+				}
+			}
+			
+			if (result.size() < numberofCategory) {
+				statement = "SELECT * FROM category ORDER by RANDOM() LIMIT 1;";
+				prep = conn.prepareStatement(statement);
+				ResultSet replacement = prep.executeQuery();
+				result.add(replacement.getString(2));
 			}
 			
 		} catch (SQLException e) {
@@ -459,7 +510,7 @@ public class SQLiteDB implements QuinzicalDB{
 	/*
 	 * =====================================================================================================
 	 * Question
-	 * Implementation of all end point method of the related
+	 * Implementation of all end point method related
 	 * to the class Question
 	 * 
 	 * =====================================================================================================

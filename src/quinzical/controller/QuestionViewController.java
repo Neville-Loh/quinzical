@@ -27,7 +27,7 @@ import quinzical.model.Question;
 import quinzical.model.QuizModel;
 
 /**
- * Controller class for question view at QuestionView.fxml. Display are question
+ * Controller class for question view at QuestionView.fxml. Display a question
  * and text field
  * 
  * @author Neville
@@ -138,7 +138,7 @@ public class QuestionViewController implements Initializable {
 
 	/**
 	 * Submit answer in the text field to check for correctness within model.
-	 * depending on if the answer is correct or not, the next screen initialize will
+	 * depending on if the answer is correct or not, the next screen initialisation will
 	 * be different.
 	 * 
 	 * @param event
@@ -151,8 +151,8 @@ public class QuestionViewController implements Initializable {
 
 	/**
 	 * Submit answer for practice in the text field to check for correctness within model.
-	 * depending on if the answer is correct or not, the next screen initialize will
-	 * be different. If the attempted left is 1, show hint for the quetsion
+	 * depending on if the answer is correct or not, the next screen initialisation will
+	 * be different. If the number of attempts left is 1, show hint for the question
 	 * @param event
 	 */
 	private void submitPracticeAnswer(ActionEvent event) {
@@ -167,7 +167,7 @@ public class QuestionViewController implements Initializable {
 					+ pq.getAnswer().charAt(0) + "'");
 		}
 
-		// Initialize next page if attempt left = 0 or answer is correct
+		// Initialize next page if attempts left = 0 or answer is correct
 		if (pq.getAttemptLeft() == 0 || isCorrect) {
 			goAnswerPage(isCorrect, event);
 		}
@@ -205,6 +205,9 @@ public class QuestionViewController implements Initializable {
 		}
 	}
 	
+	/**
+	 * Starts the countdown timer on a separate thread
+	 */
 	public void startCountdown() {
         countdownThread = new Thread(() -> {
             while (timeRemaining >= -1 && !Thread.interrupted()) {
@@ -226,6 +229,9 @@ public class QuestionViewController implements Initializable {
         countdownThread.start();
     }
 
+	/**
+	 * Stops the countdown timer
+	 */
     public void stopCountdown() {
         if (countdownThread != null) {
             countdownThread.interrupt();
@@ -233,6 +239,9 @@ public class QuestionViewController implements Initializable {
         }
     }
     
+    /**
+     * Sets the digits on the timer display
+     */
     private void setDigit() {
     	String digits = Integer.toString(timeRemaining);
     	if (digits.length() == 1) {
