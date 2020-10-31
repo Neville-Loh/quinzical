@@ -218,7 +218,6 @@ public class Session {
 		
 		if (catsCompleted >= 2) {
 			showHiddenCategory = true;
-			_remainingQuestion += 5;
 		}
 		
 		return showHiddenCategory;
