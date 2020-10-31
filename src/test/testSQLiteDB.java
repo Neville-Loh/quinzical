@@ -13,6 +13,8 @@ import quinzical.model.User;
 
 /**
  * Class to test the sql implementation of the quinical database
+ * THe following class is not automated and is only used for test-driven development
+ * 
  * @author Neville
  * @version 0.2.2.1
  */

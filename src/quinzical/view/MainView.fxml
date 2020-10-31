@@ -1,33 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" stylesheets="@css/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.MainController">
-   <center>
-      <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Welcome to Quinzical" textFill="WHITE">
-               <font>
-                  <Font name="KacstBook" size="45.0" />
-               </font>
-               <padding>
-                  <Insets bottom="200.0" top="30.0" />
-               </padding>
-            </Label>
-            <Button mnemonicParsing="false" onAction="#showQuestionSelectView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Start" />
-            <Button layoutX="392.0" layoutY="458.0" mnemonicParsing="false" onAction="#showCategorySelectView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Practice Mode" />
-            <Button layoutX="520.0" layoutY="694.0" mnemonicParsing="false" onAction="#showLeaderboardView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Leaderboard" />
-            <Button mnemonicParsing="false" onAction="#resetButtonClick" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Reset game" />
-            <Button mnemonicParsing="false" onAction="#quitButtonClick" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Save and Quit" />
-         </children>
-      </VBox>
-   </center>
-   <top>
-      <Button mnemonicParsing="false" onAction="#completeSession" text="Complete session" BorderPane.alignment="CENTER" />
-   </top>
-</BorderPane>
+
+<AnchorPane stylesheets="@css/Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quinzical.controller.MainController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0">
+         <center>
+            <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Welcome to Quinzical" textFill="WHITE">
+                     <font>
+                        <Font name="KacstBook" size="45.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="200.0" top="30.0" />
+                     </padding>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#showQuestionSelectView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Start" />
+                  <Button layoutX="392.0" layoutY="458.0" mnemonicParsing="false" onAction="#showCategorySelectView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Practice Mode" />
+                  <Button layoutX="520.0" layoutY="694.0" mnemonicParsing="false" onAction="#showLeaderboardView" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Leaderboard" />
+                  <Button mnemonicParsing="false" onAction="#resetButtonClick" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Reset game" />
+                  <Button mnemonicParsing="false" onAction="#quitButtonClick" prefHeight="35.0" prefWidth="260.0" style="-fx-background-radius: 30 30 30 30;" text="Save and Quit" />
+               </children>
+            </VBox>
+         </center>
+         <top>
+            <Button mnemonicParsing="false" onAction="#completeSession" text="Complete session" BorderPane.alignment="CENTER" />
+         </top>
+      </BorderPane>
+      <JFXDrawer fx:id="drawer" layoutX="20.0" layoutY="20.0" minWidth="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <JFXHamburger fx:id="hamburger" alignment="TOP_RIGHT" layoutX="20.0" layoutY="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </JFXHamburger>
+   </children>
+</AnchorPane>

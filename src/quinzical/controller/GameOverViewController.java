@@ -19,6 +19,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Region;
 import quinzical.controller.component.DrawerController;
 import quinzical.model.QuizModel;
+import quinzical.model.User;
 
 /**
  * Controller class for Game over view at GameOverView.fxml.
@@ -74,12 +75,17 @@ public class GameOverViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DrawerController.initDrawer(getClass(), drawer, hamburger);
-		try {
 		model = QuizModel.getModel();
+		User user = model.getUser();
+		
+		// Set final winning label
 		String scoreStr = model.getWinningStr();
 		winningLabel.setText(scoreStr);
-		} catch (Exception e) {
-			e.printStackTrace();
+		
+		if (user.getHighestScore() < model.getWinning()) {
+			System.out.println("THis is avativatewasiadsfsdkfjlsda");
+			user.setHighestScore(model.getWinning());
+			model.getDb().updateUser(user);
 		}
 		model.finishCurrentSession();
 	}

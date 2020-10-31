@@ -7,9 +7,14 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import quinzical.controller.component.DrawerController;
 import quinzical.model.QuizModel;
+import test.testSession;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Region;
@@ -22,6 +27,8 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class MainController implements Initializable{
 	private QuizModel model;
+	@FXML private JFXHamburger hamburger;
+	@FXML private JFXDrawer drawer;
 	
 	/**
 	 * Navigate to question select screen
@@ -94,7 +101,7 @@ public class MainController implements Initializable{
 	 */
 	@FXML
 	private void completeSession(ActionEvent event) throws IOException {
-		model.getSession().completeSession();
+		testSession.completeSession(model.getSession());
 	}
 	
 	/**
@@ -102,6 +109,7 @@ public class MainController implements Initializable{
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		DrawerController.initDrawer(getClass(), drawer, hamburger);
 		model = QuizModel.getModel();
 	}
 	

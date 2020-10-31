@@ -3,28 +3,55 @@
 }
 
 .button {
+	-fx-pref-height: 70px;
+    -fx-pref-width: 380px;
 	-fx-font-weight: bold;
 	-fx-background-color: #1aebfd;
-	-fx-front-size: 16;
+	-fx-font-size: 30;
 	-fx-text-fill: black;
+	-fx-border-color: #1aebfd;
 }
 
 .button:hover{
 	-fx-font-weight: bold;
 	-fx-background-color: white;
-	-fx-front-size: 16;
+	-fx-front-size: 30;
 	-fx-text-fill: black;
 	-fx-border-color: white;
-	-fx-border-radius: 20;
 	-fx-border-width: 3;
 }
 .popup {
     -fx-padding: 10;
     -fx-border-width: 5;
-    -fx-font-size: 16;
+    -fx-font-size: 30;
     -fx-text-fill: white;
 }
 
+.grid-pane-game > .label {
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+
+.grid-pane-game > .button {
+	-fx-pref-height: 40px;
+    -fx-pref-width: 160px;
+	-fx-font-weight: bold;
+	-fx-background-color: #1aebfd;
+	-fx-front-size: 30;
+	-fx-text-fill: white;
+	-fx-border-color: #1aebfd;
+}
+
+.grid-pane-game > .button:hover{
+	-fx-font-weight: bold;
+	-fx-background-color: white;
+	-fx-front-size: 30;
+	-fx-text-fill: black;
+	-fx-border-color: white;
+	-fx-border-radius: 20;
+	-fx-border-width: 3;
+}
 
 .grid-pane > .label {
 	-fx-font-weight: bold;
@@ -32,23 +59,27 @@
 }
 
 .grid-pane > .button {
+	-fx-pref-height: 50px;
+    -fx-pref-width: 320px;
 	-fx-font-weight: bold;
 	-fx-background-color: #1aebfd;
-	-fx-front-size: 16;
+	-fx-front-size: 25;
 	-fx-text-fill: white;
+	-fx-opacity: 0.95;
+	-fx-border-color: #1aebfd;
 }
 
 .grid-pane > .button:hover{
 	-fx-font-weight: bold;
 	-fx-background-color: white;
-	-fx-front-size: 16;
+	-fx-front-size: 35;
 	-fx-text-fill: black;
 	-fx-border-color: white;
 	-fx-border-radius: 20;
 	-fx-border-width: 3;
 }
 
-.jfx-hamburger StackPane {
-	-fx-background-color: #1aebfd;
-}
 
+.jfx-hamburger StackPane {
+	-fx-background-color: white;
+}
