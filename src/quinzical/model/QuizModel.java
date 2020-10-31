@@ -202,12 +202,7 @@ public class QuizModel {
 	public void reset() {
 		_currentSession.reset();
 		_currentSession.setRemainingQuestion(0);
-		for (Category cat : _currentSession.getCategoryList()) {
-			for (Question question : cat.getQuestions()) {
-				question.setAttempted(false);
-				_currentSession.incrementRemainingQuestion(1);
-			}
-		}
+		_currentSession.setQuestionSet(db.getRandomQuestionSet(5, 5));
 	}
 
 	/**

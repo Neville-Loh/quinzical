@@ -48,7 +48,7 @@ public class QuestionViewController implements Initializable {
 	@FXML private GridPane digitpanel;
 	@FXML private Button dontKnowBtn;
 	private Thread countdownThread;
-	private int timeRemaining = 11;
+	private int timeRemaining = 30;
 
 	/**
 	 * Navigate to main menu
@@ -217,7 +217,6 @@ public class QuestionViewController implements Initializable {
                 	}
                 	setDigit();
                 	timeRemaining -= 1;
-                	System.out.println(timeRemaining);
                 });
                 try {
                     Thread.sleep(1000);

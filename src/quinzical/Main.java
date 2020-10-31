@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  * Main class for the Quinical application. THe application is built with Javafx11
  * The application uses Model view controller architecture
  * @author Neville, Daniel Cutfield
- * @version 0.3.1.4
+ * @version 0.4.1.4
  */
 
 
