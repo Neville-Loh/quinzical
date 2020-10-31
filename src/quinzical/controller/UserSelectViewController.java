@@ -25,6 +25,7 @@ public class UserSelectViewController implements Initializable{
 	private QuizModel model;
 	@FXML TextField userName;
 	@FXML VBox vbox;
+	@FXML Button createButton;
 	/**
 	 * Navigate to question select screen
 	 * @param event
@@ -32,6 +33,7 @@ public class UserSelectViewController implements Initializable{
 	@FXML
 	private void createUserButton(ActionEvent event){
 		if (userName.getText() != null || userName.getText().strip() != "") {
+			model.save();
 			int resultid = model.createNewUser(userName.getText());
 			model.setUser(resultid);
 			ScreenController.goMainMenu(this.getClass(), event);
@@ -45,11 +47,7 @@ public class UserSelectViewController implements Initializable{
 	 */
 	@FXML
 	public void onEnter(ActionEvent event) throws IOException {
-		if (userName.getText() != null || userName.getText().strip() != "") {
-			int resultid = model.createNewUser(userName.getText());
-			model.setUser(resultid);
-			ScreenController.goMainMenu(this.getClass(), event);
-		}
+		createButton.fire();
 	}
 	
 

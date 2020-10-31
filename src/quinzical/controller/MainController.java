@@ -14,6 +14,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import quinzical.controller.component.DrawerController;
 import quinzical.model.QuizModel;
+import test.testSession;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Region;
@@ -100,7 +101,7 @@ public class MainController implements Initializable{
 	 */
 	@FXML
 	private void completeSession(ActionEvent event) throws IOException {
-		model.getSession().completeSession();
+		testSession.completeSession(model.getSession());
 	}
 	
 	/**

@@ -73,14 +73,6 @@ public class QuizModel {
 		}
 	}
 
-
-	/**
-	 * Save the current session to database
-	 */
-	public void saveUserSession() {
-		db.addSession(_currentUser, _currentSession);
-	}
-
 	/**
 	 * Perform game feature of answering a question, the method checks if the answer
 	 * is correct, updates the score of the user, and returns a boolean according to
@@ -99,7 +91,6 @@ public class QuizModel {
 			_currentSession.addWinnings(question.getScore());
 			return true;
 		} else {
-			// _winning -= question.getScore();
 			return false;
 		}
 
@@ -189,7 +180,6 @@ public class QuizModel {
 	 * The file is saved as an object which mimics a database
 	 */
 	public void save() {
-		System.out.println("Saving Session...");
 		db.addSession(_currentUser, _currentSession);
 		config.setLastUserId(_currentUser.getUserID());
 		AppConfig.saveConfig(config);

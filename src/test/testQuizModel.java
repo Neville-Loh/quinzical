@@ -1,7 +1,12 @@
 package test;
 
+import java.util.List;
+
+import quinzical.model.Category;
 import quinzical.model.PracticeQuestion;
+import quinzical.model.Question;
 import quinzical.model.QuizModel;
+import quinzical.model.Session;
 
 /**
  * Class for testing the model of the quinzical application 
@@ -75,8 +80,7 @@ public class testQuizModel {
 		
 		// save session
 		
-		model.saveUserSession();
-		
+		model.save();
 		
 		
 		// load session
@@ -84,4 +88,6 @@ public class testQuizModel {
 		
 
 	}
+	
+
 }
