@@ -26,7 +26,7 @@
          </BorderPane.margin></Button>
    </bottom>
    <center>
-      <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" stylesheets="@css/Leaderboard.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="userNameColumn" prefWidth="400.0" resizable="false" text="User" />
             <TableColumn fx:id="scoreColumn" prefWidth="400.0" resizable="false" sortType="DESCENDING" text="Score" />
