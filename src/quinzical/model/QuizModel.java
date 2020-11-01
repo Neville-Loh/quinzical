@@ -87,6 +87,13 @@ public class QuizModel {
 		Question question = _currentSession.getQuestionById(qid);
 		question.setAttempted(true);
 		_currentSession.incrementRemainingQuestion(-1);
+		Category hiddenCategory = _currentSession.getHiddenCategory();
+		for (Question hiddenQuestion: hiddenCategory.getQuestions()) {
+			if (hiddenQuestion.equals(question)) {
+				_currentSession.incrementRemainingQuestion(1);
+				break;
+			}
+		}
 		if (validate(input, question)) {
 			_currentSession.addWinnings(question.getScore());
 			return true;
