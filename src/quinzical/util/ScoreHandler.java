@@ -1,4 +1,4 @@
-package quinzical.model;
+package quinzical.util;
 /**
  * Utility class to handel user title and score
  * @author Neville

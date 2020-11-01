@@ -32,7 +32,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import quinzical.controller.ScreenController;
 import quinzical.model.QuizModel;
-import quinzical.model.ScoreHandler;
+import quinzical.util.ScoreHandler;
 import quinzical.util.TextToSpeech;
 
 /**

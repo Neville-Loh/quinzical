@@ -14,7 +14,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import quinzical.controller.component.DrawerController;
 import quinzical.model.QuizModel;
-import test.testSession;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
@@ -101,17 +100,6 @@ public class MainController implements Initializable{
 	private void quitButtonClick(ActionEvent event) throws IOException{
 		model.save();
 		Platform.exit();
-	}
-	
-	/**
-	 * Method for testing purposes
-	 * Sets all questions in the current session except for 1 to attempted
-	 * @param event
-	 * @throws IOException
-	 */
-	@FXML
-	private void completeSession(ActionEvent event) throws IOException {
-		testSession.completeSession(model.getSession());
 	}
 	
 	/**

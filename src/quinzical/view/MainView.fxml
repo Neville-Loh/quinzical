@@ -18,7 +18,7 @@
                <children>
                   <Label text="Welcome to Quinzical" textFill="WHITE">
                      <font>
-                        <Font name="KacstBook" size="45.0" />
+                        <Font name="KacstArt" size="73.0" />
                      </font>
                      <padding>
                         <Insets bottom="200.0" top="30.0" />
@@ -32,9 +32,6 @@
                </children>
             </VBox>
          </center>
-         <top>
-            <Button mnemonicParsing="false" onAction="#completeSession" text="Complete session" BorderPane.alignment="CENTER" />
-         </top>
       </BorderPane>
       <JFXDrawer fx:id="drawer" layoutX="20.0" layoutY="20.0" minWidth="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
       <JFXHamburger fx:id="hamburger" alignment="TOP_RIGHT" layoutX="20.0" layoutY="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
