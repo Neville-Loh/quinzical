@@ -33,6 +33,11 @@
          </VBox.margin>
       </HBox>
       <Button mnemonicParsing="false" onAction="#changeUser" prefHeight="41.0" prefWidth="163.0" text="change user" />
+      <Label fx:id="rank" text="Label" textFill="#ae644f">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
       <Label layoutX="93.0" layoutY="60.0" text="Current Winning:" textFill="WHITE">
          <font>
             <Font name="System Bold" size="19.0" />
@@ -72,7 +77,13 @@
       </JFXSlider>
       <Button mnemonicParsing="false" onAction="#goReset" prefHeight="41.0" prefWidth="163.0" text="Reset" />
       <Button mnemonicParsing="false" onAction="#goMainMenu" prefHeight="41.0" prefWidth="163.0" text="Main Manu" />
-      <JFXToggleButton fx:id="toggleButton" text="Enable Speech" textFill="WHITE" />
-      <JFXToggleButton fx:id="highContrastToggle" text="High Contrast" textFill="WHITE" />
+      <JFXToggleButton fx:id="toggleButton" text="Enable Speech" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font></JFXToggleButton>
+      <JFXToggleButton fx:id="highContrastToggle" text="High Contrast" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font></JFXToggleButton>
    </children>
 </VBox>

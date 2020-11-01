@@ -32,6 +32,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import quinzical.controller.ScreenController;
 import quinzical.model.QuizModel;
+import quinzical.model.ScoreHandler;
 import quinzical.util.TextToSpeech;
 
 /**
@@ -48,6 +49,7 @@ public class DrawerController implements Initializable {
 	@FXML private JFXSlider volumeSlider;
 	@FXML private JFXToggleButton toggleButton;
 	@FXML private JFXToggleButton highContrastToggle;
+	@FXML private Label rank;
 	
 	private static QuizModel model = QuizModel.getModel();
 
@@ -165,6 +167,7 @@ public class DrawerController implements Initializable {
 		winningLabel.setText(model.getWinningStr());
 		userName.setText(model.getUser().getName());
 		toggleButton.setSelected(model.getConfig().isEnableSpeech());
+		rank.setText(ScoreHandler.geTitle(model.getWinning()));
 
 		
 		TextToSpeech tts = model.getTextToSpeechObject();
