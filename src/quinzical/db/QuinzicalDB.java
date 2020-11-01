@@ -10,8 +10,7 @@ import quinzical.model.User;
 
 /**
  * Interface for data base required functions for the application  
- * @author Neville, Daniel
- *
+ * @author Neville
  */
 public interface QuinzicalDB {
 	

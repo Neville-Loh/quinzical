@@ -57,7 +57,6 @@ public class SQLiteDB implements QuinzicalDB{
 			Schema.createCategoryTable(conn);
 			Schema.createSessionTable(conn);
 			Schema.createSessionQuestionsTable(conn);
-			Schema.createSettingTable(conn);
 			boolean init = Schema.createQuestionTable(conn);
 			
 			

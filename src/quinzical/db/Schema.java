@@ -149,25 +149,6 @@ public class Schema {
 		
 	}
 	
-	/**
-	 * Create setting table
-	 * Facilitate all data related to settings, for example last user and user settings
-	 * @param conn
-	 * @throws SQLException
-	 */
-	public static void createSettingTable(Connection conn) throws SQLException {
-		Statement state = conn.createStatement();
-		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='setting'");		
-		if ( !res.next() ) {
-			System.out.println("Building the setting table");
-			Statement state2 = conn.createStatement();
-			state2.execute("Create TABLE setting("
-					+ "user_id INT,"
-					+ "FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE SET NULL);"
-					);
-		}
-		
-	}
 	
 	
 }

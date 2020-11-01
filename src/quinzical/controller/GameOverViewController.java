@@ -82,7 +82,6 @@ public class GameOverViewController implements Initializable {
 		String scoreStr = model.getWinningStr();
 		winningLabel.setText(scoreStr);
 		
-		System.out.println("User highscoer = "  + user.getHighestScore() +  "modelgetwinning: " + model.getWinning());
 		if (user.getHighestScore() < model.getWinning()) {
 			System.out.println("THis is avativatewasiadsfsdkfjlsda");
 			user.setHighestScore(model.getWinning());

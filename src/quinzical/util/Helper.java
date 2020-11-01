@@ -53,7 +53,7 @@ public class Helper {
 		}
 	}
 
-	 /**
+	 /**S
      * Lambda implementation of confirmClose event handler for prompting the user
      * to confirm exit without saving
      */

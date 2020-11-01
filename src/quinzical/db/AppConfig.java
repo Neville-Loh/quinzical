@@ -17,7 +17,6 @@ public class AppConfig implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public static final String SAVE_FILENAME = "quinzical.config";
     private int lastUserId = -1;
-    private int speed = 30;
     private boolean _enableSpeech = true;
     private boolean _enableHighContrast = false;
     
