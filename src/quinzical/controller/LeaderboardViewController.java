@@ -62,8 +62,10 @@ public class LeaderboardViewController implements Initializable {
 				users.get(i).print();
 				usersObservable.add(users.get(i));
 			}
+			//usersObservable.add(model.getUser());
 			
 			//Put list into table
+			tableView.setId("tableView");
 			tableView.setItems(usersObservable);
 			
 		} catch (Exception e) {
