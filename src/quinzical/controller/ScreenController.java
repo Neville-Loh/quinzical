@@ -5,10 +5,13 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -102,31 +105,6 @@ public class ScreenController {
 	 * @param controllerClass
 	 * @param event
 	 */
-	public static void goUserSelect(Class<?> controllerClass, ActionEvent event) {
-		try {
-			// Set loading screen
-			Scene Loading = getLoadingScene(controllerClass);
-			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window.setScene(Loading);			
-			// Load the next screen concurrently using worker thread
-			Task<Void> task = new Task<Void>() {
-				@Override
-				public Void call() throws IOException {
-					Parent parent = FXMLLoader.load(controllerClass.getResource("/quinzical/view/UserSelectView.fxml"));
-					Platform.runLater(new Runnable() {
-		                @Override public void run() {
-		                	window.setScene(new Scene(parent));
-		                }
-		            });
-					return null;
-				}
-			};
-			new Thread(task).start();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public static void goUserSelect2(Class<?> controllerClass, ActionEvent event) {
 		try {

@@ -17,8 +17,10 @@ import quinzical.model.QuizModel;
 import test.testSession;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 /**
  * Controller class for main menu view at MainView.fxml.
  * class control each button in the main menu
@@ -27,8 +29,14 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class MainController implements Initializable{
 	private QuizModel model;
+	@FXML private AnchorPane anchorPane;
 	@FXML private JFXHamburger hamburger;
 	@FXML private JFXDrawer drawer;
+	@FXML private Button startBtn;
+	@FXML private Button practiceBtn;
+	@FXML private Button LeaderboardBtn;
+	@FXML private Button resetBtn;
+	@FXML private Button quitBtn;
 	
 	/**
 	 * Navigate to question select screen
@@ -82,6 +90,8 @@ public class MainController implements Initializable{
 			event.consume();
 		}
 	}
+	
+	
 	
 	/**
 	 * Save and exit the application
