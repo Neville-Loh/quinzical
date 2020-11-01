@@ -299,9 +299,6 @@ public class Session {
 	 */
 	public void addWinnings(int value) {
 		_winnings += value;
-		if (_winnings > _user.getHighestScore()) {
-			_user.setHighestScore(_winnings);
-		}
 	}
 	
 	/**

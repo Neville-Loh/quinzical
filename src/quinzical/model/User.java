@@ -2,7 +2,7 @@ package quinzical.model;
 
 /**
  * Class that represent the user who is using the application,
- * Multiple instance  of user can be creates 
+ * Multiple instance of user can be created
  * @author Neville
  *
  */
@@ -25,7 +25,6 @@ public class User {
 		}
 		_name = name;
 		_currentSession = new Session(this);
-		// TODO Auto-generated method stub
 	}
 	
 	
@@ -37,6 +36,12 @@ public class User {
 		return _ID;
 	}
 	
+	/**
+	 * Set user id, this method only meant for database usage.
+	 * If the id is not set, the id will become the input number
+	 * Else throw IllegalArugment Exceptions.
+	 * @param id
+	 */
 	public void setUserId(int id) {
 		if (_ID == -1) {
 			_ID = id;
@@ -72,21 +77,16 @@ public class User {
 		this.highestScore = highestScore;
 	}
 
-	/**
-	 * Get all statistic associated to the user as an array which included
-	 * DateTime, score pairs.
-	 * @return
-	 */
-	public Object getUserStatistic() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	public void setSession(Session session) {
 		_currentSession = session;
 	}
 	
+	/**
+	 * Utility method for printing user attribute
+	 */
 	public void print() {
-		System.out.println("User name: " + _name + ",user_ID = " + _ID);
+		System.out.println("User name: " + _name + ",user_ID = " + _ID + ", highscore = " + highestScore);
+		
 	}
 }

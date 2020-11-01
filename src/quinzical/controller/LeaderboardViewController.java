@@ -56,8 +56,10 @@ public class LeaderboardViewController implements Initializable {
 			
 			//Populate list
 			List<User> users = model.getDb().getAllUser();
+			
 			ObservableList<User> usersObservable = FXCollections.observableArrayList();
 			for (int i = 0; i < users.size(); i++) {
+				users.get(i).print();
 				usersObservable.add(users.get(i));
 			}
 			

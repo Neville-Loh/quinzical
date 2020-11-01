@@ -110,6 +110,7 @@ public class SQLiteDB implements QuinzicalDB{
 			while( res.next() ) {
 				User user  = new User(res.getString(2));
 				user.setUserId(res.getInt(1));
+				user.setHighestScore(res.getInt(3));
 				result.add(user);
 			}
 			
@@ -127,9 +128,11 @@ public class SQLiteDB implements QuinzicalDB{
 			prep = conn.prepareStatement("REPLACE INTO user"
 					+ "(user_id, user_name, highest_score) "
 					+ "values(?,?,?);");
+			
 			prep.setInt(1, user.getUserID());
 			prep.setString(2, user.getName());
 			prep.setInt(3, user.getHighestScore());
+			prep.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
