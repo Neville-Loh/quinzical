@@ -164,7 +164,8 @@ public class DrawerController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		winningLabel.setText(model.getWinningStr());
 		userName.setText(model.getUser().getName());
-		toggleButton.setSelected(model.isEnableSpeech());
+		toggleButton.setSelected(model.getConfig().isEnableSpeech());
+
 		
 		TextToSpeech tts = model.getTextToSpeechObject();
 		speechSpeedSlider.setValue(tts.getSpeed());
@@ -173,9 +174,9 @@ public class DrawerController implements Initializable {
 		// set event handler for toggle button enable speech
 		toggleButton.setOnAction(e -> {
 			if (toggleButton.isSelected()) {
-				model.setEnableSpeech(true);
+				model.getConfig().setEnableSpeech(true);
 			} else {
-				model.setEnableSpeech(false);
+				model.getConfig().setEnableSpeech(false);
 				
 			}
 			e.consume();
@@ -187,14 +188,16 @@ public class DrawerController implements Initializable {
 			if (highContrastToggle.isSelected()) {
 				p.getStylesheets().remove(0);
 				p.getStylesheets().add(0, getClass().getResource("/quinzical/view/css/HighContrast.css").toExternalForm());
+				model.getConfig().setEnableHighContrast(true);
 			} else {
 				p.getStylesheets().remove(0);
 				p.getStylesheets().add(0, getClass().getResource("/quinzical/view/css/Styles.css").toExternalForm());
-				
+				model.getConfig().setEnableHighContrast(false);
 			}
 			e.consume();
 		});
-
+		
+		
 		// Set event handler for scroll bar text speed
 		speechSpeedSlider.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {

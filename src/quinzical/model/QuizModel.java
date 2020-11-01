@@ -25,7 +25,6 @@ public class QuizModel {
 	private Question _currentQuestion;
 	private PracticeQuestion _practiceQuestion;
 	
-	private boolean _enableSpeech = true;
 	private TextToSpeech tts = new Espeak();
 	private AppConfig config = AppConfig.loadconfig();
 
@@ -207,7 +206,7 @@ public class QuizModel {
 	 * @param text to be turned into speech
 	 */
 	public void textToSpeech(String text) {
-		if (_enableSpeech) {
+		if (config.isEnableSpeech()) {
 			tts.start(text);
 		}
 	}
@@ -405,28 +404,16 @@ public class QuizModel {
 		_currentSession.setHiddenCategory(db.getInternationalQuestionSet(5));
 	}
 	
+	
+	public AppConfig getConfig() {
+		return config;
+	}
 	/**
 	 * Get method
 	 * @return db;
 	 */
 	public QuinzicalDB getDb() {
 		return db;
-	}
-	/**
-	 * set method, set enable speech to a boolean
-	 * @param true/false
-	 */
-	public void setEnableSpeech(boolean b) {
-		_enableSpeech = b;
-
-	}
-	
-	/**
-	 * Get method, get if the model current enable speech
-	 * @return _enableSpeech
-	 */
-	public boolean isEnableSpeech() {
-		return _enableSpeech;
 	}
 	
 	/**

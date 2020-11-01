@@ -17,6 +17,9 @@ public class AppConfig implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public static final String SAVE_FILENAME = "quinzical.config";
     private int lastUserId = -1;
+    private int speed = 30;
+    private boolean _enableSpeech = true;
+    private boolean _enableHighContrast = false;
     
     
     /**
@@ -85,6 +88,22 @@ public class AppConfig implements Serializable {
 	public static boolean configExist() {
 		File f = new File(SAVE_FILENAME);
 		return (f.exists() && !f.isDirectory());
+	}
+
+	public boolean isEnableSpeech() {
+		return _enableSpeech;
+	}
+
+	public void setEnableSpeech(boolean _enableSpeech) {
+		this._enableSpeech = _enableSpeech;
+	}
+
+	public boolean isEnableHighContrast() {
+		return _enableHighContrast;
+	}
+
+	public void setEnableHighContrast(boolean _enableHighContrast) {
+		this._enableHighContrast = _enableHighContrast;
 	}
 
 }
