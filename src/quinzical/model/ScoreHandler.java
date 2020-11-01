@@ -20,6 +20,8 @@ public class ScoreHandler {
 	public static String geTitle(int score) {
 		if (score < 1000) {
 			return "novice";
+		} else if ( score < 2000 ){
+			return "not bad";
 		} else if ( score < 3000 ){
 			return "cool";
 		} else if ( score < 4000 ){
@@ -27,7 +29,7 @@ public class ScoreHandler {
 		} else if ( score < 5000){
 			return "excellent";
 		} else if ( score < 6000 ){
-			return "epci";
+			return "epic";
 		} else if ( score < 7000 ){
 			return "amazing";
 		} else if ( score < 8000 ){
