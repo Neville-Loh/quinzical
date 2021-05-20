@@ -1,5 +1,24 @@
 Project Quinzical
 ============================
+
+Quinzical is a Java-based application aimed at testing users on New Zealand and International trivia.
+
+Core Feature includes:
+- MVC architecture
+- Sqlite database
+- User System
+- Score and title system
+- Game mode and Practice mode
+- Add and edit questions
+
+
+Example Screens:
+![](./pics/practise-category.png)
+
+![](./pics/practice-screen.png)
+
+![](./pics/drawer.png)
+
 ## Getting Started
 To run the runable jar, use bash to run the following command
 ```
